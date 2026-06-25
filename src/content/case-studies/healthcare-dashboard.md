@@ -4,7 +4,7 @@ title: "Healthcare Provider Dashboard"
 thumbnail: "/images/case-studies/healthcare-thumb.svg"
 headerImage: "/images/case-studies/healthcare-header.svg"
 summary: "Designed an intuitive dashboard for healthcare providers to manage patient data, appointments, and clinical workflows."
-tags: ["Product Design", "Healthcare", "Dashboard"]
+tags: ["Product Design", "UX/UI Design"]
 client: "MedConnect"
 date: "2025-05-10"
 ---

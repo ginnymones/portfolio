@@ -4,7 +4,7 @@ title: "E-Commerce Checkout Optimization"
 thumbnail: "/images/case-studies/ecommerce-thumb.svg"
 headerImage: "/images/case-studies/ecommerce-header.svg"
 summary: "Redesigned the checkout flow for a major retail brand, reducing cart abandonment by 35% through data-driven UX improvements."
-tags: ["UX Research", "E-Commerce", "Web Design"]
+tags: ["UX/UI Design", "Development"]
 client: "ShopEase"
 date: "2025-09-20"
 ---

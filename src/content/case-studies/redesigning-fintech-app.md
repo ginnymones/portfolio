@@ -4,7 +4,7 @@ title: "Redesigning a Fintech Mobile App"
 thumbnail: "/images/case-studies/fintech-thumb.svg"
 headerImage: "/images/case-studies/fintech-header.svg"
 summary: "Simplifying complex financial workflows into an intuitive mobile experience that increased user engagement by 40%."
-tags: ["UX Design", "Mobile App", "Fintech"]
+tags: ["UX/UI Design", "Product Design"]
 client: "FinFlow"
 date: "2026-01-15"
 liveUrl: "https://example.com/finflow"
