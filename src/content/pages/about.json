@@ -83,12 +83,17 @@
       "proficiency": "expert"
     },
     {
-      "name": "Adobe AfterEffects",
-      "category": "Design",
-      "proficiency": "expert"
+      "name": "HTML/CSS",
+      "category": "Development",
+      "proficiency": "intermediate"
     },
     {
-      "name": "Prototyping",
+      "name": "Rapid Prototyping",
+      "category": "Design",
+      "proficiency": "advanced"
+    },
+    {
+      "name": "Adobe AfterEffects",
       "category": "Design",
       "proficiency": "expert"
     },
@@ -96,11 +101,6 @@
       "name": "Design Systems",
       "category": "Design",
       "proficiency": "advanced"
-    },
-    {
-      "name": "HTML/CSS",
-      "category": "Development",
-      "proficiency": "intermediate"
     },
     {
       "name": "Agentic Coding",
