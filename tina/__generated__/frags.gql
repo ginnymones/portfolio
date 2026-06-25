@@ -1,0 +1,44 @@
+fragment PageParts on Page {
+  __typename
+  title
+  backgroundType
+  backgroundImage
+  backgroundVideo
+  backgroundColor
+  gradientFrom
+  gradientTo
+  gradientDirection
+  overlayOpacity
+  overlayColor
+  heading
+  headingAccent
+  subtitle
+  tagline
+  ctaPrimaryLabel
+  ctaPrimaryLink
+  ctaSecondaryLabel
+  ctaSecondaryLink
+  body
+}
+
+fragment CaseStudyParts on CaseStudy {
+  __typename
+  title
+  thumbnail
+  headerImage
+  summary
+  tags
+  client
+  date
+  liveUrl
+  backgroundType
+  backgroundImage
+  backgroundVideo
+  backgroundColor
+  gradientFrom
+  gradientTo
+  gradientDirection
+  overlayOpacity
+  overlayColor
+  body
+}

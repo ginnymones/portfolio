@@ -1,0 +1,69 @@
+import Link from "next/link";
+
+export function Footer() {
+  return (
+    <footer
+      id="contact"
+      className="bg-neutral-dark text-background mt-20"
+    >
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Let&apos;s connect</h2>
+            <p className="text-neutral-warm leading-relaxed max-w-md">
+              Got a project in mind or just want to say hi? I&apos;d love to hear
+              from you. Reach out through any of the channels below.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <a
+              href="mailto:hello@ginnymones.com"
+              className="text-accent-yellow hover:text-accent-orange transition-colors font-medium"
+            >
+              hello@ginnymones.com
+            </a>
+            <div className="flex gap-6 mt-2">
+              <a
+                href="https://dribbble.com/ginnymones"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-warm hover:text-background transition-colors text-sm"
+              >
+                Dribbble
+              </a>
+              <a
+                href="https://linkedin.com/in/ginnymones"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-warm hover:text-background transition-colors text-sm"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://behance.net/ginnymones"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-warm hover:text-background transition-colors text-sm"
+              >
+                Behance
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-neutral-warm/30 mt-12 pt-8 flex items-center justify-between">
+          <p className="text-neutral-warm text-sm">
+            &copy; {new Date().getFullYear()} Ginny Mones. All rights reserved.
+          </p>
+          <Link
+            href="/works"
+            className="text-sm text-neutral-warm hover:text-background transition-colors"
+          >
+            View Works
+          </Link>
+        </div>
+      </div>
+    </footer>
+  );
+}

@@ -1,0 +1,20 @@
+{
+  "title": "About",
+  "backgroundType": "none",
+  "backgroundImage": "",
+  "backgroundVideo": "",
+  "backgroundColor": "",
+  "gradientFrom": "",
+  "gradientTo": "",
+  "gradientDirection": "to bottom",
+  "overlayOpacity": 50,
+  "overlayColor": "#FFFDF9",
+  "heading": "About Me",
+  "headingAccent": "",
+  "subtitle": "",
+  "tagline": "",
+  "ctaPrimaryLabel": "",
+  "ctaPrimaryLink": "",
+  "ctaSecondaryLabel": "",
+  "ctaSecondaryLink": ""
+}

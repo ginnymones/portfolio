@@ -1,0 +1,20 @@
+{
+  "title": "Home",
+  "backgroundType": "none",
+  "backgroundImage": "",
+  "backgroundVideo": "",
+  "backgroundColor": "",
+  "gradientFrom": "",
+  "gradientTo": "",
+  "gradientDirection": "to bottom",
+  "overlayOpacity": 50,
+  "overlayColor": "#FFFDF9",
+  "heading": "Hi, I'm",
+  "headingAccent": "Ginny",
+  "subtitle": "I design thoughtful digital experiences that solve real problems.",
+  "tagline": "UX/UI Designer · Product Thinker · Visual Storyteller",
+  "ctaPrimaryLabel": "View My Work",
+  "ctaPrimaryLink": "/works",
+  "ctaSecondaryLabel": "About Me",
+  "ctaSecondaryLink": "/about"
+}

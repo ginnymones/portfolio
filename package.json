@@ -1,0 +1,31 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tinacms dev -c \"next dev\"",
+    "dev:next": "next dev",
+    "build": "tinacms build && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
+    "@tinacms/cli": "^2.5.1",
+    "gray-matter": "^4.0.3",
+    "next": "^15.3.4",
+    "next-mdx-remote": "^5.0.0",
+    "postcss": "^8.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "tailwindcss": "^4.1.10",
+    "tinacms": "^3.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.8",
+    "typescript": "^5.8.3"
+  }
+}
