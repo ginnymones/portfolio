@@ -17,44 +17,14 @@
   "ctaPrimaryLink": "",
   "ctaSecondaryLabel": "",
   "ctaSecondaryLink": "",
-  "bio": {
-    "type": "root",
-    "children": [
-      {
-        "type": "p",
-        "children": [
-          {
-            "type": "text",
-            "text": "I'm a designer who believes that good design is invisible — it just works. With a background in product design and user experience, I focus on creating digital products that are both beautiful and functional."
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "children": [
-          {
-            "type": "text",
-            "text": "My process combines user research, strategic thinking, and visual craft to deliver experiences that people love to use. Whether it's a complex SaaS platform or a consumer mobile app, I bring the same level of care and attention to detail."
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "children": [
-          {
-            "type": "text",
-            "text": "When I'm not designing, you can find me exploring new creative tools, sketching in my notebook, or hunting for the perfect cup of coffee."
-          }
-        ]
-      }
-    ]
-  },
+  "body": "",
+  "bio": "\\[object Object]\n",
   "experience": [
     {
-      "role": "Senior UX Designer",
-      "company": "Company Name",
-      "period": "2024 — Present",
-      "description": "Leading design for core product features, conducting user research, and mentoring junior designers."
+      "role": "Production Manager",
+      "company": "Amazon",
+      "period": "2022 — Present",
+      "description": "• Led a team of many as 30+ digital artists to deliver high-quality output at high efficiency that end customers across the globe can enjoy, and to help them unlock their full potential. With her guidance, the team is able to exceed the organization's productivity and quality benchmark by ~5% month on month.\n\n• Led an adhoc team of three artists to deliver a high-quality product visualization video 50% faster than the industry standard (14 days vs. 30+ days).\n\n• At present, drives art direction for Design Operations Team, collaborating with 3D designers and content generators. Ginny provides detailed creative input and leads live editing sessions that enable high-quality output that are seen in Amazon’s different marketplaces.\n\n• Leverages AI to solve persistent organizational concerns by creating tools like a design-to-email HTML plugin, resource management platform, workload tracking application, audit flag Photoshop plugin, and more.\n • Leads the business review team of Content Generation Hub, providing narratives that give business leaders the right level of information to make decisions.\n • Leads the marketing department of the Mental Health and Wellbeing affinity group in the Philippines, designs the team's promotional materials, and writes the communications sent out."
     },
     {
       "role": "UX/UI Designer",
