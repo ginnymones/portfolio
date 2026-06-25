@@ -147,6 +147,78 @@ var config_default = defineConfig({
             name: "body",
             label: "Page Body",
             isBody: false
+          },
+          // About page specific fields
+          {
+            type: "rich-text",
+            name: "bio",
+            label: "Bio",
+            description: "Your personal bio / introduction text (About page)"
+          },
+          {
+            type: "object",
+            name: "experience",
+            label: "Work Experience",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.role ? `${item.role} \u2014 ${item.company}` : "New Experience"
+              })
+            },
+            fields: [
+              {
+                type: "string",
+                name: "role",
+                label: "Role / Job Title",
+                required: true
+              },
+              {
+                type: "string",
+                name: "company",
+                label: "Company",
+                required: true
+              },
+              {
+                type: "string",
+                name: "period",
+                label: "Time Period",
+                description: "e.g., 2024 \u2014 Present",
+                required: true
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: {
+                  component: "textarea"
+                }
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "socialLinks",
+            label: "Social Links",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.label || "New Link"
+              })
+            },
+            fields: [
+              {
+                type: "string",
+                name: "label",
+                label: "Label",
+                required: true
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "URL",
+                required: true
+              }
+            ]
           }
         ]
       },

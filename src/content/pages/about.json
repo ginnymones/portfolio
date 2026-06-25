@@ -16,5 +16,71 @@
   "ctaPrimaryLabel": "",
   "ctaPrimaryLink": "",
   "ctaSecondaryLabel": "",
-  "ctaSecondaryLink": ""
+  "ctaSecondaryLink": "",
+  "bio": {
+    "type": "root",
+    "children": [
+      {
+        "type": "p",
+        "children": [
+          {
+            "type": "text",
+            "text": "I'm a designer who believes that good design is invisible — it just works. With a background in product design and user experience, I focus on creating digital products that are both beautiful and functional."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "type": "text",
+            "text": "My process combines user research, strategic thinking, and visual craft to deliver experiences that people love to use. Whether it's a complex SaaS platform or a consumer mobile app, I bring the same level of care and attention to detail."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "type": "text",
+            "text": "When I'm not designing, you can find me exploring new creative tools, sketching in my notebook, or hunting for the perfect cup of coffee."
+          }
+        ]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "role": "Senior UX Designer",
+      "company": "Company Name",
+      "period": "2024 — Present",
+      "description": "Leading design for core product features, conducting user research, and mentoring junior designers."
+    },
+    {
+      "role": "UX/UI Designer",
+      "company": "Previous Company",
+      "period": "2022 — 2024",
+      "description": "Designed end-to-end experiences for web and mobile products, collaborating closely with engineering and product teams."
+    },
+    {
+      "role": "Visual Designer",
+      "company": "Earlier Company",
+      "period": "2020 — 2022",
+      "description": "Created brand identities, marketing materials, and digital interfaces for a variety of clients."
+    }
+  ],
+  "socialLinks": [
+    {
+      "label": "Dribbble",
+      "url": "https://dribbble.com/ginnymones"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/ginnymones"
+    },
+    {
+      "label": "Behance",
+      "url": "https://behance.net/ginnymones"
+    }
+  ]
 }

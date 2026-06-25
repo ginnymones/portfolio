@@ -90,6 +90,18 @@ type Collection {
 
 union DocumentNode = Page | CaseStudy | Folder
 
+type PageExperience {
+  role: String!
+  company: String!
+  period: String!
+  description: String
+}
+
+type PageSocialLinks {
+  label: String!
+  url: String!
+}
+
 type Page implements Node & Document {
   title: String!
   backgroundType: String
@@ -110,6 +122,9 @@ type Page implements Node & Document {
   ctaSecondaryLabel: String
   ctaSecondaryLink: String
   body: JSON
+  bio: JSON
+  experience: [PageExperience]
+  socialLinks: [PageSocialLinks]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -145,6 +160,18 @@ input RichTextFilter {
   exists: Boolean
 }
 
+input PageExperienceFilter {
+  role: StringFilter
+  company: StringFilter
+  period: StringFilter
+  description: StringFilter
+}
+
+input PageSocialLinksFilter {
+  label: StringFilter
+  url: StringFilter
+}
+
 input PageFilter {
   title: StringFilter
   backgroundType: StringFilter
@@ -165,6 +192,9 @@ input PageFilter {
   ctaSecondaryLabel: StringFilter
   ctaSecondaryLink: StringFilter
   body: RichTextFilter
+  bio: RichTextFilter
+  experience: PageExperienceFilter
+  socialLinks: PageSocialLinksFilter
 }
 
 type PageConnectionEdges {
@@ -265,6 +295,18 @@ input DocumentMutation {
   caseStudy: CaseStudyMutation
 }
 
+input PageExperienceMutation {
+  role: String
+  company: String
+  period: String
+  description: String
+}
+
+input PageSocialLinksMutation {
+  label: String
+  url: String
+}
+
 input PageMutation {
   title: String
   backgroundType: String
@@ -285,6 +327,9 @@ input PageMutation {
   ctaSecondaryLabel: String
   ctaSecondaryLink: String
   body: JSON
+  bio: JSON
+  experience: [PageExperienceMutation]
+  socialLinks: [PageSocialLinksMutation]
 }
 
 input CaseStudyMutation {

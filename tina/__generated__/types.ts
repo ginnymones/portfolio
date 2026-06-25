@@ -183,6 +183,20 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Page | CaseStudy | Folder;
 
+export type PageExperience = {
+  __typename?: 'PageExperience';
+  role: Scalars['String']['output'];
+  company: Scalars['String']['output'];
+  period: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageSocialLinks = {
+  __typename?: 'PageSocialLinks';
+  label: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
 export type Page = Node & Document & {
   __typename?: 'Page';
   title: Scalars['String']['output'];
@@ -204,6 +218,9 @@ export type Page = Node & Document & {
   ctaSecondaryLabel?: Maybe<Scalars['String']['output']>;
   ctaSecondaryLink?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
+  bio?: Maybe<Scalars['JSON']['output']>;
+  experience?: Maybe<Array<Maybe<PageExperience>>>;
+  socialLinks?: Maybe<Array<Maybe<PageSocialLinks>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -239,6 +256,18 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type PageExperienceFilter = {
+  role?: InputMaybe<StringFilter>;
+  company?: InputMaybe<StringFilter>;
+  period?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type PageSocialLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
 export type PageFilter = {
   title?: InputMaybe<StringFilter>;
   backgroundType?: InputMaybe<StringFilter>;
@@ -259,6 +288,9 @@ export type PageFilter = {
   ctaSecondaryLabel?: InputMaybe<StringFilter>;
   ctaSecondaryLink?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
+  bio?: InputMaybe<RichTextFilter>;
+  experience?: InputMaybe<PageExperienceFilter>;
+  socialLinks?: InputMaybe<PageSocialLinksFilter>;
 };
 
 export type PageConnectionEdges = {
@@ -422,6 +454,18 @@ export type DocumentMutation = {
   caseStudy?: InputMaybe<CaseStudyMutation>;
 };
 
+export type PageExperienceMutation = {
+  role?: InputMaybe<Scalars['String']['input']>;
+  company?: InputMaybe<Scalars['String']['input']>;
+  period?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageSocialLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PageMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   backgroundType?: InputMaybe<Scalars['String']['input']>;
@@ -442,6 +486,9 @@ export type PageMutation = {
   ctaSecondaryLabel?: InputMaybe<Scalars['String']['input']>;
   ctaSecondaryLink?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
+  bio?: InputMaybe<Scalars['JSON']['input']>;
+  experience?: InputMaybe<Array<InputMaybe<PageExperienceMutation>>>;
+  socialLinks?: InputMaybe<Array<InputMaybe<PageSocialLinksMutation>>>;
 };
 
 export type CaseStudyMutation = {
@@ -465,7 +512,7 @@ export type CaseStudyMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null };
+export type PagePartsFragment = { __typename: 'Page', title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null };
 
 export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null };
 
@@ -474,7 +521,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -486,7 +533,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null } | null } | null> | null } };
 
 export type CaseStudyQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -529,6 +576,19 @@ export const PagePartsFragmentDoc = gql`
   ctaSecondaryLabel
   ctaSecondaryLink
   body
+  bio
+  experience {
+    __typename
+    role
+    company
+    period
+    description
+  }
+  socialLinks {
+    __typename
+    label
+    url
+  }
 }
     `;
 export const CaseStudyPartsFragmentDoc = gql`

@@ -27,6 +27,19 @@ export const PagePartsFragmentDoc = gql`
   ctaSecondaryLabel
   ctaSecondaryLink
   body
+  bio
+  experience {
+    __typename
+    role
+    company
+    period
+    description
+  }
+  socialLinks {
+    __typename
+    label
+    url
+  }
 }
     `;
 export const CaseStudyPartsFragmentDoc = gql`
