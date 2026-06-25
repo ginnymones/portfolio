@@ -6,7 +6,7 @@ export function ContactSection() {
   const page = getPageContent("contact");
 
   return (
-    <section id="contact" className="max-w-[80vw] mx-auto px-6 py-20 max-md:max-w-none">
+    <section id="contact" className="w-[80vw] mx-auto px-0 py-20 max-md:w-full max-md:px-6">
       <div className="bg-neutral-dark rounded-2xl p-10 md:p-16 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">
           {page.heading || "Let's work together"}
