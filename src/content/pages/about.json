@@ -83,6 +83,21 @@
       "proficiency": "expert"
     },
     {
+      "name": "Creative Strategy",
+      "category": "Design",
+      "proficiency": "expert"
+    },
+    {
+      "name": "Design Systems",
+      "category": "Design",
+      "proficiency": "advanced"
+    },
+    {
+      "name": "Information Architecture Design",
+      "category": "Design",
+      "proficiency": "advanced"
+    },
+    {
       "name": "HTML/CSS",
       "category": "Development",
       "proficiency": "intermediate"
@@ -93,24 +108,9 @@
       "proficiency": "advanced"
     },
     {
-      "name": "Design Systems",
-      "category": "Design",
-      "proficiency": "advanced"
-    },
-    {
       "name": "Agentic Coding",
       "category": "Development",
       "proficiency": "intermediate"
-    },
-    {
-      "name": "Creative Strategy",
-      "category": "Design",
-      "proficiency": "expert"
-    },
-    {
-      "name": "Information Architecture Design",
-      "category": "Design",
-      "proficiency": "advanced"
     }
   ]
 }
