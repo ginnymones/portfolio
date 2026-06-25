@@ -93,11 +93,6 @@
       "proficiency": "advanced"
     },
     {
-      "name": "Adobe AfterEffects",
-      "category": "Design",
-      "proficiency": "expert"
-    },
-    {
       "name": "Design Systems",
       "category": "Design",
       "proficiency": "advanced"
@@ -106,6 +101,11 @@
       "name": "Agentic Coding",
       "category": "Development",
       "proficiency": "intermediate"
+    },
+    {
+      "name": "Creative Strategy",
+      "category": "Design",
+      "proficiency": "expert"
     }
   ]
 }
