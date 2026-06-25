@@ -66,12 +66,13 @@ WORKS (/works)     → Case study grid (3 cols, 6 per page, paginated)
 
 Location: `src/content/site-settings.json`
 
-Single source of truth for data shared across multiple components (Footer, Contact, About):
+Single source of truth for data shared across multiple components (Footer, Contact, Works):
 - `name` — site/brand name
 - `email` — contact email
 - `copyright` — footer copyright text
-- `footerHeading` — heading text in footer
-- `footerDescription` — paragraph text in footer
+- `footerHeading` — heading text in contact section
+- `footerDescription` — paragraph text in contact section
+- `workTags[]` — array of tag strings used for Works page filtering
 - `socialLinks[]` — array of {label, url} pairs
 
 Editable in Tina admin under "Site Settings" collection.
@@ -140,6 +141,7 @@ Applicable to all pages and individual case studies.
 
 ## Key Features
 
+- **Tag-based filtering**: Works page has a filter bar (All + defined tags). Tags managed from Tina admin. Client-side, instant.
 - **Mobile navigation**: Hamburger menu with compact dropdown (14px text, solid bg, drop shadow)
 - **Back to top button**: Appears after 400px scroll, up arrow + text, rounded corners, fixed bottom-right
 - **Image lightbox**: Click any case study image to view full-screen with Escape/click-outside to dismiss

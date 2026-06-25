@@ -312,6 +312,13 @@ export default defineConfig({
             description: "The paragraph text below the footer heading",
           },
           {
+            type: "string",
+            name: "workTags",
+            label: "Work Tags",
+            list: true,
+            description: "Tags available for filtering case studies on the Works page. Add/remove/reorder as needed.",
+          },
+          {
             type: "object",
             name: "socialLinks",
             label: "Social Links",

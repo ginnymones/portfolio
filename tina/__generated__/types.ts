@@ -352,6 +352,7 @@ export type SiteSettings = Node & Document & {
   copyright?: Maybe<Scalars['String']['output']>;
   footerHeading?: Maybe<Scalars['String']['output']>;
   footerDescription?: Maybe<Scalars['String']['output']>;
+  workTags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   socialLinks?: Maybe<Array<Maybe<SiteSettingsSocialLinks>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -369,6 +370,7 @@ export type SiteSettingsFilter = {
   copyright?: InputMaybe<StringFilter>;
   footerHeading?: InputMaybe<StringFilter>;
   footerDescription?: InputMaybe<StringFilter>;
+  workTags?: InputMaybe<StringFilter>;
   socialLinks?: InputMaybe<SiteSettingsSocialLinksFilter>;
 };
 
@@ -606,6 +608,7 @@ export type SiteSettingsMutation = {
   copyright?: InputMaybe<Scalars['String']['input']>;
   footerHeading?: InputMaybe<Scalars['String']['input']>;
   footerDescription?: InputMaybe<Scalars['String']['input']>;
+  workTags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   socialLinks?: InputMaybe<Array<InputMaybe<SiteSettingsSocialLinksMutation>>>;
 };
 
@@ -633,7 +636,7 @@ export type CaseStudyMutation = {
 
 export type PagePartsFragment = { __typename: 'Page', title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null, toolsAndSkills?: Array<{ __typename: 'PageToolsAndSkills', name: string, category?: string | null, proficiency?: string | null } | null> | null };
 
-export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null };
+export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null };
 
 export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null };
 
@@ -661,7 +664,7 @@ export type SiteSettingsQueryVariables = Exact<{
 }>;
 
 
-export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } };
+export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } };
 
 export type SiteSettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -673,7 +676,7 @@ export type SiteSettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } | null } | null> | null } };
+export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } | null } | null> | null } };
 
 export type CaseStudyQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -745,6 +748,7 @@ export const SiteSettingsPartsFragmentDoc = gql`
   copyright
   footerHeading
   footerDescription
+  workTags
   socialLinks {
     __typename
     label

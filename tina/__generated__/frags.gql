@@ -47,6 +47,7 @@ fragment SiteSettingsParts on SiteSettings {
   copyright
   footerHeading
   footerDescription
+  workTags
   socialLinks {
     __typename
     label

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { getPageContent } from "@/lib/pages";
+import { getSiteSettings } from "@/lib/site-settings";
 import { PageBackground } from "@/components/PageBackground";
 import { WorksGrid } from "@/components/WorksGrid";
 
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function WorksPage() {
   const studies = getAllCaseStudies();
   const page = getPageContent("works");
+  const settings = getSiteSettings();
 
   return (
     <PageBackground
@@ -42,6 +44,7 @@ export default function WorksPage() {
             summary: s.summary,
             tags: s.tags,
           }))}
+          availableTags={settings.workTags}
         />
       </section>
     </PageBackground>

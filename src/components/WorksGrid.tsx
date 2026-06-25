@@ -3,15 +3,6 @@
 import { useState } from "react";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 
-const DEFINED_TAGS = [
-  "Illustration",
-  "Graphic Design",
-  "UX/UI Design",
-  "Product Design",
-  "Animation",
-  "Development",
-];
-
 const ITEMS_PER_PAGE = 6;
 
 interface CaseStudyItem {
@@ -24,9 +15,10 @@ interface CaseStudyItem {
 
 interface WorksGridProps {
   studies: CaseStudyItem[];
+  availableTags: string[];
 }
 
-export function WorksGrid({ studies }: WorksGridProps) {
+export function WorksGrid({ studies, availableTags }: WorksGridProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -41,7 +33,7 @@ export function WorksGrid({ studies }: WorksGridProps) {
   const visible = filtered.slice(start, start + ITEMS_PER_PAGE);
 
   // Only show tags that have at least one case study
-  const availableTags = DEFINED_TAGS.filter((tag) =>
+  const visibleTags = availableTags.filter((tag) =>
     studies.some((s) => s.tags.includes(tag))
   );
 
@@ -66,7 +58,7 @@ export function WorksGrid({ studies }: WorksGridProps) {
         >
           All
         </button>
-        {availableTags.map((tag) => (
+        {visibleTags.map((tag) => (
           <button
             key={tag}
             onClick={() => handleTagClick(tag)}

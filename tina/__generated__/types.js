@@ -56,6 +56,7 @@ export const SiteSettingsPartsFragmentDoc = gql`
   copyright
   footerHeading
   footerDescription
+  workTags
   socialLinks {
     __typename
     label

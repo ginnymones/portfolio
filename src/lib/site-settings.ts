@@ -14,6 +14,7 @@ export interface SiteSettings {
   copyright: string;
   footerHeading: string;
   footerDescription: string;
+  workTags: string[];
   socialLinks: SocialLink[];
 }
 

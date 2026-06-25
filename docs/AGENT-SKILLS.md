@@ -225,3 +225,36 @@
 - Auto-close on route change
 - Body scroll locked when open
 - Accessible: `aria-label`, `aria-expanded` on toggle button
+
+
+---
+
+## Skill: Manage Work Tags (Filtering)
+
+**Trigger**: User wants to add, remove, or reorder tags for the Works filter bar
+
+**Where to edit**: Tina admin → Site Settings → Work Tags
+
+**How it works**:
+- `workTags` in `site-settings.json` defines the list of tags that appear in the filter bar
+- Only tags that have at least one case study assigned will actually show in the UI
+- Tags are matched exactly (case-sensitive) — "UX/UI Design" ≠ "ux/ui design"
+- A case study can have multiple tags and will appear under each matching filter
+
+**Adding a new tag**:
+1. Add the tag string to `workTags` in site settings (via Tina admin or JSON file)
+2. Assign the tag to one or more case studies (in their `tags` frontmatter array)
+3. It appears in the filter bar automatically on next build
+
+**Current defined tags**:
+- Illustration
+- Graphic Design
+- UX/UI Design
+- Product Design
+- Animation
+- Development
+
+**Architecture**:
+- Tags stored in: `src/content/site-settings.json` → `workTags[]`
+- Filter component: `src/components/WorksGrid.tsx` (client-side, receives tags as props)
+- Tags passed from server: `src/app/works/page.tsx` reads settings and passes to WorksGrid

@@ -236,6 +236,7 @@ type SiteSettings implements Node & Document {
   copyright: String
   footerHeading: String
   footerDescription: String
+  workTags: [String]
   socialLinks: [SiteSettingsSocialLinks]
   id: ID!
   _sys: SystemInfo!
@@ -253,6 +254,7 @@ input SiteSettingsFilter {
   copyright: StringFilter
   footerHeading: StringFilter
   footerDescription: StringFilter
+  workTags: StringFilter
   socialLinks: SiteSettingsSocialLinksFilter
 }
 
@@ -415,6 +417,7 @@ input SiteSettingsMutation {
   copyright: String
   footerHeading: String
   footerDescription: String
+  workTags: [String]
   socialLinks: [SiteSettingsSocialLinksMutation]
 }
 

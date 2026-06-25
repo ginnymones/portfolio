@@ -87,9 +87,11 @@ Note: This is NOT a separate page — it's a section in the layout with `id="con
 
 ### Case Study Grid
 
-- Columns: `lg:grid-cols-3` in `src/app/works/page.tsx` (change to 2 or 4)
-- Items per page: change the `6` in `getPaginatedCaseStudies(currentPage, 6)`
+- Columns: `lg:grid-cols-3` in `src/components/WorksGrid.tsx` (change to 2 or 4)
+- Items per page: change `ITEMS_PER_PAGE` in `WorksGrid.tsx`
 - Card aspect ratio: `aspect-[4/3]` in `CaseStudyCard.tsx`
+- Filter tags: managed from Tina admin → Site Settings → Work Tags. Add/remove/reorder anytime.
+- Filter behavior: client-side, instant. Only shows tags that have at least one assigned case study.
 
 ### Case Study Template
 
