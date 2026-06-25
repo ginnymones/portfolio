@@ -7,6 +7,9 @@ import { BackToTop } from "@/components/BackToTop";
 export const metadata: Metadata = {
   title: "Ginny Mones — Portfolio",
   description: "Design portfolio showcasing case studies and creative work.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
