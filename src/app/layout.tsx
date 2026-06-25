@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { ContactSection } from "@/components/ContactSection";
 import { BackToTop } from "@/components/BackToTop";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>
+        <ContactSection />
         <Footer />
         <BackToTop />
       </body>
