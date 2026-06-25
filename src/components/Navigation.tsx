@@ -93,8 +93,8 @@ export function Navigation() {
 
       {/* Mobile menu overlay */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 top-[65px] bg-background/95 backdrop-blur-md z-40">
-          <ul className="flex flex-col items-center justify-center h-full gap-8">
+        <div className="md:hidden fixed inset-x-0 top-[65px] bg-background shadow-lg z-40">
+          <ul className="flex flex-col items-center py-6 gap-4">
             {navLinks.map(({ href, label }) => {
               const isActive =
                 pathname === href ||
@@ -105,7 +105,7 @@ export function Navigation() {
                   <Link
                     href={href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-2xl font-medium transition-colors ${
+                    className={`text-[14px] font-medium transition-colors ${
                       isActive
                         ? "text-accent-orange"
                         : "text-foreground hover:text-accent-orange"
