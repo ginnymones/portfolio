@@ -297,6 +297,21 @@ export default defineConfig({
             label: "Copyright Text",
           },
           {
+            type: "string",
+            name: "footerHeading",
+            label: "Footer Heading",
+            description: "The heading shown in the footer section",
+          },
+          {
+            type: "string",
+            name: "footerDescription",
+            label: "Footer Description",
+            ui: {
+              component: "textarea",
+            },
+            description: "The paragraph text below the footer heading",
+          },
+          {
             type: "object",
             name: "socialLinks",
             label: "Social Links",

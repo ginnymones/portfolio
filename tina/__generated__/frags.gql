@@ -45,6 +45,8 @@ fragment SiteSettingsParts on SiteSettings {
   name
   email
   copyright
+  footerHeading
+  footerDescription
   socialLinks {
     __typename
     label

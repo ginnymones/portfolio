@@ -12,10 +12,11 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Let&apos;s connect</h2>
+            <h2 className="text-2xl font-semibold mb-4">
+              {settings.footerHeading}
+            </h2>
             <p className="text-neutral-warm leading-relaxed max-w-md">
-              Got a project in mind or just want to say hi? I&apos;d love to hear
-              from you. Reach out through any of the channels below.
+              {settings.footerDescription}
             </p>
           </div>
 

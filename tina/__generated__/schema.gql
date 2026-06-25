@@ -234,6 +234,8 @@ type SiteSettings implements Node & Document {
   name: String!
   email: String!
   copyright: String
+  footerHeading: String
+  footerDescription: String
   socialLinks: [SiteSettingsSocialLinks]
   id: ID!
   _sys: SystemInfo!
@@ -249,6 +251,8 @@ input SiteSettingsFilter {
   name: StringFilter
   email: StringFilter
   copyright: StringFilter
+  footerHeading: StringFilter
+  footerDescription: StringFilter
   socialLinks: SiteSettingsSocialLinksFilter
 }
 
@@ -409,6 +413,8 @@ input SiteSettingsMutation {
   name: String
   email: String
   copyright: String
+  footerHeading: String
+  footerDescription: String
   socialLinks: [SiteSettingsSocialLinksMutation]
 }
 

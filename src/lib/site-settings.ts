@@ -12,6 +12,8 @@ export interface SiteSettings {
   name: string;
   email: string;
   copyright: string;
+  footerHeading: string;
+  footerDescription: string;
   socialLinks: SocialLink[];
 }
 

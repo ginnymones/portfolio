@@ -54,6 +54,8 @@ export const SiteSettingsPartsFragmentDoc = gql`
   name
   email
   copyright
+  footerHeading
+  footerDescription
   socialLinks {
     __typename
     label
