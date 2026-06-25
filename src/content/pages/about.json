@@ -82,5 +82,37 @@
       "label": "Behance",
       "url": "https://behance.net/ginnymones"
     }
+  ],
+  "toolsAndSkills": [
+    {
+      "name": "Figma",
+      "category": "Design",
+      "proficiency": "expert"
+    },
+    {
+      "name": "Adobe Creative Suite",
+      "category": "Design",
+      "proficiency": "advanced"
+    },
+    {
+      "name": "User Research",
+      "category": "Research",
+      "proficiency": "expert"
+    },
+    {
+      "name": "Prototyping",
+      "category": "Design",
+      "proficiency": "expert"
+    },
+    {
+      "name": "Design Systems",
+      "category": "Design",
+      "proficiency": "advanced"
+    },
+    {
+      "name": "HTML/CSS",
+      "category": "Development",
+      "proficiency": "intermediate"
+    }
   ]
 }

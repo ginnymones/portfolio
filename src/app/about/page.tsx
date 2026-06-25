@@ -63,6 +63,50 @@ export default function AboutPage() {
           </div>
         )}
 
+        {/* Tools & Skills */}
+        {page.toolsAndSkills && page.toolsAndSkills.length > 0 && (
+          <div className="mb-16">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">
+              Tools & Skills
+            </h2>
+            <div className="space-y-6">
+              {/* Group by category */}
+              {Object.entries(
+                page.toolsAndSkills.reduce<Record<string, typeof page.toolsAndSkills>>(
+                  (groups, skill) => {
+                    const cat = skill.category || "Other";
+                    if (!groups[cat]) groups[cat] = [];
+                    groups[cat]!.push(skill);
+                    return groups;
+                  },
+                  {}
+                )
+              ).map(([category, skills]) => (
+                <div key={category}>
+                  <h3 className="text-sm font-medium text-accent-orange uppercase tracking-wide mb-3">
+                    {category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {skills!.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="px-4 py-2 border border-neutral-warm/30 rounded-lg text-sm text-foreground"
+                      >
+                        {skill.name}
+                        {skill.proficiency && (
+                          <span className="ml-2 text-xs text-neutral-warm">
+                            · {skill.proficiency}
+                          </span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Social Links */}
         {page.socialLinks && page.socialLinks.length > 0 && (
           <div>

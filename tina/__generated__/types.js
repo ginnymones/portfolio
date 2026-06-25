@@ -40,12 +40,32 @@ export const PagePartsFragmentDoc = gql`
     label
     url
   }
+  toolsAndSkills {
+    __typename
+    name
+    category
+    proficiency
+  }
+}
+    `;
+export const SiteSettingsPartsFragmentDoc = gql`
+    fragment SiteSettingsParts on SiteSettings {
+  __typename
+  name
+  email
+  copyright
+  socialLinks {
+    __typename
+    label
+    url
+  }
 }
     `;
 export const CaseStudyPartsFragmentDoc = gql`
     fragment CaseStudyParts on CaseStudy {
   __typename
   title
+  status
   thumbnail
   headerImage
   summary
@@ -122,6 +142,63 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
+export const SiteSettingsDocument = gql`
+    query siteSettings($relativePath: String!) {
+  siteSettings(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SiteSettingsParts
+  }
+}
+    ${SiteSettingsPartsFragmentDoc}`;
+export const SiteSettingsConnectionDocument = gql`
+    query siteSettingsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SiteSettingsFilter) {
+  siteSettingsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SiteSettingsParts
+      }
+    }
+  }
+}
+    ${SiteSettingsPartsFragmentDoc}`;
 export const CaseStudyDocument = gql`
     query caseStudy($relativePath: String!) {
   caseStudy(relativePath: $relativePath) {
@@ -186,6 +263,12 @@ export function getSdk(requester) {
     },
     pageConnection(variables, options) {
       return requester(PageConnectionDocument, variables, options);
+    },
+    siteSettings(variables, options) {
+      return requester(SiteSettingsDocument, variables, options);
+    },
+    siteSettingsConnection(variables, options) {
+      return requester(SiteSettingsConnectionDocument, variables, options);
     },
     caseStudy(variables, options) {
       return requester(CaseStudyDocument, variables, options);

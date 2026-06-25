@@ -1,4 +1,5 @@
 ---
+status: "published"
 title: "Redesigning a Fintech Mobile App"
 thumbnail: "/images/case-studies/fintech-thumb.svg"
 headerImage: "/images/case-studies/fintech-header.svg"

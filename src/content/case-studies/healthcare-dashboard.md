@@ -1,4 +1,5 @@
 ---
+status: "published"
 title: "Healthcare Provider Dashboard"
 thumbnail: "/images/case-studies/healthcare-thumb.svg"
 headerImage: "/images/case-studies/healthcare-header.svg"

@@ -56,12 +56,15 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
+  siteSettings(relativePath: String): SiteSettings!
+  siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
   caseStudy(relativePath: String): CaseStudy!
   caseStudyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CaseStudyFilter): CaseStudyConnection!
 }
 
 input DocumentFilter {
   page: PageFilter
+  siteSettings: SiteSettingsFilter
   caseStudy: CaseStudyFilter
 }
 
@@ -88,7 +91,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | CaseStudy | Folder
+union DocumentNode = Page | SiteSettings | CaseStudy | Folder
 
 type PageExperience {
   role: String!
@@ -100,6 +103,12 @@ type PageExperience {
 type PageSocialLinks {
   label: String!
   url: String!
+}
+
+type PageToolsAndSkills {
+  name: String!
+  category: String
+  proficiency: String
 }
 
 type Page implements Node & Document {
@@ -125,6 +134,7 @@ type Page implements Node & Document {
   bio: JSON
   experience: [PageExperience]
   socialLinks: [PageSocialLinks]
+  toolsAndSkills: [PageToolsAndSkills]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -172,6 +182,12 @@ input PageSocialLinksFilter {
   url: StringFilter
 }
 
+input PageToolsAndSkillsFilter {
+  name: StringFilter
+  category: StringFilter
+  proficiency: StringFilter
+}
+
 input PageFilter {
   title: StringFilter
   backgroundType: StringFilter
@@ -195,6 +211,7 @@ input PageFilter {
   bio: RichTextFilter
   experience: PageExperienceFilter
   socialLinks: PageSocialLinksFilter
+  toolsAndSkills: PageToolsAndSkillsFilter
 }
 
 type PageConnectionEdges {
@@ -208,8 +225,47 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
+type SiteSettingsSocialLinks {
+  label: String!
+  url: String!
+}
+
+type SiteSettings implements Node & Document {
+  name: String!
+  email: String!
+  copyright: String
+  socialLinks: [SiteSettingsSocialLinks]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SiteSettingsSocialLinksFilter {
+  label: StringFilter
+  url: StringFilter
+}
+
+input SiteSettingsFilter {
+  name: StringFilter
+  email: StringFilter
+  copyright: StringFilter
+  socialLinks: SiteSettingsSocialLinksFilter
+}
+
+type SiteSettingsConnectionEdges {
+  cursor: String!
+  node: SiteSettings
+}
+
+type SiteSettingsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SiteSettingsConnectionEdges]
+}
+
 type CaseStudy implements Node & Document {
   title: String!
+  status: String!
   thumbnail: String!
   headerImage: String!
   summary: String!
@@ -242,6 +298,7 @@ input DatetimeFilter {
 
 input CaseStudyFilter {
   title: StringFilter
+  status: StringFilter
   thumbnail: ImageFilter
   headerImage: ImageFilter
   summary: StringFilter
@@ -280,18 +337,22 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
+  updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
+  createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   updateCaseStudy(relativePath: String!, params: CaseStudyMutation!): CaseStudy!
   createCaseStudy(relativePath: String!, params: CaseStudyMutation!): CaseStudy!
 }
 
 input DocumentUpdateMutation {
   page: PageMutation
+  siteSettings: SiteSettingsMutation
   caseStudy: CaseStudyMutation
   relativePath: String
 }
 
 input DocumentMutation {
   page: PageMutation
+  siteSettings: SiteSettingsMutation
   caseStudy: CaseStudyMutation
 }
 
@@ -305,6 +366,12 @@ input PageExperienceMutation {
 input PageSocialLinksMutation {
   label: String
   url: String
+}
+
+input PageToolsAndSkillsMutation {
+  name: String
+  category: String
+  proficiency: String
 }
 
 input PageMutation {
@@ -330,10 +397,24 @@ input PageMutation {
   bio: JSON
   experience: [PageExperienceMutation]
   socialLinks: [PageSocialLinksMutation]
+  toolsAndSkills: [PageToolsAndSkillsMutation]
+}
+
+input SiteSettingsSocialLinksMutation {
+  label: String
+  url: String
+}
+
+input SiteSettingsMutation {
+  name: String
+  email: String
+  copyright: String
+  socialLinks: [SiteSettingsSocialLinksMutation]
 }
 
 input CaseStudyMutation {
   title: String
+  status: String
   thumbnail: String
   headerImage: String
   summary: String

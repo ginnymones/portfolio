@@ -32,11 +32,30 @@ fragment PageParts on Page {
     label
     url
   }
+  toolsAndSkills {
+    __typename
+    name
+    category
+    proficiency
+  }
+}
+
+fragment SiteSettingsParts on SiteSettings {
+  __typename
+  name
+  email
+  copyright
+  socialLinks {
+    __typename
+    label
+    url
+  }
 }
 
 fragment CaseStudyParts on CaseStudy {
   __typename
   title
+  status
   thumbnail
   headerImage
   summary

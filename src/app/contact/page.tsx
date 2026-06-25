@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { getPageContent } from "@/lib/pages";
+import { getSiteSettings } from "@/lib/site-settings";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { PageBackground } from "@/components/PageBackground";
 
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   const recentWorks = getAllCaseStudies().slice(0, 3);
   const page = getPageContent("contact");
+  const settings = getSiteSettings();
 
   return (
     <PageBackground
@@ -69,31 +71,18 @@ export default function ContactPage() {
               {page.ctaPrimaryLabel}
             </a>
           )}
-          <div className="flex justify-center gap-6 mt-8">
-            <a
-              href="https://dribbble.com/ginnymones"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-warm hover:text-background transition-colors text-sm"
-            >
-              Dribbble
-            </a>
-            <a
-              href="https://linkedin.com/in/ginnymones"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-warm hover:text-background transition-colors text-sm"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://behance.net/ginnymones"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-warm hover:text-background transition-colors text-sm"
-            >
-              Behance
-            </a>
+          <div className="flex flex-wrap justify-center gap-6 mt-8">
+            {settings.socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-warm hover:text-background transition-colors text-sm"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </section>

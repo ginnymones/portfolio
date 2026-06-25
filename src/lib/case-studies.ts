@@ -15,6 +15,7 @@ export interface CaseStudyMeta extends BackgroundConfig {
   client: string;
   date: string;
   liveUrl?: string;
+  status?: "draft" | "published";
 }
 
 export interface CaseStudy extends CaseStudyMeta {
@@ -60,12 +61,18 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
       client: data.client || "",
       date: data.date || "",
       liveUrl: data.liveUrl,
+      status: data.status || "published",
       ...parseBackgroundFields(data),
     };
   });
 
+  // Filter out drafts in production
+  const filtered = process.env.NODE_ENV === "production"
+    ? studies.filter((s) => s.status !== "draft")
+    : studies;
+
   // Sort by date, newest first
-  return studies.sort(
+  return filtered.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
@@ -90,6 +97,7 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
     client: data.client || "",
     date: data.date || "",
     liveUrl: data.liveUrl,
+    status: data.status || "published",
     content,
     ...parseBackgroundFields(data),
   };

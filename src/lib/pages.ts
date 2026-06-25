@@ -16,6 +16,12 @@ export interface SocialLink {
   url: string;
 }
 
+export interface ToolOrSkill {
+  name: string;
+  category?: string;
+  proficiency?: "expert" | "advanced" | "intermediate" | "beginner";
+}
+
 // TinaCMS rich-text node structure
 export interface RichTextNode {
   type: string;
@@ -36,6 +42,7 @@ export interface PageContent extends BackgroundConfig {
   bio?: RichTextNode;
   experience?: ExperienceItem[];
   socialLinks?: SocialLink[];
+  toolsAndSkills?: ToolOrSkill[];
 }
 
 export function getPageContent(slug: string): PageContent {

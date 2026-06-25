@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PageBackground } from "@/components/PageBackground";
+import { LightboxContent } from "@/components/Lightbox";
 import { remark } from "remark";
 import html from "remark-html";
 
@@ -116,10 +117,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </header>
 
         {/* Content */}
-        <div
-          className="prose max-w-none"
-          dangerouslySetInnerHTML={{ __html: contentHtml }}
-        />
+        <LightboxContent html={contentHtml} />
       </article>
     </PageBackground>
   );

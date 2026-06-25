@@ -1,4 +1,5 @@
 ---
+status: "published"
 title: "E-Commerce Checkout Optimization"
 thumbnail: "/images/case-studies/ecommerce-thumb.svg"
 headerImage: "/images/case-studies/ecommerce-header.svg"

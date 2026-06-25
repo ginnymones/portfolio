@@ -84,6 +84,8 @@ export type Query = {
   document: DocumentNode;
   page: Page;
   pageConnection: PageConnection;
+  siteSettings: SiteSettings;
+  siteSettingsConnection: SiteSettingsConnection;
   caseStudy: CaseStudy;
   caseStudyConnection: CaseStudyConnection;
 };
@@ -125,6 +127,21 @@ export type QueryPageConnectionArgs = {
 };
 
 
+export type QuerySiteSettingsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySiteSettingsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteSettingsFilter>;
+};
+
+
 export type QueryCaseStudyArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -141,6 +158,7 @@ export type QueryCaseStudyConnectionArgs = {
 
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
+  siteSettings?: InputMaybe<SiteSettingsFilter>;
   caseStudy?: InputMaybe<CaseStudyFilter>;
 };
 
@@ -181,7 +199,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | CaseStudy | Folder;
+export type DocumentNode = Page | SiteSettings | CaseStudy | Folder;
 
 export type PageExperience = {
   __typename?: 'PageExperience';
@@ -195,6 +213,13 @@ export type PageSocialLinks = {
   __typename?: 'PageSocialLinks';
   label: Scalars['String']['output'];
   url: Scalars['String']['output'];
+};
+
+export type PageToolsAndSkills = {
+  __typename?: 'PageToolsAndSkills';
+  name: Scalars['String']['output'];
+  category?: Maybe<Scalars['String']['output']>;
+  proficiency?: Maybe<Scalars['String']['output']>;
 };
 
 export type Page = Node & Document & {
@@ -221,6 +246,7 @@ export type Page = Node & Document & {
   bio?: Maybe<Scalars['JSON']['output']>;
   experience?: Maybe<Array<Maybe<PageExperience>>>;
   socialLinks?: Maybe<Array<Maybe<PageSocialLinks>>>;
+  toolsAndSkills?: Maybe<Array<Maybe<PageToolsAndSkills>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -268,6 +294,12 @@ export type PageSocialLinksFilter = {
   url?: InputMaybe<StringFilter>;
 };
 
+export type PageToolsAndSkillsFilter = {
+  name?: InputMaybe<StringFilter>;
+  category?: InputMaybe<StringFilter>;
+  proficiency?: InputMaybe<StringFilter>;
+};
+
 export type PageFilter = {
   title?: InputMaybe<StringFilter>;
   backgroundType?: InputMaybe<StringFilter>;
@@ -291,6 +323,7 @@ export type PageFilter = {
   bio?: InputMaybe<RichTextFilter>;
   experience?: InputMaybe<PageExperienceFilter>;
   socialLinks?: InputMaybe<PageSocialLinksFilter>;
+  toolsAndSkills?: InputMaybe<PageToolsAndSkillsFilter>;
 };
 
 export type PageConnectionEdges = {
@@ -306,9 +339,52 @@ export type PageConnection = Connection & {
   edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
+export type SiteSettingsSocialLinks = {
+  __typename?: 'SiteSettingsSocialLinks';
+  label: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type SiteSettings = Node & Document & {
+  __typename?: 'SiteSettings';
+  name: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  copyright?: Maybe<Scalars['String']['output']>;
+  socialLinks?: Maybe<Array<Maybe<SiteSettingsSocialLinks>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type SiteSettingsSocialLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type SiteSettingsFilter = {
+  name?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  copyright?: InputMaybe<StringFilter>;
+  socialLinks?: InputMaybe<SiteSettingsSocialLinksFilter>;
+};
+
+export type SiteSettingsConnectionEdges = {
+  __typename?: 'SiteSettingsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<SiteSettings>;
+};
+
+export type SiteSettingsConnection = Connection & {
+  __typename?: 'SiteSettingsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SiteSettingsConnectionEdges>>>;
+};
+
 export type CaseStudy = Node & Document & {
   __typename?: 'CaseStudy';
   title: Scalars['String']['output'];
+  status: Scalars['String']['output'];
   thumbnail: Scalars['String']['output'];
   headerImage: Scalars['String']['output'];
   summary: Scalars['String']['output'];
@@ -341,6 +417,7 @@ export type DatetimeFilter = {
 
 export type CaseStudyFilter = {
   title?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
   thumbnail?: InputMaybe<ImageFilter>;
   headerImage?: InputMaybe<ImageFilter>;
   summary?: InputMaybe<StringFilter>;
@@ -382,6 +459,8 @@ export type Mutation = {
   createFolder: DocumentNode;
   updatePage: Page;
   createPage: Page;
+  updateSiteSettings: SiteSettings;
+  createSiteSettings: SiteSettings;
   updateCaseStudy: CaseStudy;
   createCaseStudy: CaseStudy;
 };
@@ -432,6 +511,18 @@ export type MutationCreatePageArgs = {
 };
 
 
+export type MutationUpdateSiteSettingsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteSettingsMutation;
+};
+
+
+export type MutationCreateSiteSettingsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteSettingsMutation;
+};
+
+
 export type MutationUpdateCaseStudyArgs = {
   relativePath: Scalars['String']['input'];
   params: CaseStudyMutation;
@@ -445,12 +536,14 @@ export type MutationCreateCaseStudyArgs = {
 
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
+  siteSettings?: InputMaybe<SiteSettingsMutation>;
   caseStudy?: InputMaybe<CaseStudyMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
+  siteSettings?: InputMaybe<SiteSettingsMutation>;
   caseStudy?: InputMaybe<CaseStudyMutation>;
 };
 
@@ -464,6 +557,12 @@ export type PageExperienceMutation = {
 export type PageSocialLinksMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageToolsAndSkillsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  proficiency?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageMutation = {
@@ -489,10 +588,24 @@ export type PageMutation = {
   bio?: InputMaybe<Scalars['JSON']['input']>;
   experience?: InputMaybe<Array<InputMaybe<PageExperienceMutation>>>;
   socialLinks?: InputMaybe<Array<InputMaybe<PageSocialLinksMutation>>>;
+  toolsAndSkills?: InputMaybe<Array<InputMaybe<PageToolsAndSkillsMutation>>>;
+};
+
+export type SiteSettingsSocialLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SiteSettingsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  copyright?: InputMaybe<Scalars['String']['input']>;
+  socialLinks?: InputMaybe<Array<InputMaybe<SiteSettingsSocialLinksMutation>>>;
 };
 
 export type CaseStudyMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
   thumbnail?: InputMaybe<Scalars['String']['input']>;
   headerImage?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
@@ -512,16 +625,18 @@ export type CaseStudyMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null, toolsAndSkills?: Array<{ __typename: 'PageToolsAndSkills', name: string, category?: string | null, proficiency?: string | null } | null> | null };
 
-export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null };
+export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name: string, email: string, copyright?: string | null, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null };
+
+export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null, toolsAndSkills?: Array<{ __typename: 'PageToolsAndSkills', name: string, category?: string | null, proficiency?: string | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -533,14 +648,33 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null, toolsAndSkills?: Array<{ __typename: 'PageToolsAndSkills', name: string, category?: string | null, proficiency?: string | null } | null> | null } | null } | null> | null } };
+
+export type SiteSettingsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } };
+
+export type SiteSettingsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteSettingsFilter>;
+}>;
+
+
+export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } | null } | null> | null } };
 
 export type CaseStudyQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type CaseStudyQuery = { __typename?: 'Query', caseStudy: { __typename: 'CaseStudy', id: string, title: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type CaseStudyQuery = { __typename?: 'Query', caseStudy: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type CaseStudyConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -552,7 +686,7 @@ export type CaseStudyConnectionQueryVariables = Exact<{
 }>;
 
 
-export type CaseStudyConnectionQuery = { __typename?: 'Query', caseStudyConnection: { __typename?: 'CaseStudyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CaseStudyConnectionEdges', cursor: string, node?: { __typename: 'CaseStudy', id: string, title: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type CaseStudyConnectionQuery = { __typename?: 'Query', caseStudyConnection: { __typename?: 'CaseStudyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CaseStudyConnectionEdges', cursor: string, node?: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -589,12 +723,32 @@ export const PagePartsFragmentDoc = gql`
     label
     url
   }
+  toolsAndSkills {
+    __typename
+    name
+    category
+    proficiency
+  }
+}
+    `;
+export const SiteSettingsPartsFragmentDoc = gql`
+    fragment SiteSettingsParts on SiteSettings {
+  __typename
+  name
+  email
+  copyright
+  socialLinks {
+    __typename
+    label
+    url
+  }
 }
     `;
 export const CaseStudyPartsFragmentDoc = gql`
     fragment CaseStudyParts on CaseStudy {
   __typename
   title
+  status
   thumbnail
   headerImage
   summary
@@ -671,6 +825,63 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
+export const SiteSettingsDocument = gql`
+    query siteSettings($relativePath: String!) {
+  siteSettings(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SiteSettingsParts
+  }
+}
+    ${SiteSettingsPartsFragmentDoc}`;
+export const SiteSettingsConnectionDocument = gql`
+    query siteSettingsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SiteSettingsFilter) {
+  siteSettingsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SiteSettingsParts
+      }
+    }
+  }
+}
+    ${SiteSettingsPartsFragmentDoc}`;
 export const CaseStudyDocument = gql`
     query caseStudy($relativePath: String!) {
   caseStudy(relativePath: $relativePath) {
@@ -736,6 +947,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
         return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
+      },
+    siteSettings(variables: SiteSettingsQueryVariables, options?: C): Promise<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}> {
+        return requester<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}, SiteSettingsQueryVariables>(SiteSettingsDocument, variables, options);
+      },
+    siteSettingsConnection(variables?: SiteSettingsConnectionQueryVariables, options?: C): Promise<{data: SiteSettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsConnectionQueryVariables, query: string}> {
+        return requester<{data: SiteSettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsConnectionQueryVariables, query: string}, SiteSettingsConnectionQueryVariables>(SiteSettingsConnectionDocument, variables, options);
       },
     caseStudy(variables: CaseStudyQueryVariables, options?: C): Promise<{data: CaseStudyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CaseStudyQueryVariables, query: string}> {
         return requester<{data: CaseStudyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CaseStudyQueryVariables, query: string}, CaseStudyQueryVariables>(CaseStudyDocument, variables, options);

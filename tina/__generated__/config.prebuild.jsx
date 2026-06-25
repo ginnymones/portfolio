@@ -219,6 +219,102 @@ var config_default = defineConfig({
                 required: true
               }
             ]
+          },
+          {
+            type: "object",
+            name: "toolsAndSkills",
+            label: "Tools & Skills",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.name || "New Skill"
+              })
+            },
+            fields: [
+              {
+                type: "string",
+                name: "name",
+                label: "Tool / Skill Name",
+                required: true
+              },
+              {
+                type: "string",
+                name: "category",
+                label: "Category",
+                description: "e.g., Design, Research, Development, Collaboration"
+              },
+              {
+                type: "string",
+                name: "proficiency",
+                label: "Proficiency",
+                options: [
+                  { value: "expert", label: "Expert" },
+                  { value: "advanced", label: "Advanced" },
+                  { value: "intermediate", label: "Intermediate" },
+                  { value: "beginner", label: "Beginner" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "siteSettings",
+        label: "Site Settings",
+        path: "src/content",
+        format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          global: true
+        },
+        match: {
+          include: "site-settings"
+        },
+        fields: [
+          {
+            type: "string",
+            name: "name",
+            label: "Site Name",
+            required: true
+          },
+          {
+            type: "string",
+            name: "email",
+            label: "Contact Email",
+            required: true
+          },
+          {
+            type: "string",
+            name: "copyright",
+            label: "Copyright Text"
+          },
+          {
+            type: "object",
+            name: "socialLinks",
+            label: "Social Links",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.label || "New Link"
+              })
+            },
+            fields: [
+              {
+                type: "string",
+                name: "label",
+                label: "Label",
+                required: true
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "URL",
+                required: true
+              }
+            ]
           }
         ]
       },
@@ -227,11 +323,29 @@ var config_default = defineConfig({
         label: "Case Studies",
         path: "src/content/case-studies",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return (values?.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            }
+          }
+        },
         fields: [
           {
             type: "string",
             name: "title",
             label: "Title",
+            required: true
+          },
+          {
+            type: "string",
+            name: "status",
+            label: "Status",
+            options: [
+              { value: "draft", label: "Draft" },
+              { value: "published", label: "Published" }
+            ],
             required: true
           },
           {

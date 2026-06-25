@@ -1,0 +1,19 @@
+{
+  "name": "Ginny Mones",
+  "email": "hello@ginnymones.com",
+  "copyright": "Ginny Mones. All rights reserved.",
+  "socialLinks": [
+    {
+      "label": "Dribbble",
+      "url": "https://dribbble.com/ginnymones"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/ginnymones"
+    },
+    {
+      "label": "Behance",
+      "url": "https://behance.net/ginnymones"
+    }
+  ]
+}

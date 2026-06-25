@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getSiteSettings } from "@/lib/site-settings";
 
 export function Footer() {
+  const settings = getSiteSettings();
+
   return (
     <footer
       id="contact"
@@ -18,43 +21,30 @@ export function Footer() {
 
           <div className="flex flex-col gap-4">
             <a
-              href="mailto:hello@ginnymones.com"
+              href={`mailto:${settings.email}`}
               className="text-accent-yellow hover:text-accent-orange transition-colors font-medium"
             >
-              hello@ginnymones.com
+              {settings.email}
             </a>
-            <div className="flex gap-6 mt-2">
-              <a
-                href="https://dribbble.com/ginnymones"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-warm hover:text-background transition-colors text-sm"
-              >
-                Dribbble
-              </a>
-              <a
-                href="https://linkedin.com/in/ginnymones"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-warm hover:text-background transition-colors text-sm"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://behance.net/ginnymones"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-warm hover:text-background transition-colors text-sm"
-              >
-                Behance
-              </a>
+            <div className="flex flex-wrap gap-6 mt-2">
+              {settings.socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-warm hover:text-background transition-colors text-sm"
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="border-t border-neutral-warm/30 mt-12 pt-8 flex items-center justify-between">
           <p className="text-neutral-warm text-sm">
-            &copy; {new Date().getFullYear()} Ginny Mones. All rights reserved.
+            &copy; {new Date().getFullYear()} {settings.copyright}
           </p>
           <Link
             href="/works"
