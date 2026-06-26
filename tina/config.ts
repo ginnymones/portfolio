@@ -356,8 +356,11 @@ export default defineConfig({
             slugify: (values) => {
               return (values?.title || "")
                 .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/(^-|-$)/g, "");
+                .replace(/[—–]/g, "-")           // em/en dashes to hyphens
+                .replace(/[^a-z0-9\s-]/g, "")    // strip special chars
+                .replace(/\s+/g, "-")            // spaces to hyphens
+                .replace(/-+/g, "-")             // collapse multiple hyphens
+                .replace(/(^-|-$)/g, "");        // trim leading/trailing hyphens
             },
           },
         },

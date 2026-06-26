@@ -349,7 +349,7 @@ var config_default = defineConfig({
           filename: {
             readonly: false,
             slugify: (values) => {
-              return (values?.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+              return (values?.title || "").toLowerCase().replace(/[—–]/g, "-").replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").replace(/(^-|-$)/g, "");
             }
           }
         },
