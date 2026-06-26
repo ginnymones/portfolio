@@ -244,4 +244,6 @@ portfolio/
 - **Shared data**: Any text that appears in 2+ places (social links, email, name) must live in `site-settings.json` — never duplicate across components.
 - **Editorial workflow**: Use `status: "draft"` / `"published"` in frontmatter. Filter drafts in production via `process.env.NODE_ENV === "production"`.
 - **Tina schema sync**: After modifying `tina/config.ts`, you MUST run `npx tinacms dev --command "echo done"` locally, then commit the updated `tina/__generated__/` files. Deploy will fail with "schema mismatch" otherwise.
+- **YAML frontmatter validation**: A single missing quote in frontmatter (e.g., `icon: "globe` instead of `icon: "globe"`) will break Tina Cloud indexing for the entire branch. Always double-check quotes before pushing.
+- **Tina Cloud reindex**: When indexing fails, click the ⋮ menu next to the branch in Tina Cloud dashboard → "Reindex". The "Refresh Branches" button does NOT re-index content.
 - **All content must be CMS-editable from day one**: Never hardcode page text in JSX. Wire everything to JSON/markdown content files during initial scaffold.

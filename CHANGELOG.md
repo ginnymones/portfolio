@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-26] — Case Study Content & Image Fixes
+
+### Fixed
+- Missing closing quote in `collection-tracker.md` frontmatter (`icon: "globe"`) that broke Tina Cloud indexing
+- Renamed image files to shorter, consistent names (removed `header-` prefix from inline images)
+- Fixed image references in collection-tracker, designer-to-vibe-dev, and figma-to-email-builder case studies
+
+### Note
+- When Tina Cloud indexing fails, you must click the ⋮ menu next to the branch → "Reindex" (not "Refresh Branches")
+- Always validate YAML frontmatter quotes before pushing — a single missing quote breaks the entire Tina Cloud index
+
+---
+
 ## [2026-06-26] — Case Study Enhancements: Nav, Related, Links, Social Icons
 
 ### Added
