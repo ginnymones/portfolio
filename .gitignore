@@ -19,5 +19,8 @@ npm-debug.log*
 .env*.local
 .env
 
+# kiro
+.kiro/settings/
+
 # tina
 .tina/__generated__

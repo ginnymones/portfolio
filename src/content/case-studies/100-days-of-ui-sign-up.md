@@ -20,19 +20,19 @@ Possibly the most difficult part of participating in the 100 days of UI challeng
 My approach for this first challenge has been my go-to for nearly all design decisions I've had to make. I asked myself the following things:
 
 1. **What is already working?** — Daily, weekly, monthly forecasts. Users love those. Surprisingly, email notifications of said forecasts are also still effective, so reaching users through their inbox could be a viable option. People don't mind making a few extra taps to see content that is tailor-made for them.
-2. **What is not working?** — Ran moderated sessions with 12 participants to pinpoint exact friction points
+2. **What is not working?** — Jittery-looking page loading between the time-span views. Cluttered website layouts are also a huge problem (and a trend, unfortunately)
 3. **What else are my users interested in?** - This is important as this will help position my app as something that provides more value than the rest.
 
-### Design Changes
+### Design Decisions
 
 - Consolidated the 5-step checkout into a single-page flow with collapsible sections
 - Added trust signals (security badges, return policy) at key decision points
 - Introduced address auto-complete to reduce form fatigue
 - Simplified payment to show saved methods first with one-tap checkout
 
-![Desktop layout](/images/case-studies/100-days-of-ui-landing-page-header.jpg)
+![Desktop layout](/images/case-studies/100-days-of-ui-sign-up-header.jpg)
 
-![Mobile layout](/images/case-studies/100-days-of-ui-landing-page-mobile.jpg)
+![Mobile layout](/images/case-studies/100-days-of-ui-sign-up-mobile.jpg)
 
 ## Results & Impact
 
