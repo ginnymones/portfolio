@@ -1,0 +1,49 @@
+---
+status: "published"
+title: "Figma to HTML Email Builder — Plugin"
+thumbnail: "/images/case-studies/figma-to-email-builder-thumb.jpg"
+headerImage: "/images/case-studies/figma-to-email-builder-header.jpg"
+summary: "Designed and built a Figma plugin that provides a modular email design system with pre-built components, layout presets, font governance, and multi-client HTML export."
+tags: ["Product Design", "Development", "UX/UI Design"]
+client: "Personal Project"
+date: "2026-06-01"
+---
+
+## Problem Statement
+
+Email development is notoriously painful. Designers create beautiful email layouts in Figma, then hand them off to developers who spend hours wrestling with Outlook's rendering quirks, inline CSS limitations, and responsive stacking behavior. The gap between "what I designed" and "what actually renders in Gmail/Outlook" is massive.
+
+Additionally, design teams lack a shared system for email components. Every email starts from scratch, font choices drift across campaigns, and spacing is inconsistent.
+
+## Solution
+
+I built a Figma plugin that bridges design and development for email. It provides a complete design system within Figma — pre-built components, layout templates, font governance — and exports production-ready HTML targeting specific email clients.
+
+### Module Library
+
+The plugin creates a shared component library directly in Figma with 11 module types:
+
+- Header, Hero, Body (1-col, 2-col, 3-col), Carousel, Quote, Status, Divider, Spacer, Footer
+- Each module has 2-4 variants (e.g., Hero: Image Background, Solid Background, Split)
+- All modules are responsive — multi-column layouts stack to single column on mobile
+
+### Key Design Decisions
+
+- **Design in Figma, export as code** — Designers never touch HTML. They assemble emails from modules and hit Export.
+- **Font governance built in** — An approved font list prevents drift. Export-time validation catches unapproved fonts and suggests fallbacks.
+- **Multi-client targeting** — Export to Outlook (VML tables), Gmail (inline-only CSS), or Universal (fluid-hybrid with MSO conditionals). One design, three outputs.
+- **8px spacing grid enforced** — Spacing constraints (0-64px range) prevent layout drift between components.
+- **Layout presets** — Newsletter, Announcement, Report, Minimal, Product Showcase templates let you start from a complete layout rather than assembling piece by piece.
+
+### Tech Stack
+
+TypeScript, Figma Plugin API, fluid-hybrid responsive HTML generation, VML (for Outlook), inline CSS transformation (for Gmail).
+
+## Results & Impact
+
+- Complete email design system installable as a Figma plugin
+- 11 module types with 30+ total variants
+- 3 export targets (Outlook, Gmail, Universal)
+- Font governance prevents brand drift across campaigns
+- Responsive behavior built into every component — no separate mobile design needed
+- Eliminates the designer → developer handoff gap for email campaigns
