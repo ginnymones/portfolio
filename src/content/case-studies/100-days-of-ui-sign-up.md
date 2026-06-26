@@ -7,6 +7,13 @@ summary: "Designed a sign-up page for an astrology app as part of the 100 Days o
 tags: ["UX/UI Design"]
 client: "Personal Project"
 date: "2026-01-20"
+links:
+  - label: "View on Dribbble"
+    url: "https://dribbble.com/shots/26942784-100-Days-of-UI-Challenge-Sign-Up"
+    icon: "dribbble"
+  - label: "View on Behance"
+    url: "https://www.behance.net/gallery/243435485/100-Days-of-UI-Sign-Up-Checkout-Landing-Page"
+    icon: "behance"
 ---
 
 ## Problem Statement
@@ -25,20 +32,11 @@ My approach for this first challenge has been my go-to for nearly all design dec
 
 ### Design Decisions
 
-- Consolidated the 5-step checkout into a single-page flow with collapsible sections
-- Added trust signals (security badges, return policy) at key decision points
-- Introduced address auto-complete to reduce form fatigue
-- Simplified payment to show saved methods first with one-tap checkout
+- As the goal is to design just the sign up page, I need to communicate the whole point of the app right from the get go. That means an all-encompassing copy (Start your stellar journey), striking visuals, and strong but "mystical" colors — if that makes sense.
+- I played around with Figma agents and whipped up some quick screens for the home, daily reading, and daily tarot pages. While AI was able to put these pages together quickly, it was not able to get the nuances of the design language that I had put together so I had to make big edits to the design.
 
 ![Desktop layout](/images/case-studies/100-days-of-ui-sign-up-header.jpg)
 
 ![Mobile layout](/images/case-studies/100-days-of-ui-sign-up-mobile.jpg)
 
-## Results & Impact
-
-- **35% reduction** in cart abandonment
-- **$2.3M additional revenue** in the first quarter post-launch
-- **12% increase** in repeat purchases due to saved preferences
-- Average checkout time reduced from 4.5 minutes to 1.8 minutes
-
-[View on Dribbble](https://dribbble.com/shots/26942784-100-Days-of-UI-Challenge-Sign-Up) | [View on Behance](https://www.behance.net/gallery/243435485/100-Days-of-UI-Sign-Up-Checkout-Landing-Page)
+![Inner pages](/images/case-studies/100-days-of-ui-sign-up-inner-pages.jpg)
