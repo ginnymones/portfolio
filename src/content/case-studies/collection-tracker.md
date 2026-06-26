@@ -10,7 +10,7 @@ date: "2026-06-07"
 links:
   - label: "Live App"
     url: "https://collection-tracker-zeta.vercel.app/"
-    icon: "globe
+    icon: "globe"
 ---
 
 ## Problem Statement
