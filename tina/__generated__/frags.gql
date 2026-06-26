@@ -66,6 +66,12 @@ fragment CaseStudyParts on CaseStudy {
   client
   date
   liveUrl
+  links {
+    __typename
+    label
+    url
+    icon
+  }
   backgroundType
   backgroundImage
   backgroundVideo

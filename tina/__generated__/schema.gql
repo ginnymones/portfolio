@@ -269,6 +269,12 @@ type SiteSettingsConnection implements Connection {
   edges: [SiteSettingsConnectionEdges]
 }
 
+type CaseStudyLinks {
+  label: String!
+  url: String!
+  icon: String
+}
+
 type CaseStudy implements Node & Document {
   title: String!
   status: String!
@@ -279,6 +285,7 @@ type CaseStudy implements Node & Document {
   client: String
   date: String!
   liveUrl: String
+  links: [CaseStudyLinks]
   backgroundType: String
   backgroundImage: String
   backgroundVideo: String
@@ -302,6 +309,12 @@ input DatetimeFilter {
   in: [String]
 }
 
+input CaseStudyLinksFilter {
+  label: StringFilter
+  url: StringFilter
+  icon: StringFilter
+}
+
 input CaseStudyFilter {
   title: StringFilter
   status: StringFilter
@@ -312,6 +325,7 @@ input CaseStudyFilter {
   client: StringFilter
   date: DatetimeFilter
   liveUrl: StringFilter
+  links: CaseStudyLinksFilter
   backgroundType: StringFilter
   backgroundImage: ImageFilter
   backgroundVideo: StringFilter
@@ -421,6 +435,12 @@ input SiteSettingsMutation {
   socialLinks: [SiteSettingsSocialLinksMutation]
 }
 
+input CaseStudyLinksMutation {
+  label: String
+  url: String
+  icon: String
+}
+
 input CaseStudyMutation {
   title: String
   status: String
@@ -431,6 +451,7 @@ input CaseStudyMutation {
   client: String
   date: String
   liveUrl: String
+  links: [CaseStudyLinksMutation]
   backgroundType: String
   backgroundImage: String
   backgroundVideo: String

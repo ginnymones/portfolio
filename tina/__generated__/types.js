@@ -76,6 +76,12 @@ export const CaseStudyPartsFragmentDoc = gql`
   client
   date
   liveUrl
+  links {
+    __typename
+    label
+    url
+    icon
+  }
   backgroundType
   backgroundImage
   backgroundVideo

@@ -387,6 +387,13 @@ export type SiteSettingsConnection = Connection & {
   edges?: Maybe<Array<Maybe<SiteSettingsConnectionEdges>>>;
 };
 
+export type CaseStudyLinks = {
+  __typename?: 'CaseStudyLinks';
+  label: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
 export type CaseStudy = Node & Document & {
   __typename?: 'CaseStudy';
   title: Scalars['String']['output'];
@@ -398,6 +405,7 @@ export type CaseStudy = Node & Document & {
   client?: Maybe<Scalars['String']['output']>;
   date: Scalars['String']['output'];
   liveUrl?: Maybe<Scalars['String']['output']>;
+  links?: Maybe<Array<Maybe<CaseStudyLinks>>>;
   backgroundType?: Maybe<Scalars['String']['output']>;
   backgroundImage?: Maybe<Scalars['String']['output']>;
   backgroundVideo?: Maybe<Scalars['String']['output']>;
@@ -421,6 +429,12 @@ export type DatetimeFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type CaseStudyLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
 export type CaseStudyFilter = {
   title?: InputMaybe<StringFilter>;
   status?: InputMaybe<StringFilter>;
@@ -431,6 +445,7 @@ export type CaseStudyFilter = {
   client?: InputMaybe<StringFilter>;
   date?: InputMaybe<DatetimeFilter>;
   liveUrl?: InputMaybe<StringFilter>;
+  links?: InputMaybe<CaseStudyLinksFilter>;
   backgroundType?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   backgroundVideo?: InputMaybe<StringFilter>;
@@ -612,6 +627,12 @@ export type SiteSettingsMutation = {
   socialLinks?: InputMaybe<Array<InputMaybe<SiteSettingsSocialLinksMutation>>>;
 };
 
+export type CaseStudyLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CaseStudyMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
@@ -622,6 +643,7 @@ export type CaseStudyMutation = {
   client?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   liveUrl?: InputMaybe<Scalars['String']['input']>;
+  links?: InputMaybe<Array<InputMaybe<CaseStudyLinksMutation>>>;
   backgroundType?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   backgroundVideo?: InputMaybe<Scalars['String']['input']>;
@@ -638,7 +660,7 @@ export type PagePartsFragment = { __typename: 'Page', title: string, backgroundT
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null };
 
-export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null };
+export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -683,7 +705,7 @@ export type CaseStudyQueryVariables = Exact<{
 }>;
 
 
-export type CaseStudyQuery = { __typename?: 'Query', caseStudy: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type CaseStudyQuery = { __typename?: 'Query', caseStudy: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null } };
 
 export type CaseStudyConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -695,7 +717,7 @@ export type CaseStudyConnectionQueryVariables = Exact<{
 }>;
 
 
-export type CaseStudyConnectionQuery = { __typename?: 'Query', caseStudyConnection: { __typename?: 'CaseStudyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CaseStudyConnectionEdges', cursor: string, node?: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type CaseStudyConnectionQuery = { __typename?: 'Query', caseStudyConnection: { __typename?: 'CaseStudyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CaseStudyConnectionEdges', cursor: string, node?: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -768,6 +790,12 @@ export const CaseStudyPartsFragmentDoc = gql`
   client
   date
   liveUrl
+  links {
+    __typename
+    label
+    url
+    icon
+  }
   backgroundType
   backgroundImage
   backgroundVideo

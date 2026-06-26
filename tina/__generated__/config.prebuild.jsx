@@ -413,6 +413,46 @@ var config_default = defineConfig({
             name: "liveUrl",
             label: "Live URL"
           },
+          {
+            type: "object",
+            name: "links",
+            label: "Relevant Links",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.label || "New Link"
+              })
+            },
+            fields: [
+              {
+                type: "string",
+                name: "label",
+                label: "Label",
+                required: true
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "URL",
+                required: true
+              },
+              {
+                type: "string",
+                name: "icon",
+                label: "Icon",
+                options: [
+                  { value: "github", label: "GitHub" },
+                  { value: "figma", label: "Figma" },
+                  { value: "dribbble", label: "Dribbble" },
+                  { value: "behance", label: "Behance" },
+                  { value: "npm", label: "npm" },
+                  { value: "globe", label: "Website" },
+                  { value: "play", label: "Demo / Video" },
+                  { value: "link", label: "Generic Link" }
+                ]
+              }
+            ]
+          },
           ...backgroundFields,
           {
             type: "rich-text",
