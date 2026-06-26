@@ -1,12 +1,16 @@
 ---
 status: "published"
 title: "Workload Tracker — Full-Stack Productivity Tool"
-thumbnail: "/images/case-studies/workload-tracker-thumb.jpg"
-headerImage: "/images/case-studies/workload-tracker-header.jpg"
+thumbnail: "/images/case-studies/workload-tracker-header.png"
+headerImage: "/images/case-studies/workload-tracker-header.png"
 summary: "Designed and built a full-stack workload tracking tool from concept to deployed MVP, enabling users to log hours, visualize capacity, and share dashboards."
 tags: ["Product Design", "Development", "UX/UI Design"]
 client: "Personal Project"
 date: "2026-05-12"
+links:
+  - label: "Live App (Personal productivity tracker)"
+    url: "https://workload-tracker-pin.vercel.app/w/ginnymones"
+    icon: "globe"
 ---
 
 ## Problem Statement
@@ -25,6 +29,10 @@ Three versions of the tool, each serving a different purpose:
 - **PIN-auth variant** — Lightweight personal version with simple PIN login, no OAuth complexity
 - **Static demo** — Single HTML file proof-of-concept for stakeholders
 
+![The productivity tracker in it's full glory](/images/case-studies/workload-tracker-header.png)
+
+![Streaks/insights and period views that were added and refined — painstakingly — later on](/images/case-studies/workload-tracker-streak-views.png)
+
 ### Key Design Decisions
 
 - **Dark mode by default** — Reduces eye strain for a tool you check throughout the day
@@ -32,6 +40,10 @@ Three versions of the tool, each serving a different purpose:
 - **Capacity meter front and center** — The most critical information is the first thing you see
 - **Quick-add interaction** — One-click logging without navigating away from the dashboard
 - **Shareable public dashboards** — Toggle visibility so teammates or managers can see your load without needing accounts
+
+![Customization options (I had a lot of fun with this)](/images/case-studies/workload-tracker-customization.png)
+![Recurring templates which I added after getting tired of logging the same meeting every single day](/images/case-studies/workload-tracker-recurring-templates.png)
+
 
 ### Tech & Design Stack
 

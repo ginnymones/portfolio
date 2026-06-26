@@ -1,12 +1,16 @@
 ---
 status: "published"
 title: "Vibe Coding Starter Pack for Designers"
-thumbnail: "/images/case-studies/designer-to-vibe-dev-thumb.jpg"
-headerImage: "/images/case-studies/designer-to-vibe-dev-header.jpg"
+thumbnail: "/images/case-studies/designer-to-vibe-dev-header.png"
+headerImage: "/images/case-studies/designer-to-vibe-dev-header.png"
 summary: "Created a guided, project-based curriculum that takes designers from zero coding experience to shipping a deployed portfolio — using AI as their development partner."
 tags: ["Product Design", "UX/UI Design"]
 client: "Personal Project"
-date: "2026-06-10"
+date: "2026-05-15"
+links:
+  - label: "Live Course"
+    url: "https://designertovibedev-starterpack.vercel.app/"
+    icon: "globe"
 ---
 
 ## Problem Statement
@@ -42,6 +46,13 @@ I created a structured, project-based curriculum specifically for designers who 
 Traditional learn-to-code paths: "Here's what a function is. Here's what a variable is. Now build something."
 
 This path: "Here's what you're building today. Describe it to the AI like you'd describe it to a developer. Review what comes back. Refine."
+
+![Actual course content in light mode](/images/case-studies/designer-to-vibe-dev-curr1.png)
+
+![Course content in dark mode](/images/case-studies/designer-to-vibe-dev-curr2.png)
+
+![More dark mode because why not?](/images/case-studies/designer-to-vibe-dev-curr3.png)
+
 
 ## Results & Impact
 
