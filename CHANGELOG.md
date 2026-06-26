@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-26] — Improved Slug Generation
+
+### Changed
+- Slugify logic now cleanly handles em-dashes, en-dashes, and special characters
+- Produces single-hyphen slugs (e.g., "100 Days of UI Challenge — User Profile" → `100-days-of-ui-challenge-user-profile`)
+- Filename field remains editable in Tina admin for manual override
+
+---
+
 ## [2026-06-26] — Code Cleanup
 
 ### Removed

@@ -142,14 +142,44 @@ These are structural/architectural decisions that keep things working:
 ## How to Add a Case Study
 
 1. Copy `src/content/case-studies/_template.md`
-2. Rename to your slug: `my-project.md`
+2. Rename to your slug: `my-project.md` (lowercase, hyphens between words, no special characters)
 3. Fill in the frontmatter (title, thumbnail, tags, date, etc.)
 4. Set `status: "published"` when ready to go live (use `"draft"` while writing)
 5. Write markdown body content
 6. Drop images in `public/images/case-studies/`
 7. Done — it appears on the Works page automatically
 
-Or use the Tina admin panel → Case Studies → create new.
+Or use the Tina admin panel → Case Studies → create new (slug auto-generated from title, editable before save).
+
+### Image Specifications
+
+| Image | Aspect Ratio | Recommended Size | Notes |
+|-------|-------------|-----------------|-------|
+| Thumbnail | 4:3 | 800 × 600px | Shown on Works grid cards |
+| Header | 16:9 | 1600 × 900px | Top of case study detail page |
+| Body images | Any | Any | Clickable (lightbox opens on click) |
+
+- Header images are always masked to 16:9 with rounded corners and center-crop (`object-cover`)
+- Keep focal content centered — edges may be cropped on different screen sizes
+- Supported formats: JPG, PNG, WebP, SVG
+
+### Image Naming Convention
+
+```
+public/images/case-studies/
+├── [slug]-thumb.jpg        # Thumbnail
+├── [slug]-header.jpg       # Header image
+├── [slug]-01.jpg           # Body images
+├── [slug]-mobile.jpg       # Optional variants
+└── ...
+```
+
+### URL Slug Best Practices
+
+- Lowercase, hyphens between words: `100-days-of-ui-user-profile`
+- Keep hyphens between all words (Google treats them as word separators)
+- Aim for 3–6 words
+- Match key terms from your title for SEO
 
 ---
 
