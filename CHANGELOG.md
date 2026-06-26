@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-26] — Code Cleanup
+
+### Removed
+- `next-mdx-remote` dependency (unused — remark/remark-html handles rendering)
+- `getPaginatedCaseStudies()` server-side function (replaced by client-side pagination in WorksGrid)
+- Empty `public/images/case-studies/placeholder.jpg` (0-byte file)
+- Accidentally committed `inginnyus.pixil` design file
+
+### Note
+- Pagination still works — it's handled client-side in the WorksGrid component (6 per page, works with tag filtering)
+
+---
+
 ## [2026-06-26] — Tag Filtering & Tina-Managed Tags
 
 ### Added

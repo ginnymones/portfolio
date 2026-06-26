@@ -142,11 +142,11 @@ Applicable to all pages and individual case studies.
 ## Key Features
 
 - **Tag-based filtering**: Works page has a filter bar (All + defined tags). Tags managed from Tina admin. Client-side, instant.
+- **Pagination**: Client-side, 6 items per page, works alongside tag filtering. Resets to page 1 on filter change.
 - **Mobile navigation**: Hamburger menu with compact dropdown (14px text, solid bg, drop shadow)
 - **Back to top button**: Appears after 400px scroll, up arrow + text, rounded corners, fixed bottom-right
 - **Image lightbox**: Click any case study image to view full-screen with Escape/click-outside to dismiss
 - **Lazy loading**: Case study cards use IntersectionObserver, render skeleton until visible
-- **Pagination**: 6 items per page on Works grid
 - **Breadcrumbs**: Case study pages show Home > Works > Title
 - **Editorial workflow**: Draft/Published status per case study — drafts hidden from production
 - **Shared site settings**: Single JSON for name, email, socials, footer text — used by Footer + Contact + anywhere needed
