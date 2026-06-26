@@ -258,3 +258,47 @@
 - Tags stored in: `src/content/site-settings.json` → `workTags[]`
 - Filter component: `src/components/WorksGrid.tsx` (client-side, receives tags as props)
 - Tags passed from server: `src/app/works/page.tsx` reads settings and passes to WorksGrid
+
+
+---
+
+## Skill: Sync Tina Schema After Config Changes
+
+**Trigger**: Deploy fails with "local GraphQL schema doesn't match remote" error
+
+**Root cause**: You changed `tina/config.ts` (added/removed fields) but didn't regenerate and commit the `tina/__generated__/` files. Tina Cloud compares against these committed files.
+
+**Steps**:
+1. Run locally: `npx tinacms dev --command "echo done"` (starts and stops, regenerating files)
+2. Check: `git status tina/` — you should see changes in `tina/__generated__/`
+3. Commit: `git add tina/ && git commit -m "Regenerate Tina schema files"`
+4. Push: `git push origin main`
+5. Wait ~30s for Tina Cloud to re-index, then redeploy
+
+**Critical rule**: Every time you modify `tina/config.ts` (add fields, change collections, rename types), you MUST regenerate and commit the generated files before deploying.
+
+---
+
+## Skill: Add Relevant Links to Case Studies
+
+**Trigger**: User wants to add external links (GitHub, Figma, demo, etc.) to a case study
+
+**How it works**:
+- Each case study has a `links` array in frontmatter
+- Links appear below the content as styled buttons with icons
+- Editable via Tina admin (Case Studies → select study → Relevant Links)
+
+**Frontmatter format**:
+```yaml
+links:
+  - label: "View on GitHub"
+    url: "https://github.com/..."
+    icon: "github"
+  - label: "Live Demo"
+    url: "https://..."
+    icon: "globe"
+```
+
+**Available icons**: `github`, `figma`, `dribbble`, `behance`, `npm`, `globe` (website), `play` (demo/video), `link` (generic)
+
+**Component**: `src/components/CaseStudyLinks.tsx`

@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-26] — Case Study Enhancements: Nav, Related, Links, Social Icons
+
+### Added
+- **Previous / Next navigation** at the bottom of each case study (based on date order)
+- **Related Case Studies** section (3 max, ranked by shared tags then recency)
+- **Relevant Links** section with icon support (GitHub, Figma, Dribbble, Behance, npm, Website, Demo, Generic)
+- `links` field in case study frontmatter (managed via Tina admin)
+- **Social links with Font Awesome brand icons** (Dribbble, LinkedIn, Behance auto-detected from label)
+- Font Awesome packages (`@fortawesome/fontawesome-svg-core`, `@fortawesome/free-brands-svg-icons`, `@fortawesome/free-solid-svg-icons`, `@fortawesome/react-fontawesome`)
+- Reusable `<SocialLinks />` component with light/dark variants
+
+### Changed
+- Contact section social links now use icon + text format
+- Case study detail page restructured: content → links → prev/next nav → related work
+
+### Fixed
+- Tina Cloud schema mismatch error (`CaseStudyLinks` type) — resolved by regenerating and committing `tina/__generated__/` files
+- Added `--skip-indexing` flag to `tinacms build` command for faster deploys
+
+---
+
 ## [2026-06-26] — Improved Slug Generation
 
 ### Changed

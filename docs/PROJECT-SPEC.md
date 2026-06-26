@@ -141,6 +141,10 @@ Applicable to all pages and individual case studies.
 
 ## Key Features
 
+- **Previous / Next navigation**: Navigate between case studies at the bottom of each detail page
+- **Related case studies**: 3 related works shown below content, ranked by shared tags + recency
+- **Relevant links**: Per-study link buttons with icons (GitHub, Figma, Dribbble, etc.) — managed via Tina
+- **Social links with icons**: Font Awesome brand icons (Dribbble, LinkedIn, Behance) in contact section
 - **Tag-based filtering**: Works page has a filter bar (All + defined tags). Tags managed from Tina admin. Client-side, instant.
 - **Pagination**: Client-side, 6 items per page, works alongside tag filtering. Resets to page 1 on filter change.
 - **Mobile navigation**: Hamburger menu with compact dropdown (14px text, solid bg, drop shadow)
@@ -239,4 +243,5 @@ portfolio/
 - **Mobile nav**: Keep text at 14px, use solid background (not translucent), add drop shadow. Full-screen overlays feel oversized on mobile.
 - **Shared data**: Any text that appears in 2+ places (social links, email, name) must live in `site-settings.json` — never duplicate across components.
 - **Editorial workflow**: Use `status: "draft"` / `"published"` in frontmatter. Filter drafts in production via `process.env.NODE_ENV === "production"`.
+- **Tina schema sync**: After modifying `tina/config.ts`, you MUST run `npx tinacms dev --command "echo done"` locally, then commit the updated `tina/__generated__/` files. Deploy will fail with "schema mismatch" otherwise.
 - **All content must be CMS-editable from day one**: Never hardcode page text in JSX. Wire everything to JSON/markdown content files during initial scaffold.
