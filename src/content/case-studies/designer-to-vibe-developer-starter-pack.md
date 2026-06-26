@@ -49,9 +49,7 @@ This path: "Here's what you're building today. Describe it to the AI like you'd 
 
 ![Actual course content in light mode](/images/case-studies/designer-to-vibe-dev-curr1.png)
 
-![Course content in dark mode](/images/case-studies/designer-to-vibe-dev-curr2.png)
-
-![More dark mode because why not?](/images/case-studies/designer-to-vibe-dev-curr3.png)
+![Course content in dark mode](/images/case-studies/designer-to-vibe-dev-curr3.png)
 
 
 ## Results & Impact

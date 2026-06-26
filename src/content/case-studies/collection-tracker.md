@@ -34,7 +34,7 @@ I built a purpose-built Pokémon collection tracker with a focus on speed and vi
 - **Anonymous auth** — Firebase anonymous authentication handles the session while the PIN identifies the collection. No personal data stored.
 - **Instant feedback** — Tap a card → it's marked. No save button, no confirmation modal. The state syncs immediately.
 
-![A way to filter out the cards that you already have](/images/case-studies/collection-tracker-header-owned.png)
+![A way to filter out the cards that you already have](/images/case-studies/collection-tracker-owned.png)
 
 ![Stats for the geeks who want to see if they've already caught 'em all](/images/case-studies/collection-tracker-stats.png)
 

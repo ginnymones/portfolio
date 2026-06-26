@@ -32,7 +32,7 @@ The plugin creates a shared component library directly in Figma with 11 module t
 - Each module has 2-4 variants (e.g., Hero: Image Background, Solid Background, Split)
 - All modules are responsive — multi-column layouts stack to single column on mobile
 
-![Different modules for different needs, all enabled for auto-layout](/images/case-studies/figma-to-email-builder-modules)
+![Different modules for different needs, all enabled for auto-layout](/images/case-studies/figma-to-email-builder-modules.png)
 
 
 ### Key Design Decisions
