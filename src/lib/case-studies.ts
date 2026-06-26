@@ -102,17 +102,3 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
     ...parseBackgroundFields(data),
   };
 }
-
-export function getPaginatedCaseStudies(page: number, perPage: number = 6) {
-  const all = getAllCaseStudies();
-  const totalPages = Math.ceil(all.length / perPage);
-  const start = (page - 1) * perPage;
-  const studies = all.slice(start, start + perPage);
-
-  return {
-    studies,
-    totalPages,
-    currentPage: page,
-    total: all.length,
-  };
-}
