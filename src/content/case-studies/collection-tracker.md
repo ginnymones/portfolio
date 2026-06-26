@@ -6,7 +6,7 @@ headerImage: "/images/case-studies/collection-tracker-header.jpg"
 summary: "Designed and built a visual collection tracker for Pokémon card collectors, featuring real-time ownership tracking, variant management, and PIN-based authentication."
 tags: ["Product Design", "Development", "UX/UI Design"]
 client: "Personal Project"
-date: "2026-04-20"
+date: "2026-06-07"
 ---
 
 ## Problem Statement

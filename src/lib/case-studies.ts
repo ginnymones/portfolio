@@ -5,6 +5,12 @@ import type { BackgroundConfig } from "@/components/PageBackground";
 
 const CASE_STUDIES_DIR = path.join(process.cwd(), "src/content/case-studies");
 
+export interface CaseStudyLink {
+  label: string;
+  url: string;
+  icon?: "github" | "figma" | "dribbble" | "behance" | "globe" | "link" | "play" | "npm";
+}
+
 export interface CaseStudyMeta extends BackgroundConfig {
   slug: string;
   title: string;
@@ -15,6 +21,7 @@ export interface CaseStudyMeta extends BackgroundConfig {
   client: string;
   date: string;
   liveUrl?: string;
+  links?: CaseStudyLink[];
   status?: "draft" | "published";
 }
 
@@ -61,6 +68,7 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
       client: data.client || "",
       date: data.date || "",
       liveUrl: data.liveUrl,
+      links: data.links || [],
       status: data.status || "published",
       ...parseBackgroundFields(data),
     };
@@ -97,8 +105,51 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
     client: data.client || "",
     date: data.date || "",
     liveUrl: data.liveUrl,
+    links: data.links || [],
     status: data.status || "published",
     content,
     ...parseBackgroundFields(data),
+  };
+}
+
+/**
+ * Get related case studies based on shared tags, sorted by recency.
+ * Excludes the current study and returns up to `limit` results.
+ */
+export function getRelatedCaseStudies(
+  currentSlug: string,
+  currentTags: string[],
+  limit: number = 3
+): CaseStudyMeta[] {
+  const all = getAllCaseStudies().filter((s) => s.slug !== currentSlug);
+
+  // Score by number of shared tags
+  const scored = all.map((study) => {
+    const sharedTags = study.tags.filter((tag) => currentTags.includes(tag));
+    return { study, score: sharedTags.length };
+  });
+
+  // Sort by score (most shared tags first), then by date (newest first)
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return new Date(b.study.date).getTime() - new Date(a.study.date).getTime();
+  });
+
+  return scored.slice(0, limit).map((s) => s.study);
+}
+
+/**
+ * Get previous and next case studies for navigation.
+ */
+export function getAdjacentCaseStudies(currentSlug: string): {
+  prev: CaseStudyMeta | null;
+  next: CaseStudyMeta | null;
+} {
+  const all = getAllCaseStudies();
+  const index = all.findIndex((s) => s.slug === currentSlug);
+
+  return {
+    prev: index > 0 ? all[index - 1] : null,
+    next: index < all.length - 1 ? all[index + 1] : null,
   };
 }

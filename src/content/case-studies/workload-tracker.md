@@ -6,7 +6,7 @@ headerImage: "/images/case-studies/workload-tracker-header.jpg"
 summary: "Designed and built a full-stack workload tracking tool from concept to deployed MVP, enabling users to log hours, visualize capacity, and share dashboards."
 tags: ["Product Design", "Development", "UX/UI Design"]
 client: "Personal Project"
-date: "2026-05-15"
+date: "2026-05-12"
 ---
 
 ## Problem Statement

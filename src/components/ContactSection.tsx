@@ -1,5 +1,6 @@
 import { getSiteSettings } from "@/lib/site-settings";
 import { getPageContent } from "@/lib/pages";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export function ContactSection() {
   const settings = getSiteSettings();
@@ -23,18 +24,8 @@ export function ContactSection() {
             {page.ctaPrimaryLabel}
           </a>
         )}
-        <div className="flex flex-wrap justify-center gap-6 mt-8">
-          {settings.socialLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-warm hover:text-background transition-colors text-sm"
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="flex justify-center mt-8">
+          <SocialLinks links={settings.socialLinks} variant="light" />
         </div>
       </div>
     </section>

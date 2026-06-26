@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
+import {
+  getAllCaseStudies,
+  getCaseStudyBySlug,
+  getRelatedCaseStudies,
+  getAdjacentCaseStudies,
+} from "@/lib/case-studies";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PageBackground } from "@/components/PageBackground";
 import { LightboxContent } from "@/components/Lightbox";
+import { CaseStudyLinks } from "@/components/CaseStudyLinks";
+import { CaseStudyNav } from "@/components/CaseStudyNav";
+import { RelatedCaseStudies } from "@/components/RelatedCaseStudies";
 import { remark } from "remark";
 import html from "remark-html";
 
@@ -43,6 +51,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   const processedContent = await remark().use(html).process(study.content);
   const contentHtml = processedContent.toString();
+
+  const related = getRelatedCaseStudies(slug, study.tags, 3);
+  const { prev, next } = getAdjacentCaseStudies(slug);
 
   return (
     <PageBackground
@@ -118,7 +129,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         {/* Content */}
         <LightboxContent html={contentHtml} />
+
+        {/* Relevant Links */}
+        <CaseStudyLinks links={study.links || []} />
+
+        {/* Prev / Next Navigation */}
+        <CaseStudyNav prev={prev} next={next} />
       </article>
+
+      {/* Related Case Studies */}
+      <div className="max-w-6xl mx-auto px-6">
+        <RelatedCaseStudies studies={related} />
+      </div>
     </PageBackground>
   );
 }
