@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 
 const ITEMS_PER_PAGE = 6;
@@ -21,7 +21,6 @@ interface WorksGridProps {
 export function WorksGrid({ studies, availableTags }: WorksGridProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const gridTopRef = useRef<HTMLDivElement>(null);
 
   // Filter studies by active tag
@@ -41,7 +40,7 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
 
   const scrollToTop = useCallback(() => {
     if (gridTopRef.current) {
-      const offset = 80; // Account for sticky nav height
+      const offset = 80;
       const top =
         gridTopRef.current.getBoundingClientRect().top +
         window.scrollY -
@@ -50,29 +49,15 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
     }
   }, []);
 
-  const handleTransition = useCallback(
-    (action: () => void) => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        action();
-        scrollToTop();
-        setTimeout(() => setIsTransitioning(false), 50);
-      }, 150);
-    },
-    [scrollToTop]
-  );
-
   const handleTagClick = (tag: string | null) => {
-    handleTransition(() => {
-      setActiveTag(tag);
-      setCurrentPage(1);
-    });
+    setActiveTag(tag);
+    setCurrentPage(1);
+    scrollToTop();
   };
 
   const handlePageChange = (page: number) => {
-    handleTransition(() => {
-      setCurrentPage(page);
-    });
+    setCurrentPage(page);
+    scrollToTop();
   };
 
   return (
@@ -109,11 +94,7 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
       </div>
 
       {/* Grid */}
-      <div
-        className={`transition-opacity duration-200 ${
-          isTransitioning ? "opacity-0" : "opacity-100"
-        }`}
-      >
+      <div>
         {visible.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-neutral-warm text-lg">
