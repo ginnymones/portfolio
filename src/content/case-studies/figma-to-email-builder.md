@@ -4,7 +4,7 @@ title: "Figma to HTML Email Builder — Plugin"
 thumbnail: "/images/case-studies/figma-to-email-builder-header.png"
 headerImage: "/images/case-studies/figma-to-email-builder-header.png"
 summary: "Designed and built a Figma plugin that provides a modular email design system with pre-built components, layout presets, font governance, and multi-client HTML export."
-tags: ["Product Design", "Development", "UX/UI Design"]
+tags: ["Product Design", "Development"]
 client: "Personal Project"
 date: "2026-05-29"
 ---

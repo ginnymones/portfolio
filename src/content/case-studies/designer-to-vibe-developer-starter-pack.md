@@ -4,7 +4,7 @@ title: "Vibe Coding Starter Pack for Designers"
 thumbnail: "/images/case-studies/designer-to-vibe-dev-header.png"
 headerImage: "/images/case-studies/designer-to-vibe-dev-header.png"
 summary: "Created a guided, project-based curriculum that takes designers from zero coding experience to shipping a deployed portfolio — using AI as their development partner."
-tags: ["Product Design", "UX/UI Design"]
+tags: ["Product Design"]
 client: "Personal Project"
 date: "2026-05-15"
 links:

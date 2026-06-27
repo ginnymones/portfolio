@@ -4,7 +4,7 @@ title: "100 Days of UI Challenge - App Icon"
 thumbnail: "/images/case-studies/100-days-of-ui-app-icon-thumb.jpg"
 headerImage: "/images/case-studies/100-days-of-ui-app-icon-header.jpg"
 summary: "Redesigned the Zoom app icon as part of the 100 Days of UI Challenge"
-tags: ["Graphic Design"]
+tags: ["Graphic Design", "Branding"]
 client: "Personal Project"
 date: "2026-02-21"
 links:

@@ -4,7 +4,7 @@ title: "100 Days of UI Challenge - Sign Up"
 thumbnail: "/images/case-studies/100-days-of-ui-sign-up-thumb.jpg"
 headerImage: "/images/case-studies/100-days-of-ui-sign-up-header.jpg"
 summary: "Designed a sign-up page for an astrology app as part of the 100 Days of UI Challenge"
-tags: ["UX/UI Design"]
+tags: ["UX/UI Design", "Branding"]
 client: "Personal Project"
 date: "2026-01-20"
 links:

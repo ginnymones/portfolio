@@ -4,7 +4,7 @@ title: "100 Days of UI Challenge - Checkout"
 thumbnail: "/images/case-studies/100-days-of-ui-checkout-thumb.jpg"
 headerImage: "/images/case-studies/100-days-of-ui-checkout-header.jpg"
 summary: "Designed a checkout page for a prioprietary smart ring — the ONERING — as part of the 100 Days of UI Challenge"
-tags: ["UX/UI Design"]
+tags: ["UX/UI Design", "Branding"]
 client: "Personal Project"
 date: "2026-01-27"
 links:
