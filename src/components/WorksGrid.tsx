@@ -38,7 +38,7 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
     studies.some((s) => s.tags.includes(tag))
   );
 
-  const scrollToTop = useCallback(() => {
+  const scrollToTop = () => {
     if (gridTopRef.current) {
       const offset = 80;
       const top =
@@ -47,7 +47,7 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
         offset;
       window.scrollTo({ top, behavior: "smooth" });
     }
-  }, []);
+  };
 
   const handleTagClick = (tag: string | null) => {
     setActiveTag(tag);
