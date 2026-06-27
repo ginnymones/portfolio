@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-27] — Case Study Updates & Branding Tag
+
+### Added
+- "Branding" tag added to workTags in site settings
+- New case studies: Calculator, App Icon, User Profile (100 Days of UI series)
+- Live links added to case studies via `links` frontmatter field
+
+### Fixed
+- Pagination now scrolls to Works header on page change (not contact section)
+- Smooth fade transitions on page/filter changes
+
+---
+
 ## [2026-06-27] — Bento Gallery Layout
 
 ### Added

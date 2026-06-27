@@ -181,6 +181,54 @@ public/images/case-studies/
 - Aim for 3–6 words
 - Match key terms from your title for SEO
 
+### Adding Relevant Links (YAML frontmatter)
+
+Add a `links` array in the frontmatter to show styled buttons with icons at the bottom of the case study:
+
+```yaml
+links:
+  - label: "View on Dribbble"
+    url: "https://dribbble.com/shots/..."
+    icon: "dribbble"
+  - label: "View on Behance"
+    url: "https://www.behance.net/..."
+    icon: "behance"
+  - label: "Live App"
+    url: "https://your-app.vercel.app"
+    icon: "globe"
+  - label: "GitHub Repo"
+    url: "https://github.com/..."
+    icon: "github"
+  - label: "Figma File"
+    url: "https://figma.com/..."
+    icon: "figma"
+  - label: "npm Package"
+    url: "https://npmjs.com/..."
+    icon: "npm"
+  - label: "Watch Demo"
+    url: "https://youtube.com/..."
+    icon: "play"
+  - label: "Documentation"
+    url: "https://docs.example.com"
+    icon: "link"
+```
+
+**Available icon values:** `github`, `figma`, `dribbble`, `behance`, `npm`, `globe`, `play`, `link`
+
+### Using Bento Gallery
+
+Wrap images in `:::bento` / `:::` markers for a bento grid layout:
+
+```markdown
+:::bento
+![Image 1](/images/case-studies/img-1.jpg)
+![Image 2](/images/case-studies/img-2.jpg)
+![Image 3](/images/case-studies/img-3.jpg)
+:::
+```
+
+Layout adapts based on count: 2 = side by side, 3/5/6 = first image spans 2 rows, 4 = 2×2 grid.
+
 ---
 
 ## Deployment
