@@ -8,32 +8,17 @@ All notable changes to this project are documented here.
 
 ### Added
 - "Branding" tag added to workTags in site settings
-- New case studies: Calculator, App Icon, User Profile (100 Days of UI series)
+- New case studies: Calculator, App Icon, User Profile, Branding MHW:PH, Sketches Chansey
 - Live links added to case studies via `links` frontmatter field
+- Bento gallery component (`:::bento` / `:::` markers in markdown)
+- Supports 1-6 images with automatic layout (2-col base, first image spans 2 rows for 3/5/6)
+- Lightbox works on bento images
 
 ### Fixed
-- Pagination now scrolls to Works header on page change (not contact section)
-- Smooth fade transitions on page/filter changes
-
----
-
-## [2026-06-27] — Bento Gallery Layout
-
-### Added
-- Bento gallery component for case study images
-- Use `:::bento` / `:::` markers in markdown to create a bento grid
-- Supports 1-6 images with automatic layout: 2-col base, first image spans 2 rows for 3/5/6 images
-- Lightbox works on bento images (click to enlarge)
-- Responsive: stacks to single column on mobile
-
-### Usage
-```markdown
-:::bento
-![Image 1](/images/case-studies/img-1.jpg)
-![Image 2](/images/case-studies/img-2.jpg)
-![Image 3](/images/case-studies/img-3.jpg)
-:::
-```
+- Bento gallery parser: handles remark wrapping markers + images in single `<p>` tag
+- Pagination flicker: removed opacity fade transition that caused visual flash
+- Mobile pagination scroll: defers scroll to next animation frame after React re-render
+- Works consistently on both desktop and mobile
 
 ---
 
