@@ -23,10 +23,6 @@ Some Chansey sketches that I've done over the years.
 
 :::bento
 ![Chansey sketch](/images/case-studies/sketches-chansey-04.jpg)
-![Chansey sketch](/images/case-studies/sketches-chansey-04.jpg)
-:::
-
-:::bento
-![Chansey sketch](/images/case-studies/sketches-chansey-04.jpg)
+![Chansey sketch](/images/case-studies/sketches-chansey-05.jpg)
 :::
 

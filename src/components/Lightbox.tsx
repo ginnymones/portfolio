@@ -68,10 +68,10 @@ function LightboxModal({ src, alt, onClose }: LightboxProps) {
  * Parse content HTML and split into segments: regular HTML and bento galleries.
  */
 function parseContentSegments(html: string) {
-  // Split on bento markers that were preserved through remark
-  // We look for the pattern: <p>:::bento</p> ... <p>:::</p>
+  // Remark wraps :::bento, images, and ::: in a single <p> tag:
+  // <p>:::bento\n<img ...>\n<img ...>\n:::</p>
   const bentoRegex =
-    /<p>:::bento<\/p>([\s\S]*?)<p>:::<\/p>/g;
+    /<p>:::bento\s*([\s\S]*?):::<\/p>/g;
 
   const segments: Array<
     { type: "html"; content: string } | { type: "bento"; images: { src: string; alt: string }[] }
