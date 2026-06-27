@@ -1,41 +1,38 @@
 ---
 status: "published"
-title: "Healthcare Provider Dashboard"
-thumbnail: "/images/case-studies/healthcare-thumb.svg"
-headerImage: "/images/case-studies/healthcare-header.svg"
-summary: "Designed an intuitive dashboard for healthcare providers to manage patient data, appointments, and clinical workflows."
-tags: ["Product Design", "UX/UI Design"]
-client: "MedConnect"
-date: "2025-05-10"
+title: "100 Days of UI Challenge - Checkout"
+thumbnail: "/images/case-studies/100-days-of-ui-checkout-thumb.jpg"
+headerImage: "/images/case-studies/100-days-of-ui-checkout-header.jpg"
+summary: "Designed a checkout page for a prioprietary smart ring — the ONERING — as part of the 100 Days of UI Challenge"
+tags: ["UX/UI Design"]
+client: "Personal Project"
+date: "2026-01-27"
+links:
+  - label: "View on Dribbble"
+    url: "https://dribbble.com/shots/26947596-100-Days-of-UI-Challenge-Checkout"
+    icon: "dribbble"
+  - label: "View on Behance"
+    url: "https://www.behance.net/gallery/243435485/100-Days-of-UI-Sign-Up-Checkout-Landing-Page"
+    icon: "behance"
 ---
 
 ## Problem Statement
 
-Healthcare providers at MedConnect were spending an average of 45 minutes per day navigating between multiple tools to manage patient records, schedule appointments, and track clinical outcomes. The existing system was built by engineers without user research, resulting in a tool that technically worked but created significant cognitive load for its users.
+The challenge's second theme was "checkout". As I have been highly interested in smart rings lately, I decided to create a product — the ONERING that will rule them all (see what I did there?).
+
+As with most checkout pages, the top priority was to highlight the most important pieces of information — the items that the user is purchasing, and the cost. Along with this, I needed to show any other perks that come with purchasing the product or the service without cluttering the page while also preserving the minimalist branding of the ONERING.
 
 ## Solution
 
-Working embedded with the clinical team for 3 weeks, I:
+The best solutions are often the most simple ones. In this case, it was to keep the layout simple and streamlined.
 
-1. **Shadowed 8 providers** during their daily workflows to understand pain points in context
-2. **Mapped the information architecture** based on clinical priorities rather than database structure
-3. **Designed a unified dashboard** that surfaced the right information at the right time
+### Design Decisions
 
-### Design Principles
+- For desktop, keep the interactions on one side to keep the user focused. All product and purchase information were kept on the right, following the natural reading habits of most people (left to right, with most static elements remaining on the left).
+- UX cues were kept very nuanced, in alignment with the minimalist and elegant theme. The most important information (i.e. product info and prices) were placed in a pure white card with drop shadow, while the product perks were placed in a separate card with the same background color as the rest of the page, made to pop out with drop shadow. Subtle visual adjustment, big impact.
 
-- **Glanceability** — Critical patient info visible without clicking
-- **Clinical context** — Information grouped by workflow, not by data type
-- **Reduce clicks** — Most common actions accessible within 2 clicks from any screen
+![Desktop layout](/images/case-studies/100-days-of-ui-checkout-header.jpg)
 
-![Dashboard wireframes and user flows](/images/case-studies/healthcare-wireframes.jpg)
+![Mobile layout](/images/case-studies/100-days-of-ui-checkout-mobile.jpg)
 
-![Final dashboard design showing patient overview](/images/case-studies/healthcare-final.jpg)
-
-## Results & Impact
-
-- **30 minutes saved** per provider per day (from 45 min to 15 min navigating)
-- **92% satisfaction rate** in post-launch survey (up from 34%)
-- **Zero critical usability issues** found in follow-up testing
-- Adopted by 3 additional clinic networks within 6 months
-
-[View on Dribbble](https://dribbble.com/shots/26942784-100-Days-of-UI-Challenge-Sign-Up) | [View on Behance](https://www.behance.net/gallery/243435485/100-Days-of-UI-Sign-Up-Checkout-Landing-Page)
+More smart ring-related designs to come from me in the future.

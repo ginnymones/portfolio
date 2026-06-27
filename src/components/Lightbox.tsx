@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useCallback, useState } from "react";
+import { BentoGallery } from "@/components/BentoGallery";
 
 interface LightboxProps {
   src: string;
@@ -64,7 +65,59 @@ function LightboxModal({ src, alt, onClose }: LightboxProps) {
 }
 
 /**
+ * Parse content HTML and split into segments: regular HTML and bento galleries.
+ */
+function parseContentSegments(html: string) {
+  // Split on bento markers that were preserved through remark
+  // We look for the pattern: <p>:::bento</p> ... <p>:::</p>
+  const bentoRegex =
+    /<p>:::bento<\/p>([\s\S]*?)<p>:::<\/p>/g;
+
+  const segments: Array<
+    { type: "html"; content: string } | { type: "bento"; images: { src: string; alt: string }[] }
+  > = [];
+
+  let lastIndex = 0;
+  let match;
+
+  while ((match = bentoRegex.exec(html)) !== null) {
+    // Add HTML before this bento block
+    if (match.index > lastIndex) {
+      segments.push({ type: "html", content: html.slice(lastIndex, match.index) });
+    }
+
+    // Parse images from the bento block
+    const bentoContent = match[1];
+    const imgRegex = /<img\s+src="([^"]+)"\s+alt="([^"]*)"/g;
+    const images: { src: string; alt: string }[] = [];
+    let imgMatch;
+    while ((imgMatch = imgRegex.exec(bentoContent)) !== null) {
+      images.push({ src: imgMatch[1], alt: imgMatch[2] });
+    }
+
+    if (images.length > 0) {
+      segments.push({ type: "bento", images });
+    }
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  // Add remaining HTML
+  if (lastIndex < html.length) {
+    segments.push({ type: "html", content: html.slice(lastIndex) });
+  }
+
+  // If no bento blocks found, return the whole thing as HTML
+  if (segments.length === 0) {
+    segments.push({ type: "html", content: html });
+  }
+
+  return segments;
+}
+
+/**
  * Wraps case study content and intercepts image clicks to open a lightbox.
+ * Also renders :::bento blocks as BentoGallery components.
  */
 export function LightboxContent({ html }: { html: string }) {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(
@@ -79,13 +132,23 @@ export function LightboxContent({ html }: { html: string }) {
     }
   };
 
+  const segments = parseContentSegments(html);
+
   return (
     <>
-      <div
-        className="prose max-w-none [&_img]:cursor-zoom-in"
-        dangerouslySetInnerHTML={{ __html: html }}
-        onClick={handleClick}
-      />
+      {segments.map((segment, index) => {
+        if (segment.type === "bento") {
+          return <BentoGallery key={index} images={segment.images} />;
+        }
+        return (
+          <div
+            key={index}
+            className="prose max-w-none [&_img]:cursor-zoom-in"
+            dangerouslySetInnerHTML={{ __html: segment.content }}
+            onClick={handleClick}
+          />
+        );
+      })}
       {lightbox && (
         <LightboxModal
           src={lightbox.src}
