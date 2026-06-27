@@ -39,14 +39,16 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
   );
 
   const scrollToTop = () => {
-    if (gridTopRef.current) {
-      const offset = 80;
-      const top =
-        gridTopRef.current.getBoundingClientRect().top +
-        window.scrollY -
-        offset;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    // Defer scroll to next frame to ensure DOM has updated after state change
+    requestAnimationFrame(() => {
+      if (gridTopRef.current) {
+        const offset = 80;
+        const elementTop = gridTopRef.current.getBoundingClientRect().top;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = elementTop + scrollTop - offset;
+        window.scrollTo({ top: targetPosition, behavior: "smooth" });
+      }
+    });
   };
 
   const handleTagClick = (tag: string | null) => {
