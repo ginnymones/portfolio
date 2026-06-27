@@ -4,6 +4,26 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-27] — Bento Gallery Layout
+
+### Added
+- Bento gallery component for case study images
+- Use `:::bento` / `:::` markers in markdown to create a bento grid
+- Supports 1-6 images with automatic layout: 2-col base, first image spans 2 rows for 3/5/6 images
+- Lightbox works on bento images (click to enlarge)
+- Responsive: stacks to single column on mobile
+
+### Usage
+```markdown
+:::bento
+![Image 1](/images/case-studies/img-1.jpg)
+![Image 2](/images/case-studies/img-2.jpg)
+![Image 3](/images/case-studies/img-3.jpg)
+:::
+```
+
+---
+
 ## [2026-06-26] — Case Study Content & Image Fixes
 
 ### Fixed
