@@ -1,6 +1,6 @@
 ---
 status: "published"
-title: "Pokémon Collection Tracker"
+title: "[DEV] Pokémon Collection Tracker"
 thumbnail: "/images/case-studies/collection-tracker-header.png"
 headerImage: "/images/case-studies/collection-tracker-header.png"
 summary: "Designed and built a visual collection tracker for Pokémon card collectors, featuring real-time ownership tracking, variant management, and PIN-based authentication."

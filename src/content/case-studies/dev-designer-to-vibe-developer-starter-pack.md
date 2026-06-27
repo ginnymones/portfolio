@@ -1,6 +1,6 @@
 ---
 status: "published"
-title: "Vibe Coding Starter Pack for Designers"
+title: "[DEV] Vibe Coding Starter Pack for Designers"
 thumbnail: "/images/case-studies/designer-to-vibe-dev-header.png"
 headerImage: "/images/case-studies/designer-to-vibe-dev-header.png"
 summary: "Created a guided, project-based curriculum that takes designers from zero coding experience to shipping a deployed portfolio — using AI as their development partner."

@@ -1,6 +1,6 @@
 ---
 status: "published"
-title: "Workload Tracker — Full-Stack Productivity Tool"
+title: "[DEV] Workload Tracker — Full-Stack Productivity Tool"
 thumbnail: "/images/case-studies/workload-tracker-header.png"
 headerImage: "/images/case-studies/workload-tracker-header.png"
 summary: "Designed and built a full-stack workload tracking tool from concept to deployed MVP, enabling users to log hours, visualize capacity, and share dashboards."
