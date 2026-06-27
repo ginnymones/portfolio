@@ -1,6 +1,6 @@
 ---
 status: "published"
-title: "[BRAND] Branding and Character Design for the Mental Health and Wellbeing: Philippines Chapter at Amazon"
+title: "[BRAND] Branding and Character Design for MHW:PH"
 thumbnail: "/images/case-studies/branding-mhw-ph-header.jpg"
 headerImage: "/images/case-studies/branding-mhw-ph-header.jpg"
 summary: "Branding and characters that I made for the Mental Health and Wellbeing: Philippines Chapter at Amazon"
