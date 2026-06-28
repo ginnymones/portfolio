@@ -93,6 +93,11 @@
       "proficiency": "advanced"
     },
     {
+      "name": "UX/UI Design",
+      "category": "Design, Research",
+      "proficiency": "expert"
+    },
+    {
       "name": "Information Architecture Design",
       "category": "Design",
       "proficiency": "advanced"
@@ -111,11 +116,6 @@
       "name": "Agentic Coding",
       "category": "Development",
       "proficiency": "intermediate"
-    },
-    {
-      "name": "UX/UI Design",
-      "category": "Design, Research",
-      "proficiency": "expert"
     }
   ]
 }
