@@ -11,10 +11,12 @@
   "overlayColor": "#FFFDF9",
   "heading": "Hi, I'm",
   "headingAccent": "Ginny",
-  "subtitle": "I design thoughtful digital experiences that solve real problems.",
-  "tagline": "UX/UI Designer · Product Thinker · Visual Storyteller",
-  "ctaPrimaryLabel": "View My Work",
+  "subtitle": "I take things to my creative lab, fix them, and turn them into something people can enjoy.",
+  "tagline": "Creative Strategist | UX/UI · Art Direction · Creative Team Management",
+  "ctaPrimaryLabel": "View My Creations",
   "ctaPrimaryLink": "/works",
   "ctaSecondaryLabel": "About Me",
-  "ctaSecondaryLink": "/about"
+  "ctaSecondaryLink": "/about",
+  "body": "",
+  "bio": ""
 }
