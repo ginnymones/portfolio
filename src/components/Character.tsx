@@ -65,11 +65,6 @@ export function Character({ className = "", variant }: CharacterProps) {
 
   if (shouldHide) return null;
 
-  // Wave animation: rotate the right arm (viewer's left) from shoulder
-  const waveTransform = isWaving
-    ? "rotate(-30 72.636 302.608)"
-    : "rotate(0 72.636 302.608)";
-
   return (
     <div
       ref={containerRef}
@@ -163,7 +158,14 @@ export function Character({ className = "", variant }: CharacterProps) {
         <path d="M183.5 387.692L196.057 408.692H170.943L183.5 387.692Z" fill="#906C50"/>
 
         {/* Left arm (viewer's right) - waves on click */}
-        <g style={{ transformOrigin: "72.636px 302.608px", transition: "transform 0.3s ease-in-out", transform: waveTransform }}>
+        <g
+          className="origin-center"
+          style={{
+            transform: isWaving ? "rotate(-30deg)" : "rotate(0deg)",
+            transformOrigin: "73px 303px",
+            transition: "transform 0.3s ease-in-out",
+          }}
+        >
           <rect x="72.636" y="302.608" width="20" height="60" rx="10" transform="rotate(50.2403 72.636 302.608)" fill="#F0C4A2"/>
           <rect x="35.3618" y="321.912" width="38" height="46" rx="19" transform="rotate(50.2403 35.3618 321.912)" fill="#F0C4A2"/>
         </g>
