@@ -18,7 +18,7 @@
   "ctaSecondaryLabel": "",
   "ctaSecondaryLink": "",
   "body": "",
-  "bio": "\\[object Object]\n",
+  "bio": "Hi! I'm Ginny, a creative problem solver—\n\n— is how I'd normally introduce myself, but what does that even mean? For a girl who has been in the creative industry for 16+ years already, it means taking problems — limited brand presence and purchase channels online, zero branding for a mental health and wellbeing affinity group for the organization, no easy way to track how many trading cards you're missing for your collection, and more — and providing intuitive, frictionless, and often simple solutions to them.\n\nThroughout my creative journey, I have played a key role in winning business pitches for clients like Procter & Gamble, The Coca-Cola Company, and Jollibee Foods Corporation. I helped establish the online presence of The Coffee Bean & Tea Leaf, USSC, Jewelmer, Nissan, and PHINMA group of companies, and grew their partner agencies’ digital footprint into a strong multi-million businesses in just four years.\n\nAt present, I drive creative direction and quality assurance for Amazon's Design Operations team, providing detailed feedback to artists and content generators and working closely with them through live design sessions. \n",
   "experience": [
     {
       "role": "Production Manager",
@@ -111,6 +111,11 @@
       "name": "Agentic Coding",
       "category": "Development",
       "proficiency": "intermediate"
+    },
+    {
+      "name": "UX/UI Design",
+      "category": "Design, Research",
+      "proficiency": "expert"
     }
   ]
 }
