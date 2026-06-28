@@ -4,6 +4,25 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-29] — Microinteractions & Open Graph Metadata
+
+### Added
+- **Character idle blink** — eyes close briefly every 3-5 seconds
+- **Character hop on click** — bouncy jump animation (12px up, spring-back)
+- **Staggered hero text entrance** — heading, subtitle, tagline, buttons fade in sequentially on page load
+- **Cards fade up on scroll** — case study cards slide up 24px + fade in when entering viewport
+- **Open Graph metadata** — social sharing card with title, description, and image (1200×630)
+- **Twitter card metadata** — large image card format
+- `fadeUp` and `hop` CSS keyframe animations
+
+### Changed
+- Title updated to "Ginny Mones — Creative Problem Solver"
+- Description updated to "Ginny's creative journey and experiments, all in portfolio."
+- Character on home page now positioned to the left of hero text (side-by-side layout)
+- Character hides from layout on home page (rendered inline instead)
+
+---
+
 ## [2026-06-27] — Case Study Updates & Branding Tag
 
 ### Added

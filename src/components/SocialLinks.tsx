@@ -51,7 +51,7 @@ export function SocialLinks({
       : "text-neutral-dark hover:text-accent-orange";
 
   return (
-    <div className={`flex flex-wrap gap-5 ${className}`}>
+    <div className={`flex flex-wrap gap-5 justify-center ${className}`}>
       {links.map((link) => {
         const icon = getIconForLabel(link.label);
         return (
