@@ -12,6 +12,13 @@ export default function AboutPage() {
   const page = getPageContent("about");
   const bioHtml = richTextToHtml(page.bio);
 
+  // Handle bio as either rich-text object or plain string
+  const bioContent = bioHtml
+    ? bioHtml
+    : typeof page.bio === "string" && page.bio
+      ? page.bio.split("\n\n").map((p) => `<p>${p}</p>`).join("")
+      : "";
+
   return (
     <PageBackground
       backgroundType={page.backgroundType}
@@ -31,10 +38,10 @@ export default function AboutPage() {
         </h1>
 
         {/* Bio */}
-        {bioHtml && (
+        {bioContent && (
           <div
             className="prose mb-16 text-lg"
-            dangerouslySetInnerHTML={{ __html: bioHtml }}
+            dangerouslySetInnerHTML={{ __html: bioContent }}
           />
         )}
 

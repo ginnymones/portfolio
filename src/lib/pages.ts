@@ -39,7 +39,7 @@ export interface PageContent extends BackgroundConfig {
   ctaPrimaryLink?: string;
   ctaSecondaryLabel?: string;
   ctaSecondaryLink?: string;
-  bio?: RichTextNode;
+  bio?: RichTextNode | string;
   experience?: ExperienceItem[];
   socialLinks?: SocialLink[];
   toolsAndSkills?: ToolOrSkill[];
@@ -57,10 +57,12 @@ export function getPageContent(slug: string): PageContent {
 }
 
 /**
- * Converts TinaCMS rich-text JSON to plain HTML string
+ * Converts TinaCMS rich-text JSON to plain HTML string.
+ * Returns empty string if input is not a valid rich-text node.
  */
-export function richTextToHtml(node: RichTextNode | undefined): string {
+export function richTextToHtml(node: RichTextNode | string | undefined): string {
   if (!node) return "";
+  if (typeof node === "string") return ""; // Plain strings handled separately by the page
 
   if (node.type === "text") {
     return node.text || "";
