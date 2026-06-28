@@ -12,9 +12,29 @@ import { Character } from "@/components/Character";
 
 export const metadata: Metadata = {
   title: "Ginny Mones — Creative Problem Solver",
-  description: "Design portfolio showcasing case studies and creative work.",
+  description: "Ginny's creative journey and experiments, all in portfolio.",
   icons: {
     icon: "/favicon.png",
+  },
+  openGraph: {
+    title: "Ginny Mones — Creative Problem Solver",
+    description: "Ginny's creative journey and experiments, all in portfolio.",
+    url: "https://inginnyus.vercel.app",
+    siteName: "Ginny Mones",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ginny Mones — Creative Problem Solver",
+    description: "Ginny's creative journey and experiments, all in portfolio.",
+    images: ["/og-image.png"],
   },
 };
 
