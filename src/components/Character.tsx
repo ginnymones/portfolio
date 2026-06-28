@@ -13,7 +13,7 @@ export function Character({ className = "", variant }: CharacterProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [isBlinking, setIsBlinking] = useState(false);
-  const [isWaving, setIsWaving] = useState(false);
+  const [isHopping, setIsHopping] = useState(false);
 
   const isHome = variant === "home";
   const isMini = variant === "mini" || (variant === undefined && pathname !== "/");
@@ -48,11 +48,11 @@ export function Character({ className = "", variant }: CharacterProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Wave handler
+  // Hop handler
   const handleClick = () => {
-    if (isWaving) return;
-    setIsWaving(true);
-    setTimeout(() => setIsWaving(false), 600);
+    if (isHopping) return;
+    setIsHopping(true);
+    setTimeout(() => setIsHopping(false), 500);
   };
 
   const sizeClass = isHome
@@ -69,7 +69,8 @@ export function Character({ className = "", variant }: CharacterProps) {
     <div
       ref={containerRef}
       onClick={handleClick}
-      className={`transition-all duration-500 ease-in-out cursor-pointer select-none ${sizeClass} ${positionClass} ${className}`}
+      className={`cursor-pointer select-none ${sizeClass} ${positionClass} ${className} ${isHopping ? "animate-[hop_0.5s_ease-in-out]" : ""}`}
+      style={{ transition: "width 500ms ease-in-out, height 500ms ease-in-out" }}
       title="Click me!"
     >
       <svg
@@ -157,18 +158,9 @@ export function Character({ className = "", variant }: CharacterProps) {
         <rect x="100" y="309.692" width="168" height="72" rx="10" fill="#A57A58"/>
         <path d="M183.5 387.692L196.057 408.692H170.943L183.5 387.692Z" fill="#906C50"/>
 
-        {/* Left arm (viewer's right) - waves on click */}
-        <g
-          className="origin-center"
-          style={{
-            transform: isWaving ? "rotate(-30deg)" : "rotate(0deg)",
-            transformOrigin: "73px 303px",
-            transition: "transform 0.3s ease-in-out",
-          }}
-        >
-          <rect x="72.636" y="302.608" width="20" height="60" rx="10" transform="rotate(50.2403 72.636 302.608)" fill="#F0C4A2"/>
-          <rect x="35.3618" y="321.912" width="38" height="46" rx="19" transform="rotate(50.2403 35.3618 321.912)" fill="#F0C4A2"/>
-        </g>
+        {/* Left arm */}
+        <rect x="72.636" y="302.608" width="20" height="60" rx="10" transform="rotate(50.2403 72.636 302.608)" fill="#F0C4A2"/>
+        <rect x="35.3618" y="321.912" width="38" height="46" rx="19" transform="rotate(50.2403 35.3618 321.912)" fill="#F0C4A2"/>
 
         {/* Right arm */}
         <rect width="20" height="60" rx="10" transform="matrix(-0.639569 0.768734 0.768734 0.639569 294.548 300.608)" fill="#F0C4A2"/>
