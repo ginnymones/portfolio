@@ -12,35 +12,48 @@ export function Character({ className = "", variant }: CharacterProps) {
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+  const [isBlinking, setIsBlinking] = useState(false);
+  const [isWaving, setIsWaving] = useState(false);
 
   const isHome = variant === "home";
   const isMini = variant === "mini" || (variant === undefined && pathname !== "/");
-
-  // Don't render the layout instance on home (it's rendered inline instead)
   const shouldHide = variant === undefined && pathname === "/";
 
+  // Eye tracking
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height * 0.38; // Eyes are ~38% from top
-
+      const centerY = rect.top + rect.height * 0.38;
       const dx = e.clientX - centerX;
       const dy = e.clientY - centerY;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      const maxOffset = 3; // Max pixels the pupils move
-
+      const maxOffset = 3;
       const normalizedX = distance > 0 ? (dx / distance) * Math.min(maxOffset, distance / 50) : 0;
       const normalizedY = distance > 0 ? (dy / distance) * Math.min(maxOffset, distance / 50) : 0;
-
       setEyeOffset({ x: normalizedX, y: normalizedY });
     };
-
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  // Idle blink
+  useEffect(() => {
+    const blink = () => {
+      setIsBlinking(true);
+      setTimeout(() => setIsBlinking(false), 150);
+    };
+    const interval = setInterval(blink, 3000 + Math.random() * 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Wave handler
+  const handleClick = () => {
+    if (isWaving) return;
+    setIsWaving(true);
+    setTimeout(() => setIsWaving(false), 600);
+  };
 
   const sizeClass = isHome
     ? "w-[240px] h-auto md:w-[320px]"
@@ -52,10 +65,17 @@ export function Character({ className = "", variant }: CharacterProps) {
 
   if (shouldHide) return null;
 
+  // Wave animation: rotate the right arm (viewer's left) from shoulder
+  const waveTransform = isWaving
+    ? "rotate(-30 72.636 302.608)"
+    : "rotate(0 72.636 302.608)";
+
   return (
     <div
       ref={containerRef}
-      className={`transition-all duration-500 ease-in-out ${sizeClass} ${positionClass} ${className}`}
+      onClick={handleClick}
+      className={`transition-all duration-500 ease-in-out cursor-pointer select-none ${sizeClass} ${positionClass} ${className}`}
+      title="Click me!"
     >
       <svg
         viewBox="0 0 377 476"
@@ -67,7 +87,6 @@ export function Character({ className = "", variant }: CharacterProps) {
         <path d="M98.5 41.1924C130.5 23.1924 157.5 41.6924 167 53.1924C164.5 92.6924 147.4 185.092 99 238.692C50.6 292.292 9.5 250.692 5.00001 222.692C2.50001 211.359 2.20001 186.292 21 176.692C39.8 167.092 49.5 134.359 52 119.192C57.2 77.1924 85.1667 49.6924 98.5 41.1924Z" fill="#4F2F17"/>
         {/* Hair right */}
         <path d="M276 28.6927C216.8 -28.1073 155.333 12.3594 132 39.6927C169.333 96.3593 248.4 215.292 266 237.692C283.6 260.092 326.667 255.692 346 250.692C391.6 230.692 377 195.026 364 179.692C351.2 170.892 343.333 137.359 341 121.692C332.2 81.6924 294 43.0259 276 28.6927Z" fill="#4F2F17"/>
-        {/* Hair details */}
         <path d="M310.5 67.1924C314.5 70.5257 323.5 75.1924 327.5 67.1924" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
         <path d="M353 174.692C357 178.026 366 182.692 370 174.692" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
         {/* Neck */}
@@ -81,20 +100,26 @@ export function Character({ className = "", variant }: CharacterProps) {
         <path d="M57 130.692C56 140.192 47.7 157.892 44.5 162.692" stroke="#6F4627" strokeWidth="5" strokeLinecap="round"/>
         <path d="M33 174.192C26.5 178.526 13.1 184.592 11.5 174.192" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
         <path d="M132 41.6929C119 39.0263 71 50.1923 62 117.692" stroke="#6F4627" strokeWidth="5" strokeLinecap="round"/>
-        {/* Hair right side strands */}
         <path d="M286.269 159.033C243.133 158.153 190.531 113.768 169.621 91.6857C169.903 68.2247 197.137 75.4151 210.719 81.9429C232.599 107.589 276.724 120.301 296.051 123.452C328.091 121.055 318.722 147.977 320.591 143.689C318.627 155.067 296.891 158.659 286.269 159.033Z" fill="#4F2F17"/>
         <path d="M287.07 136.749C244 139.289 188.045 99.2119 165.452 78.8558C163.874 55.4462 191.592 60.456 205.649 65.8871C229.492 89.7185 274.486 98.8949 294.002 100.504C325.751 95.5755 318.545 123.155 320.068 118.733C319.011 130.231 297.629 135.534 287.07 136.749Z" fill="#4F2F17"/>
         <path d="M277.302 113.857C239.14 116.797 188.87 82.1404 168.505 64.4448C166.732 43.7056 191.398 47.7075 203.953 52.3008C225.482 73.0591 265.537 80.4814 282.873 81.5977C310.956 76.7198 305.004 101.298 306.285 97.3512C305.531 107.567 286.649 112.612 277.302 113.857Z" fill="#4F2F17"/>
         <path d="M216.5 9.19251C225.333 6.69251 249.3 8.49251 274.5 35.6925C282.667 43.3591 300.3 61.1924 305.5 71.1924" stroke="#6F4627" strokeWidth="5" strokeLinecap="round"/>
 
-        {/* Eyes - pupils follow cursor */}
+        {/* Eyes - blink + cursor follow */}
         <g>
-          {/* Left eye */}
-          <circle cx={142.5 + eyeOffset.x} cy={183.192 + eyeOffset.y} r="7.5" fill="black"/>
-          <circle cx={145.5 + eyeOffset.x * 0.5} cy={180.192 + eyeOffset.y * 0.5} r="1.5" fill="white"/>
-          {/* Right eye */}
-          <circle cx={225.5 + eyeOffset.x} cy={183.192 + eyeOffset.y} r="7.5" fill="black"/>
-          <circle cx={228.5 + eyeOffset.x * 0.5} cy={180.192 + eyeOffset.y * 0.5} r="1.5" fill="white"/>
+          {isBlinking ? (
+            <>
+              <path d={`M${135 + eyeOffset.x} ${183.192 + eyeOffset.y} Q${142.5 + eyeOffset.x} ${188 + eyeOffset.y} ${150 + eyeOffset.x} ${183.192 + eyeOffset.y}`} stroke="black" strokeWidth="3" strokeLinecap="round" fill="none"/>
+              <path d={`M${218 + eyeOffset.x} ${183.192 + eyeOffset.y} Q${225.5 + eyeOffset.x} ${188 + eyeOffset.y} ${233 + eyeOffset.x} ${183.192 + eyeOffset.y}`} stroke="black" strokeWidth="3" strokeLinecap="round" fill="none"/>
+            </>
+          ) : (
+            <>
+              <circle cx={142.5 + eyeOffset.x} cy={183.192 + eyeOffset.y} r="7.5" fill="black"/>
+              <circle cx={145.5 + eyeOffset.x * 0.5} cy={180.192 + eyeOffset.y * 0.5} r="1.5" fill="white"/>
+              <circle cx={225.5 + eyeOffset.x} cy={183.192 + eyeOffset.y} r="7.5" fill="black"/>
+              <circle cx={228.5 + eyeOffset.x * 0.5} cy={180.192 + eyeOffset.y * 0.5} r="1.5" fill="white"/>
+            </>
+          )}
         </g>
 
         {/* Legs */}
@@ -137,9 +162,13 @@ export function Character({ className = "", variant }: CharacterProps) {
         <rect x="100" y="309.692" width="168" height="72" rx="10" fill="#A57A58"/>
         <path d="M183.5 387.692L196.057 408.692H170.943L183.5 387.692Z" fill="#906C50"/>
 
-        {/* Arms */}
-        <rect x="72.636" y="302.608" width="20" height="60" rx="10" transform="rotate(50.2403 72.636 302.608)" fill="#F0C4A2"/>
-        <rect x="35.3618" y="321.912" width="38" height="46" rx="19" transform="rotate(50.2403 35.3618 321.912)" fill="#F0C4A2"/>
+        {/* Left arm (viewer's right) - waves on click */}
+        <g style={{ transformOrigin: "72.636px 302.608px", transition: "transform 0.3s ease-in-out", transform: waveTransform }}>
+          <rect x="72.636" y="302.608" width="20" height="60" rx="10" transform="rotate(50.2403 72.636 302.608)" fill="#F0C4A2"/>
+          <rect x="35.3618" y="321.912" width="38" height="46" rx="19" transform="rotate(50.2403 35.3618 321.912)" fill="#F0C4A2"/>
+        </g>
+
+        {/* Right arm */}
         <rect width="20" height="60" rx="10" transform="matrix(-0.639569 0.768734 0.768734 0.639569 294.548 300.608)" fill="#F0C4A2"/>
         <rect width="38" height="46" rx="19" transform="matrix(-0.639569 0.768734 0.768734 0.639569 331.822 319.912)" fill="#F0C4A2"/>
 
