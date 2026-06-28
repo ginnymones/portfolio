@@ -8,9 +8,10 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ContactSection } from "@/components/ContactSection";
 import { BackToTop } from "@/components/BackToTop";
+import { Character } from "@/components/Character";
 
 export const metadata: Metadata = {
-  title: "Ginny Mones — Portfolio",
+  title: "Ginny Mones — Creative Problem Solver",
   description: "Design portfolio showcasing case studies and creative work.",
   icons: {
     icon: "/favicon.png",
@@ -41,6 +42,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <ContactSection />
         <Footer />
+        <Character />
         <BackToTop />
       </body>
     </html>
