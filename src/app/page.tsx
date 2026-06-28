@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getPageContent } from "@/lib/pages";
 import { PageBackground } from "@/components/PageBackground";
+import { Character } from "@/components/Character";
 
 export default function Home() {
   const page = getPageContent("home");
@@ -18,32 +19,40 @@ export default function Home() {
       overlayColor={page.overlayColor}
       className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6"
     >
-      <div className="max-w-3xl text-center">
-        <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-          {page.heading}{" "}
-          <span className="text-accent-orange">{page.headingAccent}</span>.
-        </h1>
-        <p className="text-xl md:text-2xl text-neutral-dark mb-4 leading-relaxed">
-          {page.subtitle}
-        </p>
-        <p className="text-lg text-neutral-warm mb-10">{page.tagline}</p>
-        <div className="flex items-center justify-center gap-4">
-          {page.ctaPrimaryLabel && page.ctaPrimaryLink && (
-            <Link
-              href={page.ctaPrimaryLink}
-              className="px-8 py-3 bg-accent-orange text-background font-medium rounded-lg hover:bg-accent-orange/90 transition-colors"
-            >
-              {page.ctaPrimaryLabel}
-            </Link>
-          )}
-          {page.ctaSecondaryLabel && page.ctaSecondaryLink && (
-            <Link
-              href={page.ctaSecondaryLink}
-              className="px-8 py-3 border border-neutral-warm/40 text-foreground font-medium rounded-lg hover:border-accent-orange hover:text-accent-orange transition-colors"
-            >
-              {page.ctaSecondaryLabel}
-            </Link>
-          )}
+      <div className="max-w-5xl w-full flex flex-col md:flex-row items-center gap-8 md:gap-16">
+        {/* Character */}
+        <div className="flex-shrink-0">
+          <Character variant="home" />
+        </div>
+
+        {/* Text content */}
+        <div className="text-center md:text-left">
+          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+            {page.heading}{" "}
+            <span className="text-accent-orange">{page.headingAccent}</span>.
+          </h1>
+          <p className="text-xl md:text-2xl text-neutral-dark mb-4 leading-relaxed">
+            {page.subtitle}
+          </p>
+          <p className="text-lg text-neutral-warm mb-10">{page.tagline}</p>
+          <div className="flex items-center justify-center md:justify-start gap-4">
+            {page.ctaPrimaryLabel && page.ctaPrimaryLink && (
+              <Link
+                href={page.ctaPrimaryLink}
+                className="px-8 py-3 bg-accent-orange text-background font-medium rounded-lg hover:bg-accent-orange/90 transition-colors"
+              >
+                {page.ctaPrimaryLabel}
+              </Link>
+            )}
+            {page.ctaSecondaryLabel && page.ctaSecondaryLink && (
+              <Link
+                href={page.ctaSecondaryLink}
+                className="px-8 py-3 border border-neutral-warm/40 text-foreground font-medium rounded-lg hover:border-accent-orange hover:text-accent-orange transition-colors"
+              >
+                {page.ctaSecondaryLabel}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </PageBackground>

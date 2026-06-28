@@ -5,13 +5,19 @@ import { usePathname } from "next/navigation";
 
 interface CharacterProps {
   className?: string;
+  variant?: "home" | "mini";
 }
 
-export function Character({ className = "" }: CharacterProps) {
+export function Character({ className = "", variant }: CharacterProps) {
   const pathname = usePathname();
-  const isHome = pathname === "/";
   const containerRef = useRef<HTMLDivElement>(null);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+
+  const isHome = variant === "home";
+  const isMini = variant === "mini" || (variant === undefined && pathname !== "/");
+
+  // Don't render the layout instance on home (it's rendered inline instead)
+  const shouldHide = variant === undefined && pathname === "/";
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -37,12 +43,14 @@ export function Character({ className = "" }: CharacterProps) {
   }, []);
 
   const sizeClass = isHome
-    ? "w-[280px] h-auto md:w-[360px]"
+    ? "w-[240px] h-auto md:w-[320px]"
     : "w-[64px] h-auto md:w-[80px]";
 
-  const positionClass = isHome
-    ? ""
-    : "fixed bottom-6 left-6 z-30";
+  const positionClass = isMini
+    ? "fixed bottom-6 left-6 z-30"
+    : "";
+
+  if (shouldHide) return null;
 
   return (
     <div
