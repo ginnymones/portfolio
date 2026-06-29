@@ -4,22 +4,22 @@ All notable changes to this project are documented here.
 
 ---
 
-## [2026-06-29] — Microinteractions & Open Graph Metadata
+## [2026-06-29] — Character Wave, Custom 404, Open Graph
 
 ### Added
-- **Character idle blink** — eyes close briefly every 3-5 seconds
-- **Character hop on click** — bouncy jump animation (12px up, spring-back)
-- **Staggered hero text entrance** — heading, subtitle, tagline, buttons fade in sequentially on page load
-- **Cards fade up on scroll** — case study cards slide up 24px + fade in when entering viewport
-- **Open Graph metadata** — social sharing card with title, description, and image (1200×630)
-- **Twitter card metadata** — large image card format
-- `fadeUp` and `hop` CSS keyframe animations
+- **Character arm wave** — right arm (viewer's right) waves on click with CSS keyframe animation
+- **Custom 404 page** — character illustration + "Uh-oh, looks like this page blasted off again." + navigation buttons
+- **Open Graph + Twitter card metadata** — title, description, og-image.png for social sharing
+- **Idle blink** on character (eyes close every 3-5s)
+- **Staggered hero entrance** — text elements fade in sequentially on home page load
+- **Cards fade up on scroll** — case study cards animate in from below when entering viewport
+- `wave`, `fadeUp`, `hop` CSS keyframe animations
 
 ### Changed
-- Title updated to "Ginny Mones — Creative Problem Solver"
-- Description updated to "Ginny's creative journey and experiments, all in portfolio."
-- Character on home page now positioned to the left of hero text (side-by-side layout)
-- Character hides from layout on home page (rendered inline instead)
+- Character SVG updated with reworked arm structure for proper wave animation
+- Site title: "Ginny Mones — Creative Problem Solver"
+- Site description: "Ginny's creative journey and experiments, all in portfolio."
+- Social links centered in contact section
 
 ---
 
