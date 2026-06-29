@@ -13,7 +13,7 @@ export function Character({ className = "", variant }: CharacterProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [isBlinking, setIsBlinking] = useState(false);
-  const [isHopping, setIsHopping] = useState(false);
+  const [isWaving, setIsWaving] = useState(false);
 
   const isHome = variant === "home";
   const isMini = variant === "mini" || (variant === undefined && pathname !== "/");
@@ -48,11 +48,11 @@ export function Character({ className = "", variant }: CharacterProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Hop handler
+  // Wave handler
   const handleClick = () => {
-    if (isHopping) return;
-    setIsHopping(true);
-    setTimeout(() => setIsHopping(false), 500);
+    if (isWaving) return;
+    setIsWaving(true);
+    setTimeout(() => setIsWaving(false), 800);
   };
 
   const sizeClass = isHome
@@ -69,26 +69,26 @@ export function Character({ className = "", variant }: CharacterProps) {
     <div
       ref={containerRef}
       onClick={handleClick}
-      className={`cursor-pointer select-none ${sizeClass} ${positionClass} ${className} ${isHopping ? "animate-[hop_0.5s_ease-in-out]" : ""}`}
+      className={`cursor-pointer select-none ${sizeClass} ${positionClass} ${className}`}
       style={{ transition: "width 500ms ease-in-out, height 500ms ease-in-out" }}
       title="Click me!"
     >
       <svg
-        viewBox="0 0 377 476"
+        viewBox="0 0 376 476"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
         {/* Hair left */}
-        <path d="M98.5 41.1924C130.5 23.1924 157.5 41.6924 167 53.1924C164.5 92.6924 147.4 185.092 99 238.692C50.6 292.292 9.5 250.692 5.00001 222.692C2.50001 211.359 2.20001 186.292 21 176.692C39.8 167.092 49.5 134.359 52 119.192C57.2 77.1924 85.1667 49.6924 98.5 41.1924Z" fill="#4F2F17"/>
+        <path d="M94.7119 41.1924C126.712 23.1924 153.712 41.6924 163.212 53.1924C160.712 92.6924 143.612 185.092 95.2119 238.692C46.8119 292.292 5.71191 250.692 1.21192 222.692C-1.28808 211.359 -1.58808 186.292 17.2119 176.692C36.0119 167.092 45.7119 134.359 48.2119 119.192C53.4119 77.1924 81.3786 49.6924 94.7119 41.1924Z" fill="#4F2F17"/>
         {/* Hair right */}
-        <path d="M276 28.6927C216.8 -28.1073 155.333 12.3594 132 39.6927C169.333 96.3593 248.4 215.292 266 237.692C283.6 260.092 326.667 255.692 346 250.692C391.6 230.692 377 195.026 364 179.692C351.2 170.892 343.333 137.359 341 121.692C332.2 81.6924 294 43.0259 276 28.6927Z" fill="#4F2F17"/>
-        <path d="M310.5 67.1924C314.5 70.5257 323.5 75.1924 327.5 67.1924" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
-        <path d="M353 174.692C357 178.026 366 182.692 370 174.692" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
+        <path d="M272.212 28.6927C213.012 -28.1073 151.545 12.3594 128.212 39.6927C165.545 96.3593 244.612 215.292 262.212 237.692C279.812 260.092 322.879 255.692 342.212 250.692C387.812 230.692 373.212 195.026 360.212 179.692C347.412 170.892 339.545 137.359 337.212 121.692C328.412 81.6924 290.212 43.0259 272.212 28.6927Z" fill="#4F2F17"/>
+        <path d="M306.712 67.1924C310.712 70.5257 319.712 75.1924 323.712 67.1924" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
+        <path d="M349.212 174.692C353.212 178.026 362.212 182.692 366.212 174.692" stroke="#4F2F17" strokeWidth="5" strokeLinecap="round"/>
         {/* Neck */}
-        <rect x="168" y="225.692" width="33" height="60" rx="16" fill="#E8BA97"/>
+        <rect x="164.212" y="225.692" width="33" height="60" rx="16" fill="#E8BA97"/>
         {/* Face */}
-        <rect x="88" y="81.6924" width="192" height="174" rx="65" fill="#F0C4A2"/>
+        <rect x="84.2119" y="81.6924" width="192" height="174" rx="65" fill="#F0C4A2"/>
         {/* Bangs */}
         <path d="M100.444 159.757C136.889 151.115 173.404 103.821 187.106 81.2546C182.573 61.3969 160.778 72.4836 150.447 80.5092C136.573 106.277 101.455 125.142 85.6305 131.353C58.0021 135.183 70.8804 156.315 68.5096 153.018C72.2595 162.314 91.362 161.384 100.444 159.757Z" fill="#4F2F17"/>
         <path d="M86.3418 141.77C123.172 134.958 162.003 89.5465 176.815 67.6922C173.279 47.633 150.957 57.6177 140.238 65.1175C125.095 90.1609 89.0795 107.249 72.9645 112.662C45.1793 115.108 56.9865 136.856 54.7833 133.445C58.0644 142.917 77.1894 142.942 86.3418 141.77Z" fill="#4F2F17"/>
@@ -158,13 +158,20 @@ export function Character({ className = "", variant }: CharacterProps) {
         <rect x="100" y="309.692" width="168" height="72" rx="10" fill="#A57A58"/>
         <path d="M183.5 387.692L196.057 408.692H170.943L183.5 387.692Z" fill="#906C50"/>
 
-        {/* Left arm */}
-        <rect x="72.636" y="302.608" width="20" height="60" rx="10" transform="rotate(50.2403 72.636 302.608)" fill="#F0C4A2"/>
-        <rect x="35.3618" y="321.912" width="38" height="46" rx="19" transform="rotate(50.2403 35.3618 321.912)" fill="#F0C4A2"/>
+        {/* Left arm (viewer's left) */}
+        <rect x="67.2544" y="303.816" width="20" height="40.3562" rx="10" transform="rotate(20.0475 67.2544 303.816)" fill="#F0C4A2"/>
+        <rect x="52.2114" y="337.139" width="20" height="40.3562" rx="10" transform="rotate(-45 52.2114 337.139)" fill="#F0C4A2"/>
+        <rect x="62.2117" y="359.866" width="38" height="46" rx="19" transform="rotate(-45 62.2117 359.866)" fill="#F0C4A2"/>
 
-        {/* Right arm */}
-        <rect width="20" height="60" rx="10" transform="matrix(-0.639569 0.768734 0.768734 0.639569 294.548 300.608)" fill="#F0C4A2"/>
-        <rect width="38" height="46" rx="19" transform="matrix(-0.639569 0.768734 0.768734 0.639569 331.822 319.912)" fill="#F0C4A2"/>
+        {/* Right arm (viewer's right) - waves on click */}
+        <g
+          className={isWaving ? "animate-[wave_0.8s_ease-in-out]" : ""}
+          style={{ transformOrigin: "290px 306px" }}
+        >
+          <rect width="20" height="41.2359" rx="10" transform="matrix(-0.817143 0.576435 0.576435 0.817143 297.282 306.135)" fill="#F0C4A2"/>
+          <rect width="20" height="41.2359" rx="10" transform="matrix(-0.47681 -0.879007 -0.879007 0.47681 340.153 332.04)" fill="#F0C4A2"/>
+          <rect width="38" height="46" rx="19" transform="matrix(0.499393 0.866376 0.866376 -0.499393 314.344 313.74)" fill="#F0C4A2"/>
+        </g>
 
         {/* Shirt */}
         <path d="M88.0001 289.692C88.0001 273.124 101.432 259.692 118 259.692H250C266.569 259.692 280 273.124 280 289.692V347.692C280 364.261 266.569 377.692 250 377.692H118C101.432 377.692 88.0001 364.261 88.0001 347.692V289.692Z" fill="#FAFAFA"/>
