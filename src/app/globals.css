@@ -27,24 +27,6 @@ html {
   }
 }
 
-@keyframes hop {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-12px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  70% {
-    transform: translateY(0);
-  }
-  85% {
-    transform: translateY(-4px);
-  }
-}
-
 @keyframes wave {
   0%, 100% {
     transform: rotate(0deg);

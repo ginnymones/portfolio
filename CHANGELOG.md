@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-29] — SEO, Analytics, Alt Text & Cleanup
+
+### Added
+- **SEO Sitemap** — auto-generates `sitemap.xml` and `robots.txt` on build via `next-sitemap`
+- **Vercel Analytics** — privacy-friendly page view tracking (no cookies)
+- **Image alt text fields** — Thumbnail Alt Text and Header Image Alt Text in Tina admin per case study
+
+### Removed (cleanup)
+- 11 old sample SVG images (ecommerce-*, fintech-*, healthcare-*) — no longer referenced
+- Unused `@keyframes hop` CSS animation (replaced by wave)
+- Unused `ginny-404.png` 1x version (only @2x is used)
+
+---
+
 ## [2026-06-29] — Character Wave, Custom 404, Open Graph
 
 ### Added
