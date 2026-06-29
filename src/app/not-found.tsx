@@ -17,20 +17,20 @@ export default function NotFound() {
           404
         </h1>
         <p className="text-lg text-neutral-dark mb-8">
-          Oops — this page doesn&apos;t exist. Maybe it wandered off.
+          Uh-oh, looks like this page blasted off again.
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link
-            href="/"
+            href="/works"
             className="px-8 py-3 bg-accent-orange text-background font-medium rounded-lg hover:bg-accent-orange/90 transition-colors"
           >
-            Go Home
+            View My Creations
           </Link>
           <Link
-            href="/works"
+            href="/about"
             className="px-8 py-3 border border-neutral-warm/40 text-foreground font-medium rounded-lg hover:border-accent-orange hover:text-accent-orange transition-colors"
           >
-            View Works
+            About Me
           </Link>
         </div>
       </div>
