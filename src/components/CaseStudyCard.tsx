@@ -8,6 +8,7 @@ interface CaseStudyCardProps {
   slug: string;
   title: string;
   thumbnail: string;
+  thumbnailAlt?: string;
   summary: string;
   tags: string[];
 }
@@ -16,6 +17,7 @@ export function CaseStudyCard({
   slug,
   title,
   thumbnail,
+  thumbnailAlt,
   summary,
   tags,
 }: CaseStudyCardProps) {
@@ -48,7 +50,7 @@ export function CaseStudyCard({
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
                 src={thumbnail}
-                alt={`${title} thumbnail`}
+                alt={thumbnailAlt || `${title} thumbnail`}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

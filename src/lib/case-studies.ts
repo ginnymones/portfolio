@@ -15,7 +15,9 @@ export interface CaseStudyMeta extends BackgroundConfig {
   slug: string;
   title: string;
   thumbnail: string;
+  thumbnailAlt?: string;
   headerImage: string;
+  headerImageAlt?: string;
   summary: string;
   tags: string[];
   client: string;
@@ -62,7 +64,9 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
       slug,
       title: data.title || "Untitled",
       thumbnail: data.thumbnail || "/images/case-studies/placeholder.svg",
+      thumbnailAlt: data.thumbnailAlt || "",
       headerImage: data.headerImage || data.thumbnail || "/images/case-studies/placeholder.svg",
+      headerImageAlt: data.headerImageAlt || "",
       summary: data.summary || "",
       tags: data.tags || [],
       client: data.client || "",
@@ -99,7 +103,9 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
     slug,
     title: data.title || "Untitled",
     thumbnail: data.thumbnail || "/images/case-studies/placeholder.svg",
+    thumbnailAlt: data.thumbnailAlt || "",
     headerImage: data.headerImage || data.thumbnail || "/images/case-studies/placeholder.svg",
+    headerImageAlt: data.headerImageAlt || "",
     summary: data.summary || "",
     tags: data.tags || [],
     client: data.client || "",

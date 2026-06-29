@@ -9,6 +9,7 @@ interface CaseStudyItem {
   slug: string;
   title: string;
   thumbnail: string;
+  thumbnailAlt?: string;
   summary: string;
   tags: string[];
 }

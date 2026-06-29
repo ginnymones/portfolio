@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { ContactSection } from "@/components/ContactSection";
 import { BackToTop } from "@/components/BackToTop";
 import { Character } from "@/components/Character";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Ginny Mones — Creative Problem Solver",
@@ -64,6 +65,7 @@ export default function RootLayout({
         <Footer />
         <Character />
         <BackToTop />
+        <Analytics />
       </body>
     </html>
   );

@@ -399,7 +399,9 @@ export type CaseStudy = Node & Document & {
   title: Scalars['String']['output'];
   status: Scalars['String']['output'];
   thumbnail: Scalars['String']['output'];
+  thumbnailAlt?: Maybe<Scalars['String']['output']>;
   headerImage: Scalars['String']['output'];
+  headerImageAlt?: Maybe<Scalars['String']['output']>;
   summary: Scalars['String']['output'];
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   client?: Maybe<Scalars['String']['output']>;
@@ -439,7 +441,9 @@ export type CaseStudyFilter = {
   title?: InputMaybe<StringFilter>;
   status?: InputMaybe<StringFilter>;
   thumbnail?: InputMaybe<ImageFilter>;
+  thumbnailAlt?: InputMaybe<StringFilter>;
   headerImage?: InputMaybe<ImageFilter>;
+  headerImageAlt?: InputMaybe<StringFilter>;
   summary?: InputMaybe<StringFilter>;
   tags?: InputMaybe<StringFilter>;
   client?: InputMaybe<StringFilter>;
@@ -637,7 +641,9 @@ export type CaseStudyMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
   thumbnail?: InputMaybe<Scalars['String']['input']>;
+  thumbnailAlt?: InputMaybe<Scalars['String']['input']>;
   headerImage?: InputMaybe<Scalars['String']['input']>;
+  headerImageAlt?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   client?: InputMaybe<Scalars['String']['input']>;
@@ -660,7 +666,7 @@ export type PagePartsFragment = { __typename: 'Page', title: string, backgroundT
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null };
 
-export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null };
+export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, thumbnailAlt?: string | null, headerImage: string, headerImageAlt?: string | null, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -705,7 +711,7 @@ export type CaseStudyQueryVariables = Exact<{
 }>;
 
 
-export type CaseStudyQuery = { __typename?: 'Query', caseStudy: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null } };
+export type CaseStudyQuery = { __typename?: 'Query', caseStudy: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, thumbnailAlt?: string | null, headerImage: string, headerImageAlt?: string | null, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null } };
 
 export type CaseStudyConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -717,7 +723,7 @@ export type CaseStudyConnectionQueryVariables = Exact<{
 }>;
 
 
-export type CaseStudyConnectionQuery = { __typename?: 'Query', caseStudyConnection: { __typename?: 'CaseStudyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CaseStudyConnectionEdges', cursor: string, node?: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, headerImage: string, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null } | null } | null> | null } };
+export type CaseStudyConnectionQuery = { __typename?: 'Query', caseStudyConnection: { __typename?: 'CaseStudyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CaseStudyConnectionEdges', cursor: string, node?: { __typename: 'CaseStudy', id: string, title: string, status: string, thumbnail: string, thumbnailAlt?: string | null, headerImage: string, headerImageAlt?: string | null, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -784,7 +790,9 @@ export const CaseStudyPartsFragmentDoc = gql`
   title
   status
   thumbnail
+  thumbnailAlt
   headerImage
+  headerImageAlt
   summary
   tags
   client

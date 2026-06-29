@@ -279,7 +279,9 @@ type CaseStudy implements Node & Document {
   title: String!
   status: String!
   thumbnail: String!
+  thumbnailAlt: String
   headerImage: String!
+  headerImageAlt: String
   summary: String!
   tags: [String]
   client: String
@@ -319,7 +321,9 @@ input CaseStudyFilter {
   title: StringFilter
   status: StringFilter
   thumbnail: ImageFilter
+  thumbnailAlt: StringFilter
   headerImage: ImageFilter
+  headerImageAlt: StringFilter
   summary: StringFilter
   tags: StringFilter
   client: StringFilter
@@ -445,7 +449,9 @@ input CaseStudyMutation {
   title: String
   status: String
   thumbnail: String
+  thumbnailAlt: String
   headerImage: String
+  headerImageAlt: String
   summary: String
   tags: [String]
   client: String

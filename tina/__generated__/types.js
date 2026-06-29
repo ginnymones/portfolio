@@ -70,7 +70,9 @@ export const CaseStudyPartsFragmentDoc = gql`
   title
   status
   thumbnail
+  thumbnailAlt
   headerImage
+  headerImageAlt
   summary
   tags
   client

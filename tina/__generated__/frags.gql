@@ -60,7 +60,9 @@ fragment CaseStudyParts on CaseStudy {
   title
   status
   thumbnail
+  thumbnailAlt
   headerImage
+  headerImageAlt
   summary
   tags
   client

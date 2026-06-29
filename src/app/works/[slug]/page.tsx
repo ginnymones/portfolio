@@ -81,7 +81,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-10">
           <Image
             src={study.headerImage}
-            alt={`${study.title} header`}
+            alt={study.headerImageAlt || `${study.title} header`}
             fill
             className="object-cover"
             priority

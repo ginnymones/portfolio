@@ -377,10 +377,22 @@ var config_default = defineConfig({
             required: true
           },
           {
+            type: "string",
+            name: "thumbnailAlt",
+            label: "Thumbnail Alt Text",
+            description: "Accessible description of the thumbnail image"
+          },
+          {
             type: "image",
             name: "headerImage",
             label: "Header Image (16:9 ratio)",
             required: true
+          },
+          {
+            type: "string",
+            name: "headerImageAlt",
+            label: "Header Image Alt Text",
+            description: "Accessible description of the header image"
           },
           {
             type: "string",

@@ -41,6 +41,7 @@ export default function WorksPage() {
             slug: s.slug,
             title: s.title,
             thumbnail: s.thumbnail,
+            thumbnailAlt: s.thumbnailAlt,
             summary: s.summary,
             tags: s.tags,
           }))}
