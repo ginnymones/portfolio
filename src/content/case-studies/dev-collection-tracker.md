@@ -17,8 +17,8 @@ links:
 
 I went to a card show with my sister one time and saw her having to scroll though numerous lines of Pokemon names just to find the Pokemon she was looking for. She had completely forgotten that there was a search option and, even then, she had to click the button multiple times as it very small (probably around 15px). She didn't say outright that she was struggling, but after a while she mentioned that it would be nice if there was an easier was to fnd the Pokemon "by photos" because she couldn't remember their names sometimes.
 
-Me: So what if you accidentally close the tab, is the collection still saved on the site?
-Her: Huh. Good question.
+Me: So what if you accidentally close the tab, is the collection still saved on the site?  
+Her: Huh. Good question.  
 Me, in my head: Good opportunity.
 
 ## Solution
