@@ -7,7 +7,8 @@ All notable changes to this project are documented here.
 ## [2026-06-29] — Content Updates
 
 ### Changed
-- Updated case study content: dev-collection-tracker, dev-designer-to-vibe-developer-starter-pack, dev-figma-to-email-builder
+- Updated case study content: dev-collection-tracker, dev-designer-to-vibe-developer-starter-pack, dev-figma-to-email-builder, dev-workload-tracker
+- Home page heading: "Hi, I'm Ginny." → "Hi, I'm Ginny!"
 
 ### Removed
 - social-alaska case study
