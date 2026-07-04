@@ -43,7 +43,7 @@ export function HeroContent({
         style={{ transitionDelay: "0ms" }}
       >
         {heading}{" "}
-        <span className="text-accent-orange">{headingAccent}</span>.
+        <span className="text-accent-orange">{headingAccent}</span>!
       </h1>
       <p
         className={`text-xl md:text-2xl text-neutral-dark mb-4 leading-relaxed ${baseTransition} ${visible ? shown : hidden}`}
