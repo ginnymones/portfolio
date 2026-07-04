@@ -15,24 +15,26 @@ links:
 
 ## Problem Statement
 
-As a collector, tracking what you own across hundreds of cards — including variants, holos, and special editions — is a pain. Spreadsheets get unwieldy fast, and most existing apps are either too generic (designed for any collectible, so they miss Pokémon-specific data) or require creating yet another account with email verification.
+I went to a card show with my sister one time and saw her having to scroll though numerous lines of Pokemon names just to find the Pokemon she was looking for. She had completely forgotten that there was a search option and, even then, she had to click the button multiple times as it very small (probably around 15px). She didn't say outright that she was struggling, but after a while she mentioned that it would be nice if there was an easier was to fnd the Pokemon "by photos" because she couldn't remember their names sometimes.
 
-I wanted something visual, fast, and low-friction to access — something I could check on my phone at a card shop to know instantly if I already own a specific card.
+Me: So what if you accidentally close the tab, is the collection still saved on the site?
+Her: Huh. Good question.
+Me, in my head: Good opportunity.
 
 ## Solution
 
-I built a purpose-built Pokémon collection tracker with a focus on speed and visual browsing. The core experience is a grid of cards where you tap to mark ownership — no forms, no friction.
+I built Pokémon card collection tracker that focuses on ease of searching through visual cues and filters, and that also provides users with an option to save their collection data so that they can view their collection from whichever device they're using.
 
 ![The Pokemon TCG collection tracker I made for my sister](/images/case-studies/collection-tracker-header.png)
 
 
 ### Key Design Decisions
 
-- **PIN-based access** — No email signup or OAuth. Enter a short PIN and you're in. Your collection is tied to a hashed PIN stored in Firestore, so it's secure but frictionless.
-- **Visual-first browsing** — Cards displayed as a grid with images, not a text list. You see the art, which is how collectors actually think about their collections.
-- **Variant tracking** — Each card can have multiple variants (holo, reverse holo, full art). Track each independently.
-- **Anonymous auth** — Firebase anonymous authentication handles the session while the PIN identifies the collection. No personal data stored.
-- **Instant feedback** — Tap a card → it's marked. No save button, no confirmation modal. The state syncs immediately.
+- **PIN-based access** — No email signup or OAuth — I had tried that for a previous project and ended up with a headache. Instead, I kept the login method simple with a simple username and PIN combination. Secure yet frictionless.
+- **Visual-first browsing** — Cards displayed as a grid with images, not a text list. You see the art, which is how collectors like my sister actually enjoy viewing their collection.
+- **Instant feedback** — Tap a card and it's marked instantly. Tap it again and it's unmarked and untagged as something that you alread own. No need for a confirmation modal or additional friction points. The state syncs immediately.
+- **Different modes for different types of collectors** - Toggle between a casual type of tracking (one card per specie) and a hardcore type of tracking (gotta catch 'em call — literally). The hardcore mode offers multiple variant tracking (holo, reverse holo, full art).
+
 
 ![A way to filter out the cards that you already have](/images/case-studies/collection-tracker-owned.png)
 

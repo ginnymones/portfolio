@@ -15,31 +15,24 @@ links:
 
 ## Problem Statement
 
-Designers curious about coding face a wall of intimidating resources: CS fundamentals they'll never use, tutorial hell that teaches syntax but not building, and bootcamps that cost thousands. Meanwhile, AI coding tools have made it genuinely possible for non-developers to build real things — but there's no structured path that meets designers where they are.
+Most designers, me included, now face the expectation of having to know how to translate their designs into real, interactible products. This means knowing how to code or how to work with platforms that can turn design into code. While these two disciplines seem to speak two different languages, AI — specifically vibe coding — can act as a bridge.
 
-The gap: designers think visually, work iteratively, and care about craft. Existing coding courses ignore all three.
+I put off working with AI-assisted coding programs like Claude and Kiro because "I need to study them first." I've never vibe coded before, after all. Where do I even have to start? Little did I know that I could work with my design "stock knowledge", and I just had to DO THE THING ALREADY.
 
 ## Solution
 
-I created a structured, project-based curriculum specifically for designers who want to build with AI assistance. It's not a coding course — it's a creative direction course where the AI is your developer.
+Simple: JUST DO IT.
 
-### Curriculum Structure
-
-| Phase | Project | Duration | Outcome |
-|-------|---------|----------|---------|
-| 0 | Orientation | ~30 min | Tools set up, first AI interaction |
-| 1 | Color Palette Generator | ~1 week | A working design tool |
-| 2 | Product Landing Page | ~2 weeks | A polished marketing page |
-| 3 | Design Portfolio | ~2 weeks | A deployed portfolio with real projects |
+Kidding. To ease my fellow designers into this whole table-flip, let's just do the thing kind of mindset, we need to take baby steps. Hence, I put together a "designer to vibe developer" starter pack.
 
 ### Key Design Decisions
 
-- **Project-based, not concept-based** — You learn by building things you actually want, not by doing exercises about variables and loops.
-- **30-60 minute daily sessions** — Fits into a designer's workday without becoming overwhelming. Go at your own pace.
+- **Progressive language development** - The curriclum starts out in the usual designer language with occasional inserts of development terms that are commonly used. As the learners progress, more development terms are used to help get designers more comfortable with the language.
+- **30-60 minute daily sessions** — Sessions are short enough to be fit into a designer's workday without becoming overwhelming. These short sessions are also designed to encourage exploration rather than just cramming information into the learner's mind.
 - **Progressive complexity** — Phase 1 is a simple interactive tool. Phase 2 adds responsive design, animations, and forms. Phase 3 ties everything together into a portfolio.
-- **AI as partner, not teacher** — The curriculum doesn't explain JavaScript syntax. It teaches you how to describe what you want so the AI can build it. You're the creative director.
-- **Real deployment at every phase** — Every project gets deployed to a live URL. You ship from day one.
-- **Designer-native language** — Instructions reference design concepts (spacing, hierarchy, composition) rather than programming concepts.
+- **AI as partner, not teacher** — The curriculum doesn't explain JavaScript syntax. It teaches you how to describe what you want so the AI can build it. The learner is the movie director, and the AI is the actor following the script.
+- **Real deployment at every phase** — Every project gets deployed to a live URL. The learner immediately sees their creation come to life instead of just keeping the code in the cave.
+
 
 ### What Makes It Different
 
