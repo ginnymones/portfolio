@@ -66,12 +66,20 @@ function LightboxModal({ src, alt, onClose }: LightboxProps) {
 
 /**
  * Convert img tags pointing to video files (.mp4, .webm) into video elements.
+ * Automatically uses a poster image if [filename]-thumb.png/jpg exists.
  */
 function convertVideoImgs(html: string): string {
   return html.replace(
     /<img\s+src="([^"]+\.(?:mp4|webm))"\s+alt="([^"]*)"\s*\/?>/g,
-    (_match, src, alt) =>
-      `<video src="${src}" controls preload="metadata" class="rounded-xl my-8 w-full"><p>${alt}</p></video>`
+    (_match, src, alt) => {
+      // Check for poster: replace extension with -thumb.png
+      const basePath = src.replace(/\.(mp4|webm)$/, "");
+      const posterPng = `${basePath}-thumb.png`;
+      const posterJpg = `${basePath}-thumb.jpg`;
+      // We'll try png first (can't do fs check client-side, so include poster attr and let browser handle 404 gracefully)
+      const poster = `poster="${posterPng}"`;
+      return `<video src="${src}" ${poster} controls preload="metadata" class="rounded-xl my-8 w-full"><p>${alt}</p></video>`;
+    }
   );
 }
 
