@@ -229,6 +229,20 @@ Wrap images in `:::bento` / `:::` markers for a bento grid layout:
 
 Layout adapts based on count: 2 = side by side, 3/5/6 = first image spans 2 rows, 4 = 2×2 grid.
 
+### Embedding Videos
+
+Use the same image syntax with `.mp4` or `.webm` files — they automatically render as a video player with controls:
+
+```markdown
+![Video description](/images/case-studies/my-video.mp4)
+```
+
+**Auto thumbnail:** Place a file named `[video-name]-thumb.png` (or `.jpg`) in the same folder and it'll be used as the poster image automatically. Example:
+- Video: `/images/case-studies/anim-joiiio-general.mp4`
+- Thumbnail: `/images/case-studies/anim-joiiio-general-thumb.png`
+
+No extra syntax needed — just the naming convention.
+
 ---
 
 ## Deployment

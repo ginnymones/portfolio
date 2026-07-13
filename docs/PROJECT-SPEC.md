@@ -149,6 +149,7 @@ Applicable to all pages and individual case studies.
 - **Pagination**: Client-side, 6 items per page, works alongside tag filtering. Resets to page 1 on filter change.
 - **Mobile navigation**: Hamburger menu with compact dropdown (14px text, solid bg, drop shadow)
 - **Back to top button**: Appears after 400px scroll, up arrow + text, rounded corners, fixed bottom-right
+- **Inline video support**: `.mp4`/`.webm` files in markdown render as `<video>` with controls + auto poster thumbnail
 - **Image lightbox**: Click any case study image to view full-screen with Escape/click-outside to dismiss
 - **Lazy loading**: Case study cards use IntersectionObserver, render skeleton until visible
 - **Breadcrumbs**: Case study pages show Home > Works > Title

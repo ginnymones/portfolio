@@ -4,6 +4,24 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-06-29] — Video Support in Case Studies
+
+### Added
+- **Inline video player** — `.mp4` and `.webm` files referenced with image syntax now render as `<video>` elements with native browser controls (play/pause, audio, progress bar)
+- **Auto poster/thumbnail** — if a file named `[video-name]-thumb.png` (or `.jpg`) exists alongside the video, it's automatically used as the poster image
+- No autoplay, no loop — user initiates playback
+
+### Usage
+```markdown
+![Video description](/images/case-studies/my-video.mp4)
+```
+Place `my-video-thumb.png` in the same folder for an automatic thumbnail.
+
+### Changed
+- anim-motion-graphics case study: Joiiio gif moved to single line, mp4 on next line (out of bento)
+
+---
+
 ## [2026-06-29] — Content Updates
 
 ### Changed
