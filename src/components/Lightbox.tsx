@@ -65,11 +65,24 @@ function LightboxModal({ src, alt, onClose }: LightboxProps) {
 }
 
 /**
+ * Convert img tags pointing to video files (.mp4, .webm) into video elements.
+ */
+function convertVideoImgs(html: string): string {
+  return html.replace(
+    /<img\s+src="([^"]+\.(?:mp4|webm))"\s+alt="([^"]*)"\s*\/?>/g,
+    (_match, src, alt) =>
+      `<video src="${src}" controls preload="metadata" class="rounded-xl my-8 w-full"><p>${alt}</p></video>`
+  );
+}
+
+/**
  * Parse content HTML and split into segments: regular HTML and bento galleries.
  */
 function parseContentSegments(html: string) {
+  // First, convert video img tags to proper video elements
+  const processedHtml = convertVideoImgs(html);
+
   // Remark wraps :::bento, images, and ::: in a single <p> tag:
-  // <p>:::bento\n<img ...>\n<img ...>\n:::</p>
   const bentoRegex =
     /<p>:::bento\s*([\s\S]*?):::<\/p>/g;
 
@@ -80,10 +93,10 @@ function parseContentSegments(html: string) {
   let lastIndex = 0;
   let match;
 
-  while ((match = bentoRegex.exec(html)) !== null) {
+  while ((match = bentoRegex.exec(processedHtml)) !== null) {
     // Add HTML before this bento block
     if (match.index > lastIndex) {
-      segments.push({ type: "html", content: html.slice(lastIndex, match.index) });
+      segments.push({ type: "html", content: processedHtml.slice(lastIndex, match.index) });
     }
 
     // Parse images from the bento block
@@ -103,13 +116,13 @@ function parseContentSegments(html: string) {
   }
 
   // Add remaining HTML
-  if (lastIndex < html.length) {
-    segments.push({ type: "html", content: html.slice(lastIndex) });
+  if (lastIndex < processedHtml.length) {
+    segments.push({ type: "html", content: processedHtml.slice(lastIndex) });
   }
 
   // If no bento blocks found, return the whole thing as HTML
   if (segments.length === 0) {
-    segments.push({ type: "html", content: html });
+    segments.push({ type: "html", content: processedHtml });
   }
 
   return segments;

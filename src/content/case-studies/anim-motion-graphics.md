@@ -11,10 +11,9 @@ date: "2025-03-20"
 
 Motion graphics that I made for Joiiio and Tender Bites:
 
-:::bento
 ![Joiiio - How can my top be replaced?](/images/case-studies/anim-joiiio-howcanmytop.gif)
+
 ![Joiiio's introductory ad](/images/case-studies/anim-joiiio-general.mp4)
-:::
 
 :::bento
 ![Tender Bites - Last minute menu mishap](/images/case-studies/anim-tender-bites-menu.gif)
