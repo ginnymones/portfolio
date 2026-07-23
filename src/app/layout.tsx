@@ -10,6 +10,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { BackToTop } from "@/components/BackToTop";
 import { Character } from "@/components/Character";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Ginny Mones — Creative Problem Solver",
@@ -66,6 +67,7 @@ export default function RootLayout({
         <Character />
         <BackToTop />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
