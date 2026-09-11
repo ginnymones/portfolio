@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { getPageContent } from "@/lib/pages";
@@ -36,17 +37,19 @@ export default function WorksPage() {
           {page.subtitle || "Selected case studies from my design practice."}
         </p>
 
-        <WorksGrid
-          studies={studies.map((s) => ({
-            slug: s.slug,
-            title: s.title,
-            thumbnail: s.thumbnail,
-            thumbnailAlt: s.thumbnailAlt,
-            summary: s.summary,
-            tags: s.tags,
-          }))}
-          availableTags={settings.workTags}
-        />
+        <Suspense fallback={null}>
+          <WorksGrid
+            studies={studies.map((s) => ({
+              slug: s.slug,
+              title: s.title,
+              thumbnail: s.thumbnail,
+              thumbnailAlt: s.thumbnailAlt,
+              summary: s.summary,
+              tags: s.tags,
+            }))}
+            availableTags={settings.workTags}
+          />
+        </Suspense>
       </section>
     </PageBackground>
   );

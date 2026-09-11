@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 
 const ITEMS_PER_PAGE = 6;
@@ -20,9 +21,19 @@ interface WorksGridProps {
 }
 
 export function WorksGrid({ studies, availableTags }: WorksGridProps) {
-  const [activeTag, setActiveTag] = useState<string | null>(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tagParam = searchParams.get("tag");
+  const initialTag = tagParam && availableTags.includes(tagParam) ? tagParam : null;
+
+  const [activeTag, setActiveTag] = useState<string | null>(initialTag);
   const [currentPage, setCurrentPage] = useState(1);
   const gridTopRef = useRef<HTMLDivElement>(null);
+
+  // Keep filter state in sync with the URL (e.g. browser back/forward)
+  useEffect(() => {
+    setActiveTag(tagParam && availableTags.includes(tagParam) ? tagParam : null);
+  }, [tagParam, availableTags]);
 
   // Filter studies by active tag
   const filtered = activeTag
@@ -55,6 +66,16 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
   const handleTagClick = (tag: string | null) => {
     setActiveTag(tag);
     setCurrentPage(1);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (tag) {
+      params.set("tag", tag);
+    } else {
+      params.delete("tag");
+    }
+    const query = params.toString();
+    router.replace(query ? `?${query}` : "?", { scroll: false });
+
     scrollToTop();
   };
 
