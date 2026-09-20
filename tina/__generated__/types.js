@@ -64,6 +64,23 @@ export const SiteSettingsPartsFragmentDoc = gql`
   }
 }
     `;
+export const ToolPartsFragmentDoc = gql`
+    fragment ToolParts on Tool {
+  __typename
+  title
+  status
+  projectStatus
+  thumbnail
+  thumbnailAlt
+  summary
+  tags
+  liveUrl
+  repoUrl
+  caseStudy
+  date
+  featured
+}
+    `;
 export const CaseStudyPartsFragmentDoc = gql`
     fragment CaseStudyParts on CaseStudy {
   __typename
@@ -210,6 +227,63 @@ export const SiteSettingsConnectionDocument = gql`
   }
 }
     ${SiteSettingsPartsFragmentDoc}`;
+export const ToolDocument = gql`
+    query tool($relativePath: String!) {
+  tool(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ToolParts
+  }
+}
+    ${ToolPartsFragmentDoc}`;
+export const ToolConnectionDocument = gql`
+    query toolConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ToolFilter) {
+  toolConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ToolParts
+      }
+    }
+  }
+}
+    ${ToolPartsFragmentDoc}`;
 export const CaseStudyDocument = gql`
     query caseStudy($relativePath: String!) {
   caseStudy(relativePath: $relativePath) {
@@ -280,6 +354,12 @@ export function getSdk(requester) {
     },
     siteSettingsConnection(variables, options) {
       return requester(SiteSettingsConnectionDocument, variables, options);
+    },
+    tool(variables, options) {
+      return requester(ToolDocument, variables, options);
+    },
+    toolConnection(variables, options) {
+      return requester(ToolConnectionDocument, variables, options);
     },
     caseStudy(variables, options) {
       return requester(CaseStudyDocument, variables, options);

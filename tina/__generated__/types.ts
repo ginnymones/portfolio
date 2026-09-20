@@ -86,6 +86,8 @@ export type Query = {
   pageConnection: PageConnection;
   siteSettings: SiteSettings;
   siteSettingsConnection: SiteSettingsConnection;
+  tool: Tool;
+  toolConnection: ToolConnection;
   caseStudy: CaseStudy;
   caseStudyConnection: CaseStudyConnection;
 };
@@ -142,6 +144,21 @@ export type QuerySiteSettingsConnectionArgs = {
 };
 
 
+export type QueryToolArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryToolConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ToolFilter>;
+};
+
+
 export type QueryCaseStudyArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -159,6 +176,7 @@ export type QueryCaseStudyConnectionArgs = {
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
   siteSettings?: InputMaybe<SiteSettingsFilter>;
+  tool?: InputMaybe<ToolFilter>;
   caseStudy?: InputMaybe<CaseStudyFilter>;
 };
 
@@ -199,7 +217,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | SiteSettings | CaseStudy | Folder;
+export type DocumentNode = Page | SiteSettings | Tool | CaseStudy | Folder;
 
 export type PageExperience = {
   __typename?: 'PageExperience';
@@ -387,6 +405,66 @@ export type SiteSettingsConnection = Connection & {
   edges?: Maybe<Array<Maybe<SiteSettingsConnectionEdges>>>;
 };
 
+export type Tool = Node & Document & {
+  __typename?: 'Tool';
+  title: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  projectStatus?: Maybe<Scalars['String']['output']>;
+  thumbnail: Scalars['String']['output'];
+  thumbnailAlt?: Maybe<Scalars['String']['output']>;
+  summary: Scalars['String']['output'];
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  repoUrl?: Maybe<Scalars['String']['output']>;
+  caseStudy?: Maybe<Scalars['String']['output']>;
+  date: Scalars['String']['output'];
+  featured?: Maybe<Scalars['Boolean']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type DatetimeFilter = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type ToolFilter = {
+  title?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  projectStatus?: InputMaybe<StringFilter>;
+  thumbnail?: InputMaybe<ImageFilter>;
+  thumbnailAlt?: InputMaybe<StringFilter>;
+  summary?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<StringFilter>;
+  liveUrl?: InputMaybe<StringFilter>;
+  repoUrl?: InputMaybe<StringFilter>;
+  caseStudy?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
+  featured?: InputMaybe<BooleanFilter>;
+};
+
+export type ToolConnectionEdges = {
+  __typename?: 'ToolConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Tool>;
+};
+
+export type ToolConnection = Connection & {
+  __typename?: 'ToolConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ToolConnectionEdges>>>;
+};
+
 export type CaseStudyLinks = {
   __typename?: 'CaseStudyLinks';
   label: Scalars['String']['output'];
@@ -421,14 +499,6 @@ export type CaseStudy = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type DatetimeFilter = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CaseStudyLinksFilter = {
@@ -486,6 +556,8 @@ export type Mutation = {
   createPage: Page;
   updateSiteSettings: SiteSettings;
   createSiteSettings: SiteSettings;
+  updateTool: Tool;
+  createTool: Tool;
   updateCaseStudy: CaseStudy;
   createCaseStudy: CaseStudy;
 };
@@ -548,6 +620,18 @@ export type MutationCreateSiteSettingsArgs = {
 };
 
 
+export type MutationUpdateToolArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ToolMutation;
+};
+
+
+export type MutationCreateToolArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ToolMutation;
+};
+
+
 export type MutationUpdateCaseStudyArgs = {
   relativePath: Scalars['String']['input'];
   params: CaseStudyMutation;
@@ -562,6 +646,7 @@ export type MutationCreateCaseStudyArgs = {
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
   siteSettings?: InputMaybe<SiteSettingsMutation>;
+  tool?: InputMaybe<ToolMutation>;
   caseStudy?: InputMaybe<CaseStudyMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -569,6 +654,7 @@ export type DocumentUpdateMutation = {
 export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
   siteSettings?: InputMaybe<SiteSettingsMutation>;
+  tool?: InputMaybe<ToolMutation>;
   caseStudy?: InputMaybe<CaseStudyMutation>;
 };
 
@@ -631,6 +717,21 @@ export type SiteSettingsMutation = {
   socialLinks?: InputMaybe<Array<InputMaybe<SiteSettingsSocialLinksMutation>>>;
 };
 
+export type ToolMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  projectStatus?: InputMaybe<Scalars['String']['input']>;
+  thumbnail?: InputMaybe<Scalars['String']['input']>;
+  thumbnailAlt?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  liveUrl?: InputMaybe<Scalars['String']['input']>;
+  repoUrl?: InputMaybe<Scalars['String']['input']>;
+  caseStudy?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  featured?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CaseStudyLinksMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
@@ -665,6 +766,8 @@ export type CaseStudyMutation = {
 export type PagePartsFragment = { __typename: 'Page', title: string, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, heading?: string | null, headingAccent?: string | null, subtitle?: string | null, tagline?: string | null, ctaPrimaryLabel?: string | null, ctaPrimaryLink?: string | null, ctaSecondaryLabel?: string | null, ctaSecondaryLink?: string | null, body?: any | null, bio?: any | null, experience?: Array<{ __typename: 'PageExperience', role: string, company: string, period: string, description?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'PageSocialLinks', label: string, url: string } | null> | null, toolsAndSkills?: Array<{ __typename: 'PageToolsAndSkills', name: string, category?: string | null, proficiency?: string | null } | null> | null };
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null };
+
+export type ToolPartsFragment = { __typename: 'Tool', title: string, status: string, projectStatus?: string | null, thumbnail: string, thumbnailAlt?: string | null, summary: string, tags?: Array<string | null> | null, liveUrl?: string | null, repoUrl?: string | null, caseStudy?: string | null, date: string, featured?: boolean | null };
 
 export type CaseStudyPartsFragment = { __typename: 'CaseStudy', title: string, status: string, thumbnail: string, thumbnailAlt?: string | null, headerImage: string, headerImageAlt?: string | null, summary: string, tags?: Array<string | null> | null, client?: string | null, date: string, liveUrl?: string | null, backgroundType?: string | null, backgroundImage?: string | null, backgroundVideo?: string | null, backgroundColor?: string | null, gradientFrom?: string | null, gradientTo?: string | null, gradientDirection?: string | null, overlayOpacity?: number | null, overlayColor?: string | null, body?: any | null, links?: Array<{ __typename: 'CaseStudyLinks', label: string, url: string, icon?: string | null } | null> | null };
 
@@ -705,6 +808,25 @@ export type SiteSettingsConnectionQueryVariables = Exact<{
 
 
 export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, name: string, email: string, copyright?: string | null, footerHeading?: string | null, footerDescription?: string | null, workTags?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socialLinks?: Array<{ __typename: 'SiteSettingsSocialLinks', label: string, url: string } | null> | null } | null } | null> | null } };
+
+export type ToolQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ToolQuery = { __typename?: 'Query', tool: { __typename: 'Tool', id: string, title: string, status: string, projectStatus?: string | null, thumbnail: string, thumbnailAlt?: string | null, summary: string, tags?: Array<string | null> | null, liveUrl?: string | null, repoUrl?: string | null, caseStudy?: string | null, date: string, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type ToolConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ToolFilter>;
+}>;
+
+
+export type ToolConnectionQuery = { __typename?: 'Query', toolConnection: { __typename?: 'ToolConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ToolConnectionEdges', cursor: string, node?: { __typename: 'Tool', id: string, title: string, status: string, projectStatus?: string | null, thumbnail: string, thumbnailAlt?: string | null, summary: string, tags?: Array<string | null> | null, liveUrl?: string | null, repoUrl?: string | null, caseStudy?: string | null, date: string, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type CaseStudyQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -782,6 +904,23 @@ export const SiteSettingsPartsFragmentDoc = gql`
     label
     url
   }
+}
+    `;
+export const ToolPartsFragmentDoc = gql`
+    fragment ToolParts on Tool {
+  __typename
+  title
+  status
+  projectStatus
+  thumbnail
+  thumbnailAlt
+  summary
+  tags
+  liveUrl
+  repoUrl
+  caseStudy
+  date
+  featured
 }
     `;
 export const CaseStudyPartsFragmentDoc = gql`
@@ -930,6 +1069,63 @@ export const SiteSettingsConnectionDocument = gql`
   }
 }
     ${SiteSettingsPartsFragmentDoc}`;
+export const ToolDocument = gql`
+    query tool($relativePath: String!) {
+  tool(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ToolParts
+  }
+}
+    ${ToolPartsFragmentDoc}`;
+export const ToolConnectionDocument = gql`
+    query toolConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ToolFilter) {
+  toolConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ToolParts
+      }
+    }
+  }
+}
+    ${ToolPartsFragmentDoc}`;
 export const CaseStudyDocument = gql`
     query caseStudy($relativePath: String!) {
   caseStudy(relativePath: $relativePath) {
@@ -1001,6 +1197,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     siteSettingsConnection(variables?: SiteSettingsConnectionQueryVariables, options?: C): Promise<{data: SiteSettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsConnectionQueryVariables, query: string}> {
         return requester<{data: SiteSettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsConnectionQueryVariables, query: string}, SiteSettingsConnectionQueryVariables>(SiteSettingsConnectionDocument, variables, options);
+      },
+    tool(variables: ToolQueryVariables, options?: C): Promise<{data: ToolQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ToolQueryVariables, query: string}> {
+        return requester<{data: ToolQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ToolQueryVariables, query: string}, ToolQueryVariables>(ToolDocument, variables, options);
+      },
+    toolConnection(variables?: ToolConnectionQueryVariables, options?: C): Promise<{data: ToolConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ToolConnectionQueryVariables, query: string}> {
+        return requester<{data: ToolConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ToolConnectionQueryVariables, query: string}, ToolConnectionQueryVariables>(ToolConnectionDocument, variables, options);
       },
     caseStudy(variables: CaseStudyQueryVariables, options?: C): Promise<{data: CaseStudyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CaseStudyQueryVariables, query: string}> {
         return requester<{data: CaseStudyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CaseStudyQueryVariables, query: string}, CaseStudyQueryVariables>(CaseStudyDocument, variables, options);

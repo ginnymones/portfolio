@@ -58,6 +58,8 @@ type Query {
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   siteSettings(relativePath: String): SiteSettings!
   siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
+  tool(relativePath: String): Tool!
+  toolConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ToolFilter): ToolConnection!
   caseStudy(relativePath: String): CaseStudy!
   caseStudyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CaseStudyFilter): CaseStudyConnection!
 }
@@ -65,6 +67,7 @@ type Query {
 input DocumentFilter {
   page: PageFilter
   siteSettings: SiteSettingsFilter
+  tool: ToolFilter
   caseStudy: CaseStudyFilter
 }
 
@@ -91,7 +94,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | SiteSettings | CaseStudy | Folder
+union DocumentNode = Page | SiteSettings | Tool | CaseStudy | Folder
 
 type PageExperience {
   role: String!
@@ -269,6 +272,63 @@ type SiteSettingsConnection implements Connection {
   edges: [SiteSettingsConnectionEdges]
 }
 
+type Tool implements Node & Document {
+  title: String!
+  status: String!
+  projectStatus: String
+  thumbnail: String!
+  thumbnailAlt: String
+  summary: String!
+  tags: [String]
+  liveUrl: String
+  repoUrl: String
+  caseStudy: String
+  date: String!
+  featured: Boolean
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input DatetimeFilter {
+  after: String
+  before: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input ToolFilter {
+  title: StringFilter
+  status: StringFilter
+  projectStatus: StringFilter
+  thumbnail: ImageFilter
+  thumbnailAlt: StringFilter
+  summary: StringFilter
+  tags: StringFilter
+  liveUrl: StringFilter
+  repoUrl: StringFilter
+  caseStudy: StringFilter
+  date: DatetimeFilter
+  featured: BooleanFilter
+}
+
+type ToolConnectionEdges {
+  cursor: String!
+  node: Tool
+}
+
+type ToolConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ToolConnectionEdges]
+}
+
 type CaseStudyLinks {
   label: String!
   url: String!
@@ -301,14 +361,6 @@ type CaseStudy implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input DatetimeFilter {
-  after: String
-  before: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input CaseStudyLinksFilter {
@@ -363,6 +415,8 @@ type Mutation {
   createPage(relativePath: String!, params: PageMutation!): Page!
   updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
+  updateTool(relativePath: String!, params: ToolMutation!): Tool!
+  createTool(relativePath: String!, params: ToolMutation!): Tool!
   updateCaseStudy(relativePath: String!, params: CaseStudyMutation!): CaseStudy!
   createCaseStudy(relativePath: String!, params: CaseStudyMutation!): CaseStudy!
 }
@@ -370,6 +424,7 @@ type Mutation {
 input DocumentUpdateMutation {
   page: PageMutation
   siteSettings: SiteSettingsMutation
+  tool: ToolMutation
   caseStudy: CaseStudyMutation
   relativePath: String
 }
@@ -377,6 +432,7 @@ input DocumentUpdateMutation {
 input DocumentMutation {
   page: PageMutation
   siteSettings: SiteSettingsMutation
+  tool: ToolMutation
   caseStudy: CaseStudyMutation
 }
 
@@ -437,6 +493,21 @@ input SiteSettingsMutation {
   footerDescription: String
   workTags: [String]
   socialLinks: [SiteSettingsSocialLinksMutation]
+}
+
+input ToolMutation {
+  title: String
+  status: String
+  projectStatus: String
+  thumbnail: String
+  thumbnailAlt: String
+  summary: String
+  tags: [String]
+  liveUrl: String
+  repoUrl: String
+  caseStudy: String
+  date: String
+  featured: Boolean
 }
 
 input CaseStudyLinksMutation {

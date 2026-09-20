@@ -55,6 +55,22 @@ fragment SiteSettingsParts on SiteSettings {
   }
 }
 
+fragment ToolParts on Tool {
+  __typename
+  title
+  status
+  projectStatus
+  thumbnail
+  thumbnailAlt
+  summary
+  tags
+  liveUrl
+  repoUrl
+  caseStudy
+  date
+  featured
+}
+
 fragment CaseStudyParts on CaseStudy {
   __typename
   title

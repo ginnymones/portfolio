@@ -341,6 +341,67 @@ var config_default = defineConfig({
         ]
       },
       {
+        name: "tool",
+        label: "Tools",
+        path: "src/content/tools",
+        format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return (values?.title || "").toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").replace(/(^-|-$)/g, "");
+            }
+          }
+        },
+        fields: [
+          { type: "string", name: "title", label: "Title", required: true },
+          {
+            type: "string",
+            name: "status",
+            label: "Visibility",
+            options: [
+              { value: "draft", label: "Draft" },
+              { value: "published", label: "Published" }
+            ],
+            required: true
+          },
+          {
+            type: "string",
+            name: "projectStatus",
+            label: "Project Status",
+            options: [
+              { value: "live", label: "Live" },
+              { value: "beta", label: "Beta" },
+              { value: "in-progress", label: "In progress" }
+            ]
+          },
+          { type: "image", name: "thumbnail", label: "Screenshot (4:3 ratio)", required: true },
+          { type: "string", name: "thumbnailAlt", label: "Screenshot Alt Text" },
+          {
+            type: "string",
+            name: "summary",
+            label: "Summary",
+            required: true,
+            ui: { component: "textarea" }
+          },
+          { type: "string", name: "tags", label: "Tags", list: true },
+          { type: "string", name: "liveUrl", label: "Live URL" },
+          { type: "string", name: "repoUrl", label: "Code / Repo URL" },
+          {
+            type: "string",
+            name: "caseStudy",
+            label: "Case Study Slug",
+            description: "Filename (without .md) of a case study in /works, e.g. dev-collection-tracker"
+          },
+          { type: "datetime", name: "date", label: "Date", required: true },
+          {
+            type: "boolean",
+            name: "featured",
+            label: "Featured (shown first)"
+          }
+        ]
+      },
+      {
         name: "caseStudy",
         label: "Case Studies",
         path: "src/content/case-studies",

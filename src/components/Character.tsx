@@ -17,7 +17,8 @@ export function Character({ className = "", variant }: CharacterProps) {
 
   const isHome = variant === "home";
   const isMini = variant === "mini" || (variant === undefined && pathname !== "/");
-  const shouldHide = variant === undefined && pathname === "/";
+  // The home and tools pages have their own large character, so hide the corner mini one there
+  const shouldHide = variant === undefined && (pathname === "/" || pathname === "/tools");
 
   // Eye tracking
   useEffect(() => {

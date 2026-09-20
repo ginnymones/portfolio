@@ -1,0 +1,20 @@
+{
+  "title": "Tools",
+  "backgroundType": "none",
+  "backgroundImage": "",
+  "backgroundVideo": "",
+  "backgroundColor": "",
+  "gradientFrom": "",
+  "gradientTo": "",
+  "gradientDirection": "to bottom",
+  "overlayOpacity": 50,
+  "overlayColor": "#FFFDF9",
+  "heading": "Tools I've",
+  "headingAccent": "built",
+  "subtitle": "Small apps, plugins, and experiments that solve problems I ran into.",
+  "tagline": "",
+  "ctaPrimaryLabel": "",
+  "ctaPrimaryLink": "",
+  "ctaSecondaryLabel": "",
+  "ctaSecondaryLink": ""
+}

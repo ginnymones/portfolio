@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-21] — Tools Page
+
+### Added
+- **`/tools` page** — standalone page for hosting apps, plugins, and coding projects. Hero with the ginny-lab character on the left and heading/subtitle on the right, followed by a filterable 3-column card grid
+- **Tools content collection** — one Markdown file per tool in `src/content/tools/`, managed from Tina admin ("Tools"). Fields: title, screenshot, summary, tags, project status (Live / Beta / In progress), live URL, code URL, optional case study slug, date, featured
+- **Tool cards** — status badge, tags, and Launch / Case study / Code links (each shown only when set). Image and title open the live app, falling back to the case study or repo
+- **Tag filter** — deep-linkable via `?tag=` (e.g. `/tools?tag=Tracker`); tabs only show tags that at least one tool uses
+- **Hero background controls** — the `tools` page entry uses the same image / video / color / gradient fields as other pages (default: none, flat background)
+- **Nav link** — "Tools" added after "Works"
+- Seeded with Pokémon Collection Tracker, Workload Tracker, Figma to HTML Email Builder, and Mega CP Calculator
+
+### Changed
+- Mini corner character is now hidden on `/tools` (the hero has its own character), same as on the home page
+- `tina/tina-lock.json` and `tina/__generated__/` regenerated for the new Tools collection
+
+### Notes
+- Tools stay listed in `/works` as case studies; `/tools` has its own screenshots in `public/images/tools/` and only links a case study if the file exists, so it works on its own
+- Mega CP Calculator has no case study yet; add its slug in the CMS once written
+
+---
+
 ## [2026-06-29] — Video Support in Case Studies
 
 ### Added
