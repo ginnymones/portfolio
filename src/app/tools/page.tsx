@@ -31,63 +31,66 @@ export default function ToolsPage() {
         overlayColor={page.overlayColor}
         className="w-full"
       >
-        <section className="max-w-[1152px] mx-auto px-6 pt-12 pb-16 md:pb-20 flex flex-col md:flex-row items-center gap-8 md:gap-[62px]">
-          <Image
-            src="/images/tools/ginny-lab.svg"
-            alt=""
-            width={425}
-            height={515}
-            priority
-            unoptimized
-            className="w-[240px] md:w-[425px] h-auto flex-shrink-0"
-          />
-          <div className="text-center md:text-left">
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight mb-3">
-              {page.heading || "Tools"}
-              {page.headingAccent && (
-                <>
-                  {" "}
-                  <span className="text-accent-orange">{page.headingAccent}</span>
-                </>
+        {/* Same placement as the home page hero: viewport-height, vertically centered, max-w-5xl, 320px character */}
+        <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 py-12">
+          <div className="max-w-5xl w-full flex flex-col md:flex-row items-center gap-8 md:gap-16">
+            <Image
+              src="/images/tools/ginny-lab.svg"
+              alt=""
+              width={425}
+              height={515}
+              priority
+              unoptimized
+              className="w-[240px] md:w-[320px] h-auto flex-shrink-0"
+            />
+            <div className="text-center md:text-left">
+              <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight mb-6">
+                {page.heading || "Tools"}
+                {page.headingAccent && (
+                  <>
+                    {" "}
+                    <span className="text-accent-orange">{page.headingAccent}</span>
+                  </>
+                )}
+              </h1>
+              {page.subtitle && (
+                <p
+                  className={`text-xl md:text-2xl font-normal text-neutral-dark max-w-[511px] leading-normal ${
+                    page.tagline ? "mb-8" : ""
+                  }`}
+                >
+                  {page.subtitle}
+                </p>
               )}
-            </h1>
-            {page.subtitle && (
-              <p
-                className={`text-xl md:text-2xl font-normal text-neutral-dark max-w-[511px] leading-normal ${
-                  page.tagline ? "mb-8" : ""
-                }`}
-              >
-                {page.subtitle}
-              </p>
-            )}
-            {page.tagline && (
-              <p className="text-xl md:text-2xl font-medium text-neutral-dark max-w-[511px] leading-normal">
-                {page.tagline}
-              </p>
-            )}
-            {((page.ctaPrimaryLabel && page.ctaPrimaryLink) ||
-              (page.ctaSecondaryLabel && page.ctaSecondaryLink)) && (
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8">
-                {page.ctaPrimaryLabel && page.ctaPrimaryLink && (
-                  <Link
-                    href={page.ctaPrimaryLink}
-                    className="px-8 py-3 bg-accent-orange text-background font-medium rounded-lg hover:bg-accent-orange/90 transition-colors"
-                  >
-                    {page.ctaPrimaryLabel}
-                  </Link>
-                )}
-                {page.ctaSecondaryLabel && page.ctaSecondaryLink && (
-                  <Link
-                    href={page.ctaSecondaryLink}
-                    className="px-8 py-3 border border-neutral-warm/40 text-foreground font-medium rounded-lg hover:border-accent-orange hover:text-accent-orange transition-colors"
-                  >
-                    {page.ctaSecondaryLabel}
-                  </Link>
-                )}
-              </div>
-            )}
+              {page.tagline && (
+                <p className="text-xl md:text-2xl font-medium text-neutral-dark max-w-[511px] leading-normal">
+                  {page.tagline}
+                </p>
+              )}
+              {((page.ctaPrimaryLabel && page.ctaPrimaryLink) ||
+                (page.ctaSecondaryLabel && page.ctaSecondaryLink)) && (
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8">
+                  {page.ctaPrimaryLabel && page.ctaPrimaryLink && (
+                    <Link
+                      href={page.ctaPrimaryLink}
+                      className="px-8 py-3 bg-accent-orange text-background font-medium rounded-lg hover:bg-accent-orange/90 transition-colors"
+                    >
+                      {page.ctaPrimaryLabel}
+                    </Link>
+                  )}
+                  {page.ctaSecondaryLabel && page.ctaSecondaryLink && (
+                    <Link
+                      href={page.ctaSecondaryLink}
+                      className="px-8 py-3 border border-neutral-warm/40 text-foreground font-medium rounded-lg hover:border-accent-orange hover:text-accent-orange transition-colors"
+                    >
+                      {page.ctaSecondaryLabel}
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </section>
+        </div>
       </PageBackground>
 
       <section id="tools" className="max-w-[1184px] mx-auto px-6 pb-20 scroll-mt-20">

@@ -16,6 +16,7 @@ All notable changes to this project are documented here.
 - Seeded with Pokémon Collection Tracker, Workload Tracker, Figma to HTML Email Builder, and Mega CP Calculator
 
 ### Changed
+- `/tools` hero now uses the home page's placement: viewport-height, vertically centered, `max-w-5xl` container, 320px character, 64px gap
 - Mini corner character is now hidden on `/tools` (the hero has its own character), same as on the home page
 - `tina/tina-lock.json` and `tina/__generated__/` regenerated for the new Tools collection
 
