@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-22] — Tools page polish and two new entries
+
+### Added
+- **Resume Lab** and **Quiz Randomizer** added to `/tools`. Quiz Randomizer links to a separate demo deployment (`quiz-randomizer-demo.vercel.app`, password `quizdemo`) with 3 sample quizzes on its own Google Sheet, so the real password-gated family tool and its data stay private
+- Fresh screenshots for Resume Lab, Quiz Randomizer, and a redone one for Mega CP Calculator (the old one was an oddly tall crop)
+
+### Changed
+- Hero character is 20% bigger (240px → 288px mobile, 320px → 384px desktop)
+- Removed the tag filter tabs — with only a handful of tools it wasn't earning its keep; `ToolsGrid` is a plain grid now. Per-card tags still show as badges. Pagination is still on the list for once there are more entries
+- Reduced the hero's height (`min-h-[calc(100vh-80px)]` → `calc(70vh-80px)`) and iterated the hero-to-grid gap up to `py-20` (80px) after the first pass felt too cramped
+
+---
+
 ## [2026-09-21] — Tools Page
 
 ### Added

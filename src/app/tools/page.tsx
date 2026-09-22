@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -32,7 +31,7 @@ export default function ToolsPage() {
         className="w-full"
       >
         {/* Same placement as the home page hero: viewport-height, vertically centered, max-w-5xl, 320px character */}
-        <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 py-12">
+        <div className="min-h-[calc(70vh-80px)] flex items-center justify-center px-6 py-20">
           <div className="max-w-5xl w-full flex flex-col md:flex-row items-center gap-8 md:gap-16">
             <Image
               src="/images/tools/ginny-lab.svg"
@@ -41,7 +40,7 @@ export default function ToolsPage() {
               height={515}
               priority
               unoptimized
-              className="w-[240px] md:w-[320px] h-auto flex-shrink-0"
+              className="w-[288px] md:w-[384px] h-auto flex-shrink-0"
             />
             <div className="text-center md:text-left">
               <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight mb-6">
@@ -94,9 +93,7 @@ export default function ToolsPage() {
       </PageBackground>
 
       <section id="tools" className="max-w-[1184px] mx-auto px-6 pb-20 scroll-mt-20">
-        <Suspense fallback={null}>
-          <ToolsGrid tools={tools} />
-        </Suspense>
+        <ToolsGrid tools={tools} />
       </section>
     </>
   );
