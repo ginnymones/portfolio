@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-23] — Case study copy edits
+
+### Changed
+- Quiz Randomizer: rewrote the Problem Statement as a dialogue with my sister, and the "Google Sheet is the CMS" design decision to explain the reasoning in more detail
+- Resume Lab: spelled out "9"/"5" as "nine"/"five" throughout for consistency
+- Mega CP Calculator: minor wording tweak to the League CP Cap Planner bullet
+
+---
+
 ## [2026-09-23] — Quiz Randomizer and Resume Lab case studies
 
 ### Added

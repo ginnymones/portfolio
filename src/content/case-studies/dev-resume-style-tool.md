@@ -19,14 +19,14 @@ Job hunting right now is brutal, and most people don't know two things that actu
 
 ## Solution
 
-Instead of a gallery to scroll through, I built a five-question personality quiz that maps the answers to one of 9 resume styles — different color palettes, font pairings, and layout density, each one still built to the same ATS rules underneath (single column, standard section headings, real text, nothing hidden inside images). The result screen hands off a shared Figma file the user duplicates, pre-populated with their matched style's resume *and* a matching cover letter, plus plain-language instructions for editing it without ever having touched Figma before.
+Instead of a gallery to scroll through, I built a five-question personality quiz that maps the answers to one of nine resume styles — different color palettes, font pairings, and layout density, each one still built to the same ATS rules underneath (single column, standard section headings, real text, nothing hidden inside images). The result screen hands off a shared Figma file the user duplicates, pre-populated with their matched style's resume *and* a matching cover letter, plus plain-language instructions for editing it without ever having touched Figma before.
 
 ### Key Design Decisions
 
 - **A quiz instead of a gallery** — Scrolling nine near-identical thumbnails and guessing is exactly the decision fatigue this tool is trying to remove. Five quick, personality-flavored questions — favorite drink, time of day, how you tackle a to-do list — do the picking instead.
 - **Nothing is stored, nothing is sent** — Scoring runs entirely in the browser. The result screen says so outright, because "why does a resume quiz need my data" is a completely fair question to anticipate.
-- **ATS rules are non-negotiable, not a setting** — All 9 presets are built inside the same constraints (real text, standard headings, contact info in the body) so a user can't accidentally pick the "pretty" option and tank their applicant-tracking-system parsing.
-- **Each style gets its own page in the shared Figma file** — Landing on one page with all 9 presets side by side to hunt for your match was exactly the kind of "now what" moment this tool is supposed to prevent for someone new to Figma. The result screen deep-links straight to the matched style's own page instead, with a separate page to browse the rest if curious.
+- **ATS rules are non-negotiable, not a setting** — All nine presets are built inside the same constraints (real text, standard headings, contact info in the body) so a user can't accidentally pick the "pretty" option and tank their applicant-tracking-system parsing.
+- **Each style gets its own page in the shared Figma file** — Landing on one page with all nine presets side by side to hunt for your match was exactly the kind of "now what" moment this tool is supposed to prevent for someone new to Figma. The result screen deep-links straight to the matched style's own page instead, with a separate page to browse the rest if curious.
 - **A matching cover letter, not just a resume** — Since the resume already commits to a style's fonts, colors, and voice, building the cover letter into the same file, in the same style, is one less thing the user has to figure out or match by eye.
 
 ### Tech & Design Stack
@@ -35,8 +35,8 @@ Next.js, TypeScript, Tailwind CSS v4, styled with the same design tokens as this
 
 ## Results & Impact
 
-- 5 questions to a matched style, with 1–2 close alternates offered if the top match doesn't feel right
-- 9 ATS-safe presets, each shipping both a resume and a matching cover letter in the same shared Figma file
+- Five questions to a matched style, with 1–2 close alternates offered if the top match doesn't feel right
+- Nine ATS-safe presets, each shipping both a resume and a matching cover letter in the same shared Figma file
 - Zero personal data collected — scoring is entirely client-side
 - Deep-linked result screen takes a first-time Figma user straight to their matched style's own page instead of a shared file with all 9
 - An AI-snippet Copy button turns the matched style into a ready-to-paste prompt for writing the actual resume content

@@ -15,7 +15,15 @@ links:
 
 ## Problem Statement
 
-My sister and I like quizzing each other, but a shared doc gets messy fast: someone re-asks a question the other already answered five minutes ago, and there's no single "check this one off" that both of us actually see. Free quiz apps expect real accounts, come with their own fixed question packs, or bring advertising I didn't want to hand either of us. What we actually wanted was closer to a shared, always-in-sync flashcard box — pick a quiz, get a random question neither of us has seen yet, and have it stay crossed off even if we close the tab and open it again later on a different device.
+During one fine after-lunch conversation, my sister asked if I knew of any tool that could randomize a quiz for her as she would need it for her class. She wanted to be able to show one question at a time out of a set of questions, and have the ability to "strike off" the question once it's been shown.
+
+Me: You can use the wheel of names.
+Sister: Yeah, but the questions are gonna be long.
+Me: Weeeell, there are probably some other options out there, but they might not be free.
+
+Me, a beat after: I mean, I can probably make one for you.
+Sister: I don't even know how many questions I'll load onto it yet.
+Me: That's fine, just give me the basic rules and I'll put together something for you.
 
 ## Solution
 
@@ -23,7 +31,7 @@ I built a small web app that reads its questions straight from a Google Sheet �
 
 ### Key Design Decisions
 
-- **The Google Sheet is the CMS** — Neither of us wanted to learn a new admin panel just to add a question. A spreadsheet is something we both already know, and a new quiz is just duplicating a template tab and giving it a name.
+- **The Google Sheet is the CMS** — The tool didn't have to be complicated. It just needed to be completed ASAP. And in terms of maintaining an inventory of questions, a spreadsheet seemed to be the most organized way to go about it. Also, my sister isn't the most techie of people so the inventory management needed to be easy and frictionless, especially for a busy college professor like my sister. Google Sheets to the rescue.
 - **Shared password, not accounts** — This is a two-person tool. A single shared password behind a signed session cookie was enough security without the overhead — or the awkwardness — of real signup for one other person.
 - **Light mode only** — I tried dark mode; my sister didn't like it, so it got pulled. Not every product needs to support every preference — sometimes "what the one actual user wants" beats "what's technically more complete."
 - **Used state lives in the Sheet, not local storage** — So a question that's already come up on my phone doesn't come up again on my sister's laptop. The whole point was for it to feel shared, not per-device.

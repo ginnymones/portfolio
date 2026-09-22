@@ -34,7 +34,7 @@ Competitive Pokémon GO players are already accustomed to providing these three 
 - **Frontload the information input** — Competitive Pokémon GO players usually check several different Pokémon to find the best one for each league. To make them feel like they're making good use of their time with this tool, the form they need to fill out is presented right upfront.
 - **More than one input option per field** — Some people are more comfortable typing, while others like to scroll to get to the item they want to select. The tool enables both options for most fields, so users have a fallback if one method isn't working for them.
 - **Instant feedback** — The resulting CP adjusts live as the user changes any input. Right below it, an "Ending CP by League" preview shows the ending CP for Great, Ultra, and Master League at a glance, with a link straight down to the League CP Cap Planner for the full power-up cost and IV rank breakdown.
-- **Bonus: the League CP Cap Planner** — Presents the power-up cost information to users on the same page instead of making them go hunt for it elsewhere. This turns the tool from "just another calculator" into a battle-planning buddy.
+- **Bonus: the League CP Cap Planner** — This section presents the power-up cost information to users on the same page instead of making them go hunt for it elsewhere. This turns the tool from "just another calculator" into a battle-planning buddy.
 
 ![The main calculator view where all the information is presented upfront](/images/case-studies/mega-cp-calculator-main.jpg)
 
