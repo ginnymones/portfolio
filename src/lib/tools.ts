@@ -63,9 +63,8 @@ export function getAllTools(): Tool[] {
       ? tools.filter((t) => t.status !== "draft")
       : tools;
 
-  // Featured first, then newest
+  // Newest first, matching case studies
   return visible.sort((a, b) => {
-    if (a.featured !== b.featured) return a.featured ? -1 : 1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 }

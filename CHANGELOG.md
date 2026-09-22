@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-23] — Tools sorted newest-first
+
+### Changed
+- `/tools` now sorts strictly newest-first by date, matching `/works`. It previously pinned `featured` tools to the top regardless of date, which had been quietly keeping Pokémon Collection Tracker at #1 — it now sits in date order with everything else
+
+---
+
 ## [2026-09-23] — Case study copy edits
 
 ### Changed
