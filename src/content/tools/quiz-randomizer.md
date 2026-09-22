@@ -8,7 +8,7 @@ tags: ["Web App"]
 projectStatus: "live"
 liveUrl: "https://quiz-randomizer-demo.vercel.app/"
 repoUrl: ""
-caseStudy: ""
+caseStudy: "dev-quiz-randomizer"
 date: "2026-09-22"
 featured: false
 ---

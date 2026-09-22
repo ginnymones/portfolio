@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-23] — Quiz Randomizer and Resume Lab case studies
+
+### Added
+- **Case studies** for Quiz Randomizer and Resume Lab, linked from their Tools cards. Both were previously placeholder files (copy-pasted from the Collection Tracker case study, including its Firebase/PIN-auth content) — now written from scratch to actually describe each project
+
+---
+
 ## [2026-09-23] — Mega CP Calculator case study
 
 ### Added

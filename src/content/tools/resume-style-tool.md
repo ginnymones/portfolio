@@ -8,7 +8,7 @@ tags: ["Web App", "Quiz"]
 projectStatus: "live"
 liveUrl: "https://resume-style-tool.vercel.app/"
 repoUrl: ""
-caseStudy: ""
+caseStudy: "dev-resume-style-tool"
 date: "2026-09-22"
 featured: false
 ---
