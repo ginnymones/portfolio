@@ -7,8 +7,8 @@ summary: "Calculate a Pokémon's CP after Mega Evolution from its level and IVs.
 tags: ["Web App", "Calculator"]
 projectStatus: "live"
 liveUrl: "https://mega-cp-calculator.vercel.app/"
-repoUrl: "https://github.com/ginnymones/mega-cp-calculator"
-caseStudy: ""
+repoUrl: ""
+caseStudy: "dev-mega-cp-calculator"
 date: "2026-09-01"
 featured: false
 ---

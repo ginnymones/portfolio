@@ -4,6 +4,14 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-23] — Mega CP Calculator case study
+
+### Added
+- **Case study** for the Mega Evolution CP Calculator, linked from its Tools card
+- Removed the Mega CP Calculator's "Code" link — the linked repo is private, so the link never actually worked for visitors
+
+---
+
 ## [2026-09-22] — Tools page polish and two new entries
 
 ### Added
