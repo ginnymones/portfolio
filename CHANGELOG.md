@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-09-24] — Ginny Mones 2026 Rebrand case study
+
+### Added
+- **Case study** for the 2026 rebrand itself — branding, illustration, and the portfolio site build (Next.js/TinaCMS/Vercel), linked from Behance-style "Relevant Links" to the live portfolio site
+
+---
+
+## [2026-09-23] — Substack added to socials
+
+### Added
+- Substack link added to footer social links (`src/content/site-settings.json`)
+
+---
+
 ## [2026-09-23] — Tools sorted newest-first
 
 ### Changed
