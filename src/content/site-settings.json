@@ -15,16 +15,20 @@
   ],
   "socialLinks": [
     {
-      "label": "Dribbble",
-      "url": "https://dribbble.com/ginnymones"
-    },
-    {
       "label": "LinkedIn",
       "url": "https://linkedin.com/in/ginnymones"
     },
     {
+      "label": "Dribbble",
+      "url": "https://dribbble.com/ginnymones"
+    },
+    {
       "label": "Behance",
       "url": "https://behance.net/ginnymones"
+    },
+    {
+      "label": "Substack",
+      "url": "https://fettuginny.substack.com/"
     }
   ]
 }
