@@ -8,6 +8,7 @@ import {
   faGithub,
   faTwitter,
   faInstagram,
+  faSubstack,
 } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
@@ -19,6 +20,7 @@ const brandIconMap: Record<string, IconDefinition> = {
   github: faGithub,
   twitter: faTwitter,
   instagram: faInstagram,
+  substack: faSubstack,
 };
 
 function getIconForLabel(label: string): IconDefinition {
