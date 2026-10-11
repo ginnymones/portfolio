@@ -19,6 +19,35 @@ fragment PageParts on Page {
   ctaSecondaryLabel
   ctaSecondaryLink
   body
+  portrait
+  portraitAlt
+  heroBody
+  companyIntro
+  companyProjects {
+    __typename
+    company
+    title
+    description
+    caseStudy
+    stats {
+      __typename
+      value
+      label
+      image
+      imageAlt
+      motion
+      caption
+    }
+  }
+  otherHeading
+  otherText
+  otherTiles {
+    __typename
+    label
+    link
+    image
+    imageAlt
+  }
   bio
   experience {
     __typename
@@ -82,7 +111,12 @@ fragment CaseStudyParts on CaseStudy {
   summary
   tags
   client
+  role
+  years
   date
+  homepageOnly
+  situation
+  task
   liveUrl
   links {
     __typename
@@ -99,5 +133,12 @@ fragment CaseStudyParts on CaseStudy {
   gradientDirection
   overlayOpacity
   overlayColor
+  resultsStats {
+    __typename
+    value
+    label
+    icon
+  }
+  resultsCopy
   body
 }

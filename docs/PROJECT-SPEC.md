@@ -24,7 +24,7 @@ A reusable, minimalist portfolio site template for showcasing design work as cas
 ```
 HOME (/)           → Splash/hero page with CTA
 ABOUT (/about)     → Bio, work experience, tools & skills, social links
-WORKS (/works)     → Case study grid (3 cols, 6 per page, paginated)
+WORKS (/works)     → Case study gallery (3 staggered columns, 6 at a time, "Load more")
   └─ CASE STUDY (/works/[slug]) → Individual case study with breadcrumbs + lightbox
 #CONTACT           → Persistent section on every page (not a separate route), anchored via id
 ```
@@ -90,7 +90,16 @@ headerImage: "/images/..."        # 16:9 ratio, for detail page
 summary: "Short description"      # 1-2 sentences for card
 tags: ["Tag 1", "Tag 2"]          # Shown on cards + detail
 client: "Client Name"             # Optional
+role: "Your role"                 # Optional (V2), hero meta
+years: "2018 – 2022"              # Optional (V2), hero meta; falls back to the year of date
 date: "YYYY-MM-DD"                # Required, used for sort order
+homepageOnly: false               # V2: true hides it from Works/related/prev-next (optional; company highlights no longer have case studies)
+situation: ""                     # V2 STAR, optional
+task: ""                          # V2 STAR, optional
+resultsStats:                     # V2 STAR, optional list of {value, label, icon}
+  - value: "500%"
+    label: "More agency revenue"
+resultsCopy: ""                   # V2 STAR, optional
 liveUrl: "https://..."            # Optional, shown as link
 backgroundType: "none"            # none | image | video | color | gradient
 backgroundImage: ""               # For image backgrounds
@@ -103,10 +112,7 @@ overlayOpacity: 50                # 0-100
 overlayColor: "#FFFDF9"           # Overlay tint color
 ```
 
-Body content structure:
-1. **Problem Statement** — The challenge
-2. **Solution** — Approach, process, key decisions
-3. **Results & Impact** — Measurable outcomes
+Body content structure (V2, STAR): the markdown body is the **Action** section; Situation, Task and Results come from the frontmatter fields above. Older write-ups (Problem Statement / Solution / Results & Impact) still render, entirely inside Action. Full details: [CASE-STUDY-STRUCTURE.md](CASE-STUDY-STRUCTURE.md).
 
 ### Pages (JSON)
 
@@ -146,7 +152,7 @@ Applicable to all pages and individual case studies.
 - **Relevant links**: Per-study link buttons with icons (GitHub, Figma, Dribbble, etc.) — managed via Tina
 - **Social links with icons**: Font Awesome brand icons (Dribbble, LinkedIn, Behance) in contact section
 - **Tag-based filtering**: Works page has a filter bar (All + defined tags). Tags managed from Tina admin. Client-side, instant.
-- **Pagination**: Client-side, 6 items per page, works alongside tag filtering. Resets to page 1 on filter change.
+- **Load more** (V2, replaces numbered pagination): Client-side, shows 6 items and adds 6 per click, works alongside tag filtering. Resets to 6 on filter change.
 - **Mobile navigation**: Hamburger menu with compact dropdown (14px text, solid bg, drop shadow)
 - **Back to top button**: Appears after 400px scroll, up arrow + text, rounded corners, fixed bottom-right
 - **Inline video support**: `.mp4`/`.webm` files in markdown render as `<video>` with controls + auto poster thumbnail

@@ -1,5 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { ImageSlot } from "@/components/ui/ImageSlot";
+import { Tag } from "@/components/ui/Tag";
 import type { ToolStatus } from "@/lib/tools";
 
 interface ToolCardProps {
@@ -20,9 +22,14 @@ const STATUS_LABEL: Record<ToolStatus, string> = {
   "in-progress": "In progress",
 };
 
-const actionClass =
-  "text-sm font-medium text-accent-orange hover:underline underline-offset-4";
+// Live is forest (Figma, added 2026-10-08), Beta is sunshine. In progress is sunset (decided 2026-10-08).
+const STATUS_DOT: Record<ToolStatus, string> = {
+  live: "bg-forest",
+  beta: "bg-sunshine",
+  "in-progress": "bg-sunset",
+};
 
+// Figma: tools / hi-fi "tool / ..." card (359:179)
 export function ToolCard({
   title,
   thumbnail,
@@ -38,23 +45,7 @@ export function ToolCard({
   const primaryHref = liveUrl || (caseStudy ? `/works/${caseStudy}` : repoUrl);
   const primaryIsExternal = Boolean(liveUrl || (!caseStudy && repoUrl));
 
-  const titleEl = <>{title}</>;
-  const imageEl = (
-    <div className="relative aspect-[4/3] overflow-hidden bg-neutral-warm/10">
-      <Image
-        src={thumbnail}
-        alt={thumbnailAlt || `${title} screenshot`}
-        fill
-        className="object-cover group-hover:scale-105 transition-transform duration-500"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-      <span className="absolute top-3 left-3 text-xs font-medium px-2.5 py-1 rounded-full bg-background/90 text-neutral-dark">
-        {STATUS_LABEL[projectStatus]}
-      </span>
-    </div>
-  );
-
-  const wrap = (children: React.ReactNode, className: string) =>
+  const wrap = (children: React.ReactNode, className = "") =>
     !primaryHref ? (
       <div className={className}>{children}</div>
     ) : primaryIsExternal ? (
@@ -68,41 +59,54 @@ export function ToolCard({
     );
 
   return (
-    <article className="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
-      {wrap(imageEl, "block")}
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-lg font-semibold text-foreground group-hover:text-accent-orange transition-colors mb-2">
-          {wrap(titleEl, "")}
-        </h3>
-        <p className="text-sm text-neutral-dark mb-3">{summary}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-khaki bg-warm-white">
+      {wrap(
+        <ImageSlot
+          src={thumbnail}
+          alt={thumbnailAlt || `${title} screenshot`}
+          label="App preview"
+          className="h-[220px] w-full md:h-[250px]"
+          imageClassName="object-top"
+          sizes="(max-width: 768px) 100vw, 484px"
+        />,
+        "block"
+      )}
+
+      <div className="flex flex-1 flex-col items-start gap-4 px-6 pb-7 pt-6 md:px-7">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="label flex items-center gap-[6px] pr-[6px] text-ochre">
+            <span aria-hidden="true" className={`size-2 rounded-full ${STATUS_DOT[projectStatus]}`} />
+            {STATUS_LABEL[projectStatus]}
+          </span>
           {tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-1 rounded-full bg-neutral-warm/15 text-neutral-dark"
-            >
-              {tag}
-            </span>
+            <Tag key={tag}>{tag}</Tag>
           ))}
         </div>
-        <div className="mt-auto flex flex-wrap gap-x-5 gap-y-1 pt-2">
+
+        <h2 className="heading-3 text-neutral-black transition-colors group-hover:text-sunset">
+          {wrap(title)}
+        </h2>
+
+        <p className="text-warm-gray">{summary}</p>
+
+        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-2">
           {liveUrl && (
-            <a href={liveUrl} target="_blank" rel="noopener noreferrer" className={actionClass}>
+            <Button href={liveUrl} target="_blank" rel="noopener noreferrer">
               Launch
               <span className="sr-only"> {title} (opens in a new tab)</span>
-            </a>
+            </Button>
           )}
           {caseStudy && (
-            <Link href={`/works/${caseStudy}`} className={actionClass}>
+            <Button variant="text" href={`/works/${caseStudy}`}>
               Case study
               <span className="sr-only"> for {title}</span>
-            </Link>
+            </Button>
           )}
           {repoUrl && (
-            <a href={repoUrl} target="_blank" rel="noopener noreferrer" className={actionClass}>
+            <Button variant="text" href={repoUrl} target="_blank" rel="noopener noreferrer">
               Code
               <span className="sr-only"> for {title} (opens in a new tab)</span>
-            </a>
+            </Button>
           )}
         </div>
       </div>

@@ -1,10 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { Button } from "@/components/ui/Button";
 
-const ITEMS_PER_PAGE = 6;
+const PAGE_SIZE = 6;
+
+// Figma: works / hi-fi gallery. Three independent columns with staggered cover heights.
+// Row 1 is tall / short / medium, row 2 short / tall / medium, repeating.
+const STAGGER = [
+  ["381.333 / 460", "381.333 / 300", "381.333 / 380"],
+  ["381.333 / 300", "381.333 / 460", "381.333 / 380"],
+];
 
 interface CaseStudyItem {
   slug: string;
@@ -20,6 +28,23 @@ interface WorksGridProps {
   availableTags: string[];
 }
 
+function useColumnCount() {
+  const [count, setCount] = useState(3);
+  useEffect(() => {
+    const lg = window.matchMedia("(min-width: 1024px)");
+    const md = window.matchMedia("(min-width: 768px)");
+    const update = () => setCount(lg.matches ? 3 : md.matches ? 2 : 1);
+    update();
+    lg.addEventListener("change", update);
+    md.addEventListener("change", update);
+    return () => {
+      lg.removeEventListener("change", update);
+      md.removeEventListener("change", update);
+    };
+  }, []);
+  return count;
+}
+
 export function WorksGrid({ studies, availableTags }: WorksGridProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -27,45 +52,25 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
   const initialTag = tagParam && availableTags.includes(tagParam) ? tagParam : null;
 
   const [activeTag, setActiveTag] = useState<string | null>(initialTag);
-  const [currentPage, setCurrentPage] = useState(1);
-  const gridTopRef = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(PAGE_SIZE);
+  const columnCount = useColumnCount();
 
   // Keep filter state in sync with the URL (e.g. browser back/forward)
   useEffect(() => {
     setActiveTag(tagParam && availableTags.includes(tagParam) ? tagParam : null);
+    setShown(PAGE_SIZE);
   }, [tagParam, availableTags]);
 
-  // Filter studies by active tag
-  const filtered = activeTag
-    ? studies.filter((s) => s.tags.includes(activeTag))
-    : studies;
-
-  // Paginate
-  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const visible = filtered.slice(start, start + ITEMS_PER_PAGE);
+  const filtered = activeTag ? studies.filter((s) => s.tags.includes(activeTag)) : studies;
+  const visible = filtered.slice(0, shown);
+  const hasMore = filtered.length > shown;
 
   // Only show tags that have at least one case study
-  const visibleTags = availableTags.filter((tag) =>
-    studies.some((s) => s.tags.includes(tag))
-  );
-
-  const scrollToTop = () => {
-    // Defer scroll to next frame to ensure DOM has updated after state change
-    requestAnimationFrame(() => {
-      if (gridTopRef.current) {
-        const offset = 80;
-        const elementTop = gridTopRef.current.getBoundingClientRect().top;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetPosition = elementTop + scrollTop - offset;
-        window.scrollTo({ top: targetPosition, behavior: "smooth" });
-      }
-    });
-  };
+  const visibleTags = availableTags.filter((tag) => studies.some((s) => s.tags.includes(tag)));
 
   const handleTagClick = (tag: string | null) => {
     setActiveTag(tag);
-    setCurrentPage(1);
+    setShown(PAGE_SIZE);
 
     const params = new URLSearchParams(searchParams.toString());
     if (tag) {
@@ -75,112 +80,71 @@ export function WorksGrid({ studies, availableTags }: WorksGridProps) {
     }
     const query = params.toString();
     router.replace(query ? `?${query}` : "?", { scroll: false });
-
-    scrollToTop();
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    scrollToTop();
-  };
+  // Deal items out round-robin so newest-first reads across the columns
+  const columns: { study: CaseStudyItem; aspect?: string }[][] = Array.from({ length: columnCount }, () => []);
+  visible.forEach((study, i) => {
+    const col = i % columnCount;
+    const row = Math.floor(i / columnCount);
+    columns[col].push({
+      study,
+      aspect: columnCount > 1 ? STAGGER[row % 2][col] : undefined,
+    });
+  });
+
+  const chip = (label: string, active: boolean, onClick: () => void) => (
+    <button
+      key={label}
+      onClick={onClick}
+      role="tab"
+      aria-selected={active}
+      className={`label whitespace-nowrap rounded-full border border-sunset px-[14px] py-[6px] transition-colors ${
+        active ? "bg-sunset text-warm-white" : "text-sunset hover:bg-sunset/10"
+      }`}
+    >
+      {label}
+    </button>
+  );
 
   return (
-    <div ref={gridTopRef}>
-      {/* Filter bar */}
-      <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Filter by tag">
-        <button
-          onClick={() => handleTagClick(null)}
-          className={`px-4 py-2 text-sm rounded-lg transition-all duration-200 ${
-            activeTag === null
-              ? "bg-accent-orange text-background font-medium"
-              : "border border-neutral-warm/30 text-neutral-dark hover:border-accent-orange hover:text-accent-orange"
-          }`}
-          role="tab"
-          aria-selected={activeTag === null}
-        >
-          All
-        </button>
-        {visibleTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => handleTagClick(tag)}
-            className={`px-4 py-2 text-sm rounded-lg transition-all duration-200 ${
-              activeTag === tag
-                ? "bg-accent-orange text-background font-medium"
-                : "border border-neutral-warm/30 text-neutral-dark hover:border-accent-orange hover:text-accent-orange"
-            }`}
-            role="tab"
-            aria-selected={activeTag === tag}
-          >
-            {tag}
-          </button>
-        ))}
+    <div>
+      {/* Filter chips */}
+      <div className="mb-10 flex flex-wrap gap-[10px]" role="tablist" aria-label="Filter by category">
+        {chip("All", activeTag === null, () => handleTagClick(null))}
+        {visibleTags.map((tag) => chip(tag, activeTag === tag, () => handleTagClick(tag)))}
       </div>
 
-      {/* Grid */}
-      <div>
-        {visible.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-neutral-warm text-lg">
-              No case studies found for this filter.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {visible.map((study) => (
-              <CaseStudyCard
-                key={study.slug}
-                slug={study.slug}
-                title={study.title}
-                thumbnail={study.thumbnail}
-                summary={study.summary}
-                tags={study.tags}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+      {/* Gallery */}
+      {visible.length === 0 ? (
+        <p className="py-20 text-center text-warm-gray">No case studies found for this filter.</p>
+      ) : (
+        <div className="flex items-start gap-[30px]">
+          {columns.map((column, c) => (
+            <div key={c} className="flex min-w-0 flex-1 flex-col gap-10">
+              {column.map(({ study, aspect }) => (
+                <CaseStudyCard
+                  key={study.slug}
+                  slug={study.slug}
+                  title={study.title}
+                  thumbnail={study.thumbnail}
+                  thumbnailAlt={study.thumbnailAlt}
+                  summary={study.summary}
+                  tags={study.tags}
+                  aspect={aspect}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <nav
-          aria-label="Pagination"
-          className="flex items-center justify-center gap-2 mt-16"
-        >
-          {currentPage > 1 && (
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              className="px-4 py-2 text-sm border border-neutral-warm/30 rounded-lg hover:border-accent-orange hover:text-accent-orange transition-all duration-200"
-            >
-              Previous
-            </button>
-          )}
-
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-            (pageNum) => (
-              <button
-                key={pageNum}
-                onClick={() => handlePageChange(pageNum)}
-                className={`px-4 py-2 text-sm rounded-lg transition-all duration-200 ${
-                  pageNum === currentPage
-                    ? "bg-accent-orange text-background font-medium"
-                    : "border border-neutral-warm/30 hover:border-accent-orange hover:text-accent-orange"
-                }`}
-              >
-                {pageNum}
-              </button>
-            )
-          )}
-
-          {currentPage < totalPages && (
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              className="px-4 py-2 text-sm border border-neutral-warm/30 rounded-lg hover:border-accent-orange hover:text-accent-orange transition-all duration-200"
-            >
-              Next
-            </button>
-          )}
-        </nav>
+      {hasMore && (
+        <div className="flex justify-center pb-16 pt-16 md:pb-24">
+          <Button variant="text" onClick={() => setShown((n) => n + PAGE_SIZE)}>
+            Load more
+          </Button>
+        </div>
       )}
     </div>
   );

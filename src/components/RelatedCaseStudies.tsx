@@ -9,11 +9,9 @@ export function RelatedCaseStudies({ studies }: RelatedCaseStudiesProps) {
   if (!studies || studies.length === 0) return null;
 
   return (
-    <section className="mt-20 pt-10 border-t border-neutral-warm/20">
-      <h2 className="text-2xl font-semibold text-foreground mb-8">
-        Related Work
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="pb-16 md:pb-28">
+      <h2 className="heading-2 mb-8 text-burnt-sienna">Related work</h2>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {studies.map((study) => (
           <CaseStudyCard
             key={study.slug}

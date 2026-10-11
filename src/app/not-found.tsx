@@ -1,37 +1,19 @@
-import Image from "next/image";
-import Link from "next/link";
+import { Curve } from "@/components/Curve";
+import { Button } from "@/components/ui/Button";
 
+// Not in Figma yet: built from the V2 pieces. The old character is gone until the new illustration is ready.
 export default function NotFound() {
   return (
-    <section className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6">
-      <div className="text-center">
-        <Image
-          src="/ginny-404@2x.png"
-          alt="Ginny looking confused"
-          width={300}
-          height={300}
-          className="mx-auto mb-8"
-          priority
-        />
-        <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-4">
-          404
-        </h1>
-        <p className="text-lg text-neutral-dark mb-8">
-          Uh-oh, looks like this page blasted off again.
-        </p>
-        <div className="flex items-center justify-center gap-4">
-          <Link
-            href="/works"
-            className="px-8 py-3 bg-accent-orange text-background font-medium rounded-lg hover:bg-accent-orange/90 transition-colors"
-          >
-            View My Creations
-          </Link>
-          <Link
-            href="/about"
-            className="px-8 py-3 border border-neutral-warm/40 text-foreground font-medium rounded-lg hover:border-accent-orange hover:text-accent-orange transition-colors"
-          >
-            About Me
-          </Link>
+    <section className="flex min-h-[60vh] items-center justify-center px-6 py-16">
+      <div className="flex flex-col items-center gap-5 text-center">
+        <h1 className="heading-1 text-burnt-sienna">404</h1>
+        <Curve variant="fancy" className="h-[10.65px] w-[216px] text-neutral-black" />
+        <p className="max-w-[420px] text-warm-gray">Uh-oh, looks like this page blasted off again.</p>
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
+          <Button href="/works">View my work</Button>
+          <Button variant="secondary" href="/tools">
+            See my tools
+          </Button>
         </div>
       </div>
     </section>

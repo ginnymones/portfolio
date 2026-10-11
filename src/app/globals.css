@@ -1,19 +1,87 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #FFFDF9;
-  --color-foreground: #333333;
-  --color-accent-orange: #D26D1F;
-  --color-accent-yellow: #F3C041;
-  --color-neutral-warm: #AFA29B;
-  --color-neutral-dark: #5A5756;
+  /* V2 brand palette (Figma: design-system 321:3) */
+  --color-burnt-sienna: #B75220;
+  --color-sunset: #CF5925;
+  --color-ochre: #C6802C;
+  --color-deep-yellow: #DD9334;
+  --color-sunshine: #F2B64E;
+  --color-khaki: #DAC6A3;
+  --color-neutral-black: #000000;
+  --color-warm-gray: #5A5756;
+  --color-dark-gray: #333333;
+  --color-light-gray: #B2ABA4;
+  --color-warm-white: #FEFBEF;
+  --color-neutral-white: #FAFAFA;
+  --color-cream: #FFFCF7;
+  /* Status colors, added to Figma 2026-10-08 (color/neutrals/forest, color/neutrals/crimson) */
+  --color-forest: #47D856;
+  --color-crimson: #DA3131;
+
+  /* Transitional aliases: V1 token names now point at V2 colors.
+     Remove as components migrate to the names above. */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-dark-gray);
+  --color-accent-orange: var(--color-sunset);
+  --color-accent-yellow: var(--color-sunshine);
+  --color-neutral-warm: var(--color-light-gray);
+  --color-neutral-dark: var(--color-warm-gray);
 
   --font-sans: "Google Sans Flex", system-ui, sans-serif;
+  --font-serif: "Forum", Georgia, serif;
 }
 
 /* Base styles */
 html {
   scroll-behavior: smooth;
+}
+
+/* Stat motion: layered screenshots fade out in turn (Figma 486:174 12s boomerang, 493:831 7s loop).
+   Opacity only. Keyframe times are the Figma tracks; ease-out sits on the fade segment. */
+.stat-motion-layer {
+  will-change: opacity;
+}
+.stat-motion-pf-a { animation: stat-pf-a 12s linear infinite alternate; }
+.stat-motion-pf-b { animation: stat-pf-b 12s linear infinite alternate; }
+.stat-motion-pf-c { animation: stat-pf-c 12s linear infinite alternate; }
+.stat-motion-pf-d { animation: stat-pf-d 12s linear infinite alternate; }
+.stat-motion-cart-a { animation: stat-cart-a 7s linear infinite; }
+.stat-motion-cart-b { animation: stat-cart-b 7s linear infinite; }
+
+@keyframes stat-pf-a {
+  0%, 8.333% { opacity: 1; }
+  8.333% { animation-timing-function: ease-out; }
+  25%, 100% { opacity: 0; }
+}
+@keyframes stat-pf-b {
+  0%, 33.333% { opacity: 1; }
+  33.333% { animation-timing-function: ease-out; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes stat-pf-c {
+  0%, 58.333% { opacity: 1; }
+  58.333% { animation-timing-function: ease-out; }
+  75%, 100% { opacity: 0; }
+}
+@keyframes stat-pf-d {
+  0%, 83.333% { opacity: 1; }
+  83.333% { animation-timing-function: ease-out; }
+  100% { opacity: 0; }
+}
+@keyframes stat-cart-a {
+  0%, 14.286% { opacity: 1; }
+  14.286% { animation-timing-function: ease-out; }
+  42.857%, 100% { opacity: 0; }
+}
+@keyframes stat-cart-b {
+  0%, 57.143% { opacity: 1; }
+  57.143% { animation-timing-function: ease-out; }
+  85.714%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-motion-layer { animation: none; }
 }
 
 @keyframes fadeUp {
@@ -49,64 +117,126 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Prose styles for case study content */
-.prose h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--color-foreground);
+@layer components {
+  /* Prose styles for case study content (Action write-ups) */
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose h2 {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-neutral-black);
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-neutral-black);
+  }
+
+  .prose p {
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+    color: var(--color-dark-gray);
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: var(--color-dark-gray);
+  }
+
+  .prose img {
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  .prose a {
+    color: var(--color-ochre);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .prose a:hover {
+    color: var(--color-burnt-sienna);
+  }
+
+  .prose blockquote {
+    border-left: 3px solid var(--color-sunset);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--color-warm-gray);
+  }
+
 }
 
-.prose h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  color: var(--color-foreground);
+/* ---- V2 typography (Figma text styles) ---- */
+/* Layered so Tailwind utilities (text-[30px], leading-tight, ...) can override them. */
+
+@layer base {
+  /* Forum has a single weight: never synthesize a bold. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-synthesis: none;
+    line-height: 1;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  p, li {
+    text-wrap: pretty;
+  }
 }
 
-.prose p {
-  margin-bottom: 1.25rem;
-  line-height: 1.75;
-  color: var(--color-neutral-dark);
-}
+@layer components {
+  .heading-1, .heading-2, .heading-3, .heading-4, .heading-5 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-synthesis: none;
+    line-height: 1;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
 
-.prose ul,
-.prose ol {
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
-}
+  /* Sentence case */
+  .heading-1 { font-size: 3rem; }
+  .heading-2 { font-size: 2.5rem; }
+  .heading-3 { font-size: 2rem; }
 
-.prose li {
-  margin-bottom: 0.5rem;
-  line-height: 1.75;
-  color: var(--color-neutral-dark);
-}
+  /* Uppercase, 5% tracking */
+  .heading-4,
+  .heading-5 {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .heading-4 { font-size: 1.5rem; }
+  .heading-5 { font-size: 1.25rem; }
 
-.prose img {
-  border-radius: 0.75rem;
-  margin: 2rem 0;
-}
-
-.prose a {
-  color: var(--color-accent-orange);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.prose a:hover {
-  color: var(--color-accent-yellow);
-}
-
-.prose blockquote {
-  border-left: 3px solid var(--color-accent-orange);
-  padding-left: 1.25rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: var(--color-neutral-dark);
+  /* Labels, tags, nav, buttons */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+  }
 }

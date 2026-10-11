@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/Button";
 
+// Uses the sans-serif solid (primary) button style from the Figma design system, about 30% smaller below 768px.
 export function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -21,20 +23,12 @@ export function BackToTop() {
   if (!isVisible) return null;
 
   return (
-    <button
+    <Button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 z-40 flex items-center gap-2 px-4 py-3 bg-foreground text-background rounded-xl shadow-lg hover:bg-accent-orange transition-colors duration-200"
       aria-label="Back to top"
-      style={{ padding: "10px 16px", borderRadius: "12px" }}
+      className="fixed bottom-4 right-4 z-40 gap-[6px] px-4! py-[10px]! text-[13px]! shadow-md md:bottom-8 md:right-8 md:gap-2 md:px-10! md:py-[14px]! md:text-[18px]!"
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="size-[11px] md:size-4">
         <path
           d="M8 13V3M8 3L3 8M8 3L13 8"
           stroke="currentColor"
@@ -43,7 +37,7 @@ export function BackToTop() {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="text-sm font-medium">Back to top</span>
-    </button>
+      <span>Back to top</span>
+    </Button>
   );
 }

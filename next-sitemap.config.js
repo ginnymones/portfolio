@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://inginnyus.vercel.app",
+  siteUrl: "https://ginnymones.com",
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   outDir: "./public",

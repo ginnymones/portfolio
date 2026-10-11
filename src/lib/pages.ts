@@ -29,6 +29,31 @@ export interface RichTextNode {
   children?: RichTextNode[];
 }
 
+export interface CompanyStat {
+  value: string;
+  label: string;
+  image?: string;
+  imageAlt?: string;
+  /** Key in STAT_MOTIONS (src/lib/stat-motion.ts); replaces the image with an animated stack */
+  motion?: string;
+  caption?: string;
+}
+
+export interface CompanyProject {
+  company: string;
+  title: string;
+  description?: string;
+  caseStudy?: string;
+  stats?: CompanyStat[];
+}
+
+export interface OtherTile {
+  label: string;
+  link: string;
+  image?: string;
+  imageAlt?: string;
+}
+
 export interface PageContent extends BackgroundConfig {
   title: string;
   heading?: string;
@@ -39,6 +64,14 @@ export interface PageContent extends BackgroundConfig {
   ctaPrimaryLink?: string;
   ctaSecondaryLabel?: string;
   ctaSecondaryLink?: string;
+  portrait?: string;
+  portraitAlt?: string;
+  heroBody?: string;
+  companyIntro?: string;
+  companyProjects?: CompanyProject[];
+  otherHeading?: string;
+  otherText?: string;
+  otherTiles?: OtherTile[];
   bio?: RichTextNode | string;
   experience?: ExperienceItem[];
   socialLinks?: SocialLink[];

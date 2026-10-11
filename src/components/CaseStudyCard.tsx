@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
 
 interface CaseStudyCardProps {
   slug: string;
@@ -11,8 +8,12 @@ interface CaseStudyCardProps {
   thumbnailAlt?: string;
   summary: string;
   tags: string[];
+  /** CSS aspect-ratio for the cover on md+ screens, e.g. "381 / 460". Phones always use 4:3. */
+  aspect?: string;
 }
 
+// Figma: works / hi-fi "work / ..." tile (359:93) and its hover state (359:104).
+// Hover or keyboard focus fills the cover with sunset and shows the summary.
 export function CaseStudyCard({
   slug,
   title,
@@ -20,66 +21,30 @@ export function CaseStudyCard({
   thumbnailAlt,
   summary,
   tags,
+  aspect = "4 / 3",
 }: CaseStudyCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "100px" }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={ref}>
-      {isVisible ? (
-        <Link href={`/works/${slug}`} className="group block opacity-0 translate-y-6 animate-[fadeUp_0.5s_ease-out_forwards]">
-          <article className="overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image
-                src={thumbnail}
-                alt={thumbnailAlt || `${title} thumbnail`}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                loading="lazy"
-              />
-            </div>
-            <div className="p-5">
-              <h3 className="text-lg font-semibold text-foreground group-hover:text-accent-orange transition-colors mb-2">
-                {title}
-              </h3>
-              <p className="text-sm text-neutral-dark line-clamp-2 mb-3">
-                {summary}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2 py-1 rounded-full bg-neutral-warm/15 text-neutral-dark"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </article>
-        </Link>
-      ) : (
-        <div className="aspect-[4/3] rounded-xl bg-neutral-warm/10 animate-pulse" />
-      )}
-    </div>
+    <Link href={`/works/${slug}`} className="group flex flex-col gap-[14px] outline-none">
+      <div
+        className="relative aspect-[4/3] overflow-hidden rounded-xl bg-khaki md:aspect-[var(--ar)]"
+        style={{ "--ar": aspect } as React.CSSProperties}
+      >
+        <Image
+          src={thumbnail}
+          alt={thumbnailAlt || `${title} thumbnail`}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 382px"
+        />
+        <div className="absolute inset-0 flex flex-col justify-end gap-4 bg-sunset p-7 text-warm-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+          {summary && <p className="line-clamp-6">{summary}</p>}
+          <span className="label text-sunshine">View case study →</span>
+        </div>
+      </div>
+      <h3 className="heading-5 text-neutral-black transition-colors group-hover:text-sunset group-focus-visible:text-sunset">
+        {title}
+      </h3>
+      {tags.length > 0 && <p className="text-warm-gray">{tags.join(" · ")}</p>}
+    </Link>
   );
 }

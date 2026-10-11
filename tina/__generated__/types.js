@@ -27,6 +27,35 @@ export const PagePartsFragmentDoc = gql`
   ctaSecondaryLabel
   ctaSecondaryLink
   body
+  portrait
+  portraitAlt
+  heroBody
+  companyIntro
+  companyProjects {
+    __typename
+    company
+    title
+    description
+    caseStudy
+    stats {
+      __typename
+      value
+      label
+      image
+      imageAlt
+      motion
+      caption
+    }
+  }
+  otherHeading
+  otherText
+  otherTiles {
+    __typename
+    label
+    link
+    image
+    imageAlt
+  }
   bio
   experience {
     __typename
@@ -93,7 +122,12 @@ export const CaseStudyPartsFragmentDoc = gql`
   summary
   tags
   client
+  role
+  years
   date
+  homepageOnly
+  situation
+  task
   liveUrl
   links {
     __typename
@@ -110,6 +144,13 @@ export const CaseStudyPartsFragmentDoc = gql`
   gradientDirection
   overlayOpacity
   overlayColor
+  resultsStats {
+    __typename
+    value
+    label
+    icon
+  }
+  resultsCopy
   body
 }
     `;

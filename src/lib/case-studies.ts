@@ -11,6 +11,12 @@ export interface CaseStudyLink {
   icon?: "github" | "figma" | "dribbble" | "behance" | "globe" | "link" | "play" | "npm";
 }
 
+export interface ResultStat {
+  value: string;
+  label: string;
+  icon?: string;
+}
+
 export interface CaseStudyMeta extends BackgroundConfig {
   slug: string;
   title: string;
@@ -21,7 +27,14 @@ export interface CaseStudyMeta extends BackgroundConfig {
   summary: string;
   tags: string[];
   client: string;
+  role?: string;
+  years?: string;
   date: string;
+  homepageOnly?: boolean;
+  situation?: string;
+  task?: string;
+  resultsStats?: ResultStat[];
+  resultsCopy?: string;
   liveUrl?: string;
   links?: CaseStudyLink[];
   status?: "draft" | "published";
@@ -45,6 +58,33 @@ function parseBackgroundFields(data: Record<string, unknown>): BackgroundConfig 
   };
 }
 
+function parseMeta(slug: string, data: Record<string, unknown>): CaseStudyMeta {
+  return {
+    slug,
+    title: (data.title as string) || "Untitled",
+    thumbnail: (data.thumbnail as string) || "/images/case-studies/placeholder.svg",
+    thumbnailAlt: (data.thumbnailAlt as string) || "",
+    headerImage:
+      (data.headerImage as string) || (data.thumbnail as string) || "/images/case-studies/placeholder.svg",
+    headerImageAlt: (data.headerImageAlt as string) || "",
+    summary: (data.summary as string) || "",
+    tags: (data.tags as string[]) || [],
+    client: (data.client as string) || "",
+    role: (data.role as string) || undefined,
+    years: (data.years as string) || undefined,
+    date: (data.date as string) || "",
+    homepageOnly: data.homepageOnly === true,
+    situation: (data.situation as string) || undefined,
+    task: (data.task as string) || undefined,
+    resultsStats: (data.resultsStats as ResultStat[]) || [],
+    resultsCopy: (data.resultsCopy as string) || undefined,
+    liveUrl: data.liveUrl as string | undefined,
+    links: (data.links as CaseStudyLink[]) || [],
+    status: (data.status as CaseStudyMeta["status"]) || "published",
+    ...parseBackgroundFields(data),
+  };
+}
+
 export function getAllCaseStudies(): CaseStudyMeta[] {
   if (!fs.existsSync(CASE_STUDIES_DIR)) {
     return [];
@@ -60,22 +100,7 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const { data } = matter(fileContent);
 
-    return {
-      slug,
-      title: data.title || "Untitled",
-      thumbnail: data.thumbnail || "/images/case-studies/placeholder.svg",
-      thumbnailAlt: data.thumbnailAlt || "",
-      headerImage: data.headerImage || data.thumbnail || "/images/case-studies/placeholder.svg",
-      headerImageAlt: data.headerImageAlt || "",
-      summary: data.summary || "",
-      tags: data.tags || [],
-      client: data.client || "",
-      date: data.date || "",
-      liveUrl: data.liveUrl,
-      links: data.links || [],
-      status: data.status || "published",
-      ...parseBackgroundFields(data),
-    };
+    return parseMeta(slug, data);
   });
 
   // Filter out drafts in production
@@ -89,6 +114,11 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
   );
 }
 
+/** Case studies shown in the Works listing, related and prev/next. Excludes homepage-only company case studies. */
+export function getListedCaseStudies(): CaseStudyMeta[] {
+  return getAllCaseStudies().filter((s) => !s.homepageOnly);
+}
+
 export function getCaseStudyBySlug(slug: string): CaseStudy | null {
   const filePath = path.join(CASE_STUDIES_DIR, `${slug}.md`);
 
@@ -99,23 +129,7 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
 
-  return {
-    slug,
-    title: data.title || "Untitled",
-    thumbnail: data.thumbnail || "/images/case-studies/placeholder.svg",
-    thumbnailAlt: data.thumbnailAlt || "",
-    headerImage: data.headerImage || data.thumbnail || "/images/case-studies/placeholder.svg",
-    headerImageAlt: data.headerImageAlt || "",
-    summary: data.summary || "",
-    tags: data.tags || [],
-    client: data.client || "",
-    date: data.date || "",
-    liveUrl: data.liveUrl,
-    links: data.links || [],
-    status: data.status || "published",
-    content,
-    ...parseBackgroundFields(data),
-  };
+  return { ...parseMeta(slug, data), content };
 }
 
 /**
@@ -127,7 +141,7 @@ export function getRelatedCaseStudies(
   currentTags: string[],
   limit: number = 3
 ): CaseStudyMeta[] {
-  const all = getAllCaseStudies().filter((s) => s.slug !== currentSlug);
+  const all = getListedCaseStudies().filter((s) => s.slug !== currentSlug);
 
   // Score by number of shared tags
   const scored = all.map((study) => {
@@ -151,7 +165,7 @@ export function getAdjacentCaseStudies(currentSlug: string): {
   prev: CaseStudyMeta | null;
   next: CaseStudyMeta | null;
 } {
-  const all = getAllCaseStudies();
+  const all = getListedCaseStudies();
   const index = all.findIndex((s) => s.slug === currentSlug);
 
   return {

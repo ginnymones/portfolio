@@ -153,6 +153,113 @@ export default defineConfig({
             label: "Page Body",
             isBody: false,
           },
+          // Home page specific fields
+          {
+            type: "image",
+            name: "portrait",
+            label: "Hero Portrait / Illustration",
+            description: "Hero illustration on the home page. Artwork is 443x448: a 400px circle with a 22px margin on the left and a 48px margin on top for the head to pop out (transparent PNG). Leave empty to show the placeholder circle.",
+          },
+          {
+            type: "string",
+            name: "portraitAlt",
+            label: "Hero Portrait Alt Text",
+          },
+          {
+            type: "string",
+            name: "heroBody",
+            label: "Hero Intro Paragraph",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "companyIntro",
+            label: "Company Highlights Intro Line",
+            description: "Short line shown above the first company highlight.",
+          },
+          {
+            type: "object",
+            name: "companyProjects",
+            label: "Company Highlights (home page)",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.company ? `${item.company}: ${item.title}` : "New Company Highlight",
+              }),
+            },
+            fields: [
+              { type: "string", name: "company", label: "Company (tag)", required: true },
+              { type: "string", name: "title", label: "Headline", required: true },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "string",
+                name: "caseStudy",
+                label: "Case Study Slug",
+                description: "Optional. Company highlights are standalone, so leave this empty. If set, the Read case study button shows only when that file exists.",
+              },
+              {
+                type: "object",
+                name: "stats",
+                label: "Stats",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.value ? `${item.value} ${item.label || ""}` : "New Stat",
+                  }),
+                },
+                fields: [
+                  { type: "string", name: "value", label: "Number (e.g. +12%)", required: true },
+                  { type: "string", name: "label", label: "Label", required: true },
+                  { type: "image", name: "image", label: "Image" },
+                  { type: "string", name: "imageAlt", label: "Image Alt Text" },
+                  {
+                    type: "string",
+                    name: "motion",
+                    label: "Animation",
+                    description: "Optional. Plays an animated image stack instead of the image above.",
+                    options: [
+                      { value: "", label: "None" },
+                      { value: "elevation-portfolio", label: "Elevation: portfolio growth" },
+                      { value: "elevation-cart", label: "Elevation: add to cart" },
+                    ],
+                  },
+                  {
+                    type: "string",
+                    name: "caption",
+                    label: "Caption",
+                    ui: { component: "textarea" },
+                  },
+                ],
+              },
+            ],
+          },
+          { type: "string", name: "otherHeading", label: "Other Stuff: Heading" },
+          {
+            type: "string",
+            name: "otherText",
+            label: "Other Stuff: Text",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "object",
+            name: "otherTiles",
+            label: "Other Stuff: Tiles",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.label || "New Tile" }),
+            },
+            fields: [
+              { type: "string", name: "label", label: "Label", required: true },
+              { type: "string", name: "link", label: "Link", required: true },
+              { type: "image", name: "image", label: "Preview Image" },
+              { type: "string", name: "imageAlt", label: "Preview Alt Text" },
+            ],
+          },
           // About page specific fields
           {
             type: "rich-text",
@@ -492,10 +599,42 @@ export default defineConfig({
             label: "Client",
           },
           {
+            type: "string",
+            name: "role",
+            label: "Role",
+            description: "Shown in the hero, e.g. UX/UI Designer, Digital Account Director",
+          },
+          {
+            type: "string",
+            name: "years",
+            label: "Years",
+            description: "Shown in the hero, e.g. 2018 – 2022. Falls back to the year of the Date field.",
+          },
+          {
             type: "datetime",
             name: "date",
             label: "Date",
             required: true,
+          },
+          {
+            type: "boolean",
+            name: "homepageOnly",
+            label: "Homepage only (hide from Works)",
+            description: "Company case studies (Amazon, Elevation, TBWA\\SMP): reachable from the home page only.",
+          },
+          {
+            type: "string",
+            name: "situation",
+            label: "Situation",
+            description: "STAR: the context and problem. Blank lines start a new paragraph.",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "task",
+            label: "Task",
+            description: "STAR: what you were asked to do. Blank lines start a new paragraph.",
+            ui: { component: "textarea" },
           },
           {
             type: "string",
@@ -544,9 +683,33 @@ export default defineConfig({
           },
           ...backgroundFields,
           {
+            type: "object",
+            name: "resultsStats",
+            label: "Results: Stats",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.value ? `${item.value} ${item.label || ""}` : "New Stat",
+              }),
+            },
+            fields: [
+              { type: "string", name: "value", label: "Number (e.g. 500%)", required: true },
+              { type: "string", name: "label", label: "Label", required: true },
+              { type: "image", name: "icon", label: "Icon (optional)" },
+            ],
+          },
+          {
+            type: "string",
+            name: "resultsCopy",
+            label: "Results: Copy",
+            description: "STAR: closing paragraphs under the stats. Blank lines start a new paragraph.",
+            ui: { component: "textarea" },
+          },
+          {
             type: "rich-text",
             name: "body",
-            label: "Case Study Content",
+            label: "Action",
+            description: "STAR: what you did. A ### heading starts a block; an image inside the block sits beside its text and alternates sides. An image on its own runs full width, with its alt text as the caption.",
             isBody: true,
           },
         ],

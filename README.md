@@ -32,6 +32,10 @@ Visit `http://localhost:3000`
 | `client` | No | Client name |
 | `date` | Yes | Publication date (YYYY-MM-DD), used for sorting |
 | `liveUrl` | No | Link to live project |
+| `role`, `years` | No | Hero meta (V2) |
+| `situation`, `task` | No | STAR Situation and Task text (V2) |
+| `resultsStats`, `resultsCopy` | No | STAR Results stats and closing paragraphs (V2) |
+| `homepageOnly` | No | `true` hides the case study from Works, related and prev/next (V2; company highlights no longer use case studies) |
 
 ### Image Guidelines
 
@@ -42,12 +46,9 @@ Visit `http://localhost:3000`
 
 ### Content Structure
 
-Each case study follows a template with:
-- **Problem Statement** — What was the challenge?
-- **Solution** — Your approach and process
-- **Results & Impact** — Measurable outcomes
+Case studies follow STAR (V2): **Situation**, **Task**, **Action** and **Results**. Situation, Task and Results are frontmatter fields; the markdown body is Action, where `###` headings start blocks with an image beside the text. Older write-ups still work and show entirely under Action. See [docs/CASE-STUDY-STRUCTURE.md](docs/CASE-STUDY-STRUCTURE.md).
 
-You can add any markdown content: images, videos (via embed), links, lists, etc.
+You can add any markdown content to Action: images, videos (via embed), links, lists, etc.
 
 ## Project Structure
 

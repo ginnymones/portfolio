@@ -12,17 +12,15 @@ export function CaseStudyNav({ prev, next }: CaseStudyNavProps) {
   return (
     <nav
       aria-label="Case study navigation"
-      className="mt-16 pt-10 border-t border-neutral-warm/20 grid grid-cols-2 gap-4"
+      className="grid grid-cols-2 gap-4 border-t border-khaki pb-16 pt-10 md:pb-28"
     >
       {prev ? (
         <Link
           href={`/works/${prev.slug}`}
-          className="group flex flex-col items-start p-4 rounded-lg hover:bg-neutral-warm/10 transition-colors"
+          className="group flex flex-col items-start gap-2 rounded-xl p-4 transition-colors hover:bg-warm-white"
         >
-          <span className="text-xs text-neutral-warm uppercase tracking-wide mb-1">
-            ← Previous
-          </span>
-          <span className="text-sm font-medium text-foreground group-hover:text-accent-orange transition-colors line-clamp-1">
+          <span className="label text-sunset">← Previous</span>
+          <span className="line-clamp-2 font-serif text-xl text-neutral-black transition-colors group-hover:text-burnt-sienna md:text-2xl">
             {prev.title}
           </span>
         </Link>
@@ -33,12 +31,10 @@ export function CaseStudyNav({ prev, next }: CaseStudyNavProps) {
       {next ? (
         <Link
           href={`/works/${next.slug}`}
-          className="group flex flex-col items-end text-right p-4 rounded-lg hover:bg-neutral-warm/10 transition-colors"
+          className="group flex flex-col items-end gap-2 rounded-xl p-4 text-right transition-colors hover:bg-warm-white"
         >
-          <span className="text-xs text-neutral-warm uppercase tracking-wide mb-1">
-            Next →
-          </span>
-          <span className="text-sm font-medium text-foreground group-hover:text-accent-orange transition-colors line-clamp-1">
+          <span className="label text-sunset">Next →</span>
+          <span className="line-clamp-2 font-serif text-xl text-neutral-black transition-colors group-hover:text-burnt-sienna md:text-2xl">
             {next.title}
           </span>
         </Link>

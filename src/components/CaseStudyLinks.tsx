@@ -1,4 +1,5 @@
 import type { CaseStudyLink } from "@/lib/case-studies";
+import { Button } from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,
@@ -33,27 +34,26 @@ export function CaseStudyLinks({ links }: CaseStudyLinksProps) {
   if (!links || links.length === 0) return null;
 
   return (
-    <div className="mt-16 pt-10 border-t border-neutral-warm/20">
-      <h3 className="text-lg font-semibold text-foreground mb-4">
-        Relevant Links
-      </h3>
+    <section className="flex flex-col gap-6 pb-16 md:pb-28">
+      <h2 className="heading-4 text-sunset">Relevant links</h2>
       <div className="flex flex-wrap gap-3">
         {links.map((link, index) => {
           const icon = iconMap[link.icon || "link"] || faLink;
           return (
-            <a
+            <Button
               key={index}
+              variant="secondary"
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-warm/30 rounded-lg text-sm font-medium text-neutral-dark hover:border-accent-orange hover:text-accent-orange transition-colors"
+              className="gap-2 px-6! py-[10px]! text-[14px]!"
             >
-              <FontAwesomeIcon icon={icon} className="w-4 h-4" />
+              <FontAwesomeIcon icon={icon} className="size-4" />
               {link.label}
-            </a>
+            </Button>
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

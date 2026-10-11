@@ -1,6 +1,6 @@
 {
   "name": "Ginny Mones",
-  "email": "ginny.mones@gmail.com",
+  "email": "hola@ginnymones.com",
   "copyright": "Ginny Mones. All rights reserved.",
   "footerHeading": "Let's connect",
   "footerDescription": "Got a project in mind or just want to say hi? I'd love to hear from you. Reach out through any of the channels below.",
@@ -19,12 +19,12 @@
       "url": "https://linkedin.com/in/ginnymones"
     },
     {
-      "label": "Dribbble",
-      "url": "https://dribbble.com/ginnymones"
-    },
-    {
       "label": "Behance",
       "url": "https://behance.net/ginnymones"
+    },
+    {
+      "label": "Dribbble",
+      "url": "https://dribbble.com/ginnymones"
     },
     {
       "label": "Substack",

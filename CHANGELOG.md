@@ -4,6 +4,192 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-11] — Homepage synced from Figma, real videos in stat slots
+
+### Added
+- Stat images can be a `.mp4` or `.webm`: it autoplays as a silent loop that only loads and plays when scrolled near (`LoopVideo`, used by `ImageSlot`), including with reduced motion on, with a small pause/play button. Pick the file in the existing Image field, no schema change.
+- Videos in `public/videos/`: `amz_armani.mp4` (Amazon, faster than industry standard), `elev_grewportfolio.mp4` and `elev_addtocart.mp4` (Elevation).
+- Amazon stat images `public/images/home/amazon/unaccounted-time.jpg` and `workbench.jpg`.
+
+### Changed
+- Copy re-synced from Figma 357:13: Amazon and Elevation titles and descriptions, new first Amazon stat (53% reduction in unaccounted time), Elevation caption, TBWA\SMP description (70% budget shift), "snapshot" intro line.
+- TBWA\SMP and MediaCom now show two stats each (the third was removed in Figma).
+- Elevation stats use the videos instead of the CSS animation.
+
+### Notes
+- `MotionImageSlot`, `src/lib/stat-motion.ts` and the Tina "Animation" field are now unused and can be removed.
+- Figma numbers (3310.60 minutes, 10% uplift, 70% shift) verified by Ginny, 2026-10-11.
+
+---
+
+## [2026-10-11] — Elevation stat images animated
+
+### Added
+- Animated image stacks for two Elevation stats (Figma `elev_grewportfolio` 486:174, 12s boomerang; `elev_addtocart` 493:831, 7s loop). Screenshots fade out in turn, opacity only, and stay still for visitors who prefer reduced motion.
+- `Animation` field on each company stat in TinaCMS (Pages > Home > Company Highlights > Stats). Presets live in `src/lib/stat-motion.ts`.
+
+### Changed
+- Elevation now shows two stats (500% more agency revenue, +5% cart conversions) instead of three; "30+ Websites delivered and managed" was removed. A company with exactly two stats lays them out in two columns (max 1000px), matching the 482px Figma frames; everyone else stays at three.
+
+### Notes
+- New frames are in `public/images/home/elevation/` (JPEG, 1400px max).
+- The animation is a CSS stand-in. Ginny plans to export it from Figma as a single file and load it into the layout, which would replace `MotionImageSlot` and `src/lib/stat-motion.ts`.
+- Not yet checked playing in a browser (headless screenshots don't advance CSS animations). Alt text on both stats is a draft.
+
+## [2026-10-09] — Homepage copy synced from Figma, company highlights stay standalone
+
+### Added
+- A fourth company highlight, MediaCom (Figma 439:271), and a short line above the highlights: "Below is a snapshot of my career journey so far." The line is editable in TinaCMS (Pages > Home > Company Highlights Intro Line).
+
+### Changed
+- Hero heading now ends with "!", the subtitle with a period, and the intro paragraph lists Procter & Gamble, Diageo, Jollibee Foods Corporation, The Coffee Bean and Tea Leaf, and Jewelmer. Amazon headline and description, and the Elevation "Websites delivered and managed" label, match the updated Figma.
+- Company highlights (Amazon, Elevation, TBWA\SMP, MediaCom) will not get case studies. The Case Study Slug field stays optional and stays empty.
+
+### Notes
+- MediaCom stat captions are still the TBWA\SMP placeholder text from Figma; they need rewriting.
+
+## [2026-10-09] — Smaller Back to top button on phones
+
+### Changed
+- Below 768px the Back to top button is about 30% smaller (13px label, 11px arrow, tighter padding, 16px from the edges) so it no longer covers the copyright line at the bottom of the page. Desktop is unchanged.
+
+## [2026-10-08] — In progress dot and old domain redirect
+
+### Changed
+- "In progress" tool status dot is now sunset (was light gray).
+- `inginnyus.vercel.app` requests redirect permanently (308) to `https://ginnymones.com`, keeping path and query. Only takes effect once this branch is deployed and ginnymones.com points at the deployment.
+
+## [2026-10-08] — Max container width 1200px, Get in touch spacing
+
+### Changed
+- Wide containers (Get in touch panel, Works grid, related-work row) cap at 1200px; the nav bar caps at 1200px too (was 1440px) and drops its side padding from 1360px wide so the logo lines up with the content. The 1000px reading containers are unchanged.
+- Get in touch: the illustration overhangs the panel by 43px from 1340px wide (24px below). The text column starts at the art's right edge and is centered in the 496px beside it, so the gap to the art is the same at every width (it grew at 1024-1339px before).
+
+## [2026-10-08] — Tools page hero illustration
+
+### Added
+- Tools hero from Figma (421:238) at 1024px and wider: 400px portrait with the head popping out of a 30% burnt-sienna circle, heading and subtitle beside it (`public/images/tools/tools-hero-art.png`).
+
+### Changed
+- Below 1024px the tools intro stays as in the mobile frame (heading, curve, subtitle, no illustration).
+
+## [2026-10-08] — Get in touch panel: icon + label socials
+
+### Changed
+- Contact panel follows Figma "get in touch / mobile" (416:197): the large email line is gone; Email is now the first social item, and each item is an icon over a small semibold label (no outlined circles). Applied to all breakpoints, with slightly larger icons/labels and wider gaps from 768px.
+- LinkedIn uses the boxed mark; items hover to sunshine.
+
+### Notes
+- Substack is left out of the panel (it isn't in the Figma frame) but stays in Site Settings and the other social link lists.
+
+## [2026-10-07] — V2 revamp: tokens, fonts and contact email (staging branch `v2-revamp`, not live)
+
+### Added
+- New V2 color palette (13 tokens) and Forum heading font in `src/app/globals.css`
+- Heading styles (`.heading-1` to `.heading-5`) and `.label` style from the Figma text styles
+
+### Changed
+- Nav rebuilt to the Figma spec: gradient logo, Works / Tools / Contact, hand-drawn curve under the active page. About removed from the nav
+- Contact panel rebuilt as a sunset panel with Forum heading, circled social badges (LinkedIn, Behance, Dribbble, Substack) and the copyright line inside it
+- Page background is now cream; old orange, yellow and neutral tokens point at their V2 equivalents
+- Body text is 16px, 150% line height, 3% letter spacing; headings use Forum and never fake a bold
+- Contact email is now hola@ginnymones.com (site settings and contact page)
+
+### Home page (rebuilt to Figma 357:13 / mobile draft 364:96)
+- Hero with an illustration slot (khaki placeholder circle), intro, "View my work" button
+- Company highlights (Amazon, Elevation, TBWA\\SMP) with stats, image slots and a section-dots indicator; the "Read case study" button only appears once a case study slug is set and the file exists
+- "I also make other stuff" section with Works and Tools tiles
+- All copy lives in `src/content/pages/home.json` and is editable in TinaCMS (new fields on the Pages collection: portrait, heroBody, companyProjects, otherHeading, otherText, otherTiles). Copy and stats are the Figma placeholders and still need Ginny's rewrite
+- New shared `ui/ImageSlot`, `SectionDots`, `CompanyHighlight`
+
+### Case study template (STAR, Figma 357:171)
+- New layout: hero (image, tag, title, summary, curve, Client / Role / Years), then Situation, Task, Action and Results. Sections with no content are hidden
+- Action is the case study body. A `###` heading starts a block; an image inside a block sits beside its text and alternates sides; a lone image runs full width with its alt text as the caption
+- Existing write-ups were not edited: their whole body shows under Action (Situation, Task and Results stay empty until filled in)
+- New optional CMS fields on Case Studies: role, years, situation, task, resultsStats (number, label, icon), resultsCopy, homepageOnly. The body field is relabelled "Action"
+- `homepageOnly` hides a case study from the Works listing, related and prev/next; it stays reachable by URL and from the home page
+- Mobile layout is a proposal (stacked); Figma has no case study mobile frame yet
+- Breadcrumbs, Previous / Next and Related work are kept (they are not in the Figma frame, by Ginny's decision), restyled to V2 tokens. Relevant Links are kept too
+- Structure documented in `docs/CASE-STUDY-STRUCTURE.md`; `README.md` and `docs/PROJECT-SPEC.md` updated
+- `_template.md` rewritten for the STAR structure
+
+### Works page (Figma 359:48)
+- Gallery column gap is 30px (Figma has 24px; widened at Ginny's request because the columns looked squished)
+- Intro (Forum heading, curve, subtitle), pill filter chips (active chip filled sunset) and a three-column staggered gallery. Items are dealt round-robin across the columns so newest-first reads across; cover heights follow the Figma pattern (tall / short / medium, then short / tall / medium). Two columns on tablet, one on phone (4:3 covers)
+- Tile hover/focus: cover fills with sunset showing the summary and "View case study →", and the title turns sunset. Touch devices tap straight through
+- "Load more" (text button) replaces 1 / 2 / 3 paging: 6 at a time, resets when the filter changes. The `?tag=` deep link still works
+- `CaseStudyCard` rebuilt for the new tile and also used by Related work
+- Contact panel is now full width (it had shrunk to its content inside the flex layout)
+
+### Tools page (Figma 359:152)
+- Intro (Forum "Tools I've built", curve, subtitle) and a two-column card grid, 32px apart. The old hero character is gone
+- Cards: app preview on top (anchored to the top of the screenshot), status dot + label, tag pills, Forum title, summary, then "Launch" (primary button) and "Case study" (text button). "Code" shows as a text button when a repo URL is set. Cards in a row share a height
+- Status dots: Live is deep yellow (Figma); Beta (sunset) and In progress (light gray) are proposals
+- Phone layout is a proposal: single column, shorter preview
+- Heading in `src/content/pages/tools.json` is now "Tools I've built" with no accent word
+- Figma Works gallery gap set to 30px (columns 377.33px) to match the site
+
+### Get in touch panel redesign (Figma "get in touch - samp", 392:277)
+- The contact panel now has the new illustration popping out of its top-left corner (107px above, 63px past the left edge), with the text column shifted right to make room. Art is `public/images/get-in-touch-art.png`, cropped at 2x from the Figma source
+- Below 1024px the panel has no illustration (the Figma mobile draft has none); the section also clips sideways overflow so the art can't cause horizontal scroll
+
+### Hero illustration (Figma 367:104)
+- The homepage hero now shows the line-art portrait (`public/images/hero-portrait.png`, exported at 2x from the Figma `headshot` group): a peach circle with the head popping out of the top. It is set in `home.json`, so it can be swapped in TinaCMS; with no image, the khaki placeholder circle returns
+- Sizing follows Figma: 400px circle on desktop (the artwork hangs 22px past the left and 48px above the circle box), 300px on tablet, 220px on phones
+- The header no longer paints a cream background over the page, which had been covering the top of the head where it rises above the circle
+- On the Get in touch panel the illustration's left overhang shrinks to the page gutter below 1340px wide, so the art is never cut off by the screen edge
+- Illustration placement is still open for the rest of the site; the Get in touch panel already uses its own artwork
+
+### Round of 2026-10-08 decisions
+- **Nav shrinks after scrolling**: the bar is now fixed (not sticky) so it can change size without moving the page. Full: 170px on desktop with the 70px logo. After scrolling more than 60px: 70px with the logo scaled to about 44px, and a light drop shadow under the bar (no line). Phone: 88px, then 64px with the logo at about 36px. A fixed spacer (full bar height + 40px) keeps the first content block from sitting too close
+- **Smoother shrink**: the logo scales with `transform` (no reflow) and the bar's height is the only layout change, on a 300ms ease-out curve; the shadow fades in on the same timing
+- **Sunset logo everywhere in the nav**: `public/branding/logo-sunset.svg` (exported from the Figma `logo` set, 100 / sunset, solid #CF5925) replaces the gradient logo, which looked messy when small
+- **Drawer links are right-aligned**, with 16px more right padding so the curves keep 28px from the edge; the curve stays centred under each word (103.68 x 4, 2px)
+- **Back to top** now uses the sans-serif solid (primary) button style from the Figma design system (sunshine, sunset on hover)
+- **Tool status dots**: Live uses the new `forest` colour, Beta uses sunshine, In progress stays light gray
+- **About page redirect**: `/about` now redirects (permanently) to the "Hi, I'm Ginny" intro on the homepage (`/#intro`)
+- **Contact panel copy** is "Get in touch" / "Have a brand, a product, or a team that needs a creative lead? Say hola." Edit it in TinaCMS under Pages → Contact (heading and subtitle); the email and social badges come from Site Settings
+- The "get in touch - samp" master layer stays on the Figma board
+
+### Figma mobile frames (2026-10-08, no site changes)
+- Drew `case study / mobile`, `works / mobile`, `tools / mobile` and `404 / mobile` (390px, header + 40px spacer, content, mobile Get in touch panel), in a row next to the mobile menu frames. They document the phone layouts the site already uses
+- The mobile homepage frame now has the new hero order and copy and the new `get in touch / mobile` panel (358px, 20px corners, social badges, no illustration)
+- Logo instances on the Figma page are switched to the sunset variant
+
+### Sticky nav and the new mobile menu (earlier today; the nav is now fixed and shrinks, see above)
+- The nav is sticky (cream background, stays at the top while scrolling). A 40px spacer below it keeps the first block of every page from sitting too close; the spacer scrolls away, so the stuck bar is not 40px taller
+- Mobile menu is now a full-height slide-out drawer from the right (Figma `mobile menu / drawer (open)`, 399:121): 280px wide over a dimmed scrim, Forum 32px links in burnt sienna, right-aligned, X where the hamburger is. It replaces the 200px card, which jittered on open
+- No more jitter: the drawer is always in the page and moves with transform/opacity only (300ms), the page is not scroll-locked, and the hamburger no longer morphs. Measured in a 390px frame: header height, content position, scroll position and page width were identical before, during and after opening
+- Tapping the scrim or the X, pressing Escape, or following a link closes it. Focus moves into the drawer on open and back to the hamburger on close. Reduced-motion users get no slide
+- Drawer links use the Figma `nav-mobile` component (401:313): Forum 32px, 200px-wide boxes with centred text, and the curve (103.68 x 4, 2px stroke, 8px under the text) on the current page and on hover/focus. The Figma drawer frame now uses the same component
+- The earlier "Mobile menu design is parked" notes are superseded
+
+### Domain, social preview and Back to top
+- Site URL is now https://ginnymones.com in the page metadata (`metadataBase`, Open Graph URL) and `next-sitemap.config.js`. The favicon is unchanged
+- Social preview (`public/og-image.png`, 1200x630) replaced with the Figma `social-preview` frame (375:108); added alt text
+- "Back to top" restyled as a sunshine pill (sunset on hover and focus) in the label style; it is not in Figma
+
+### Responsive pass
+- Home: the hero stacks below 1024px (illustration 300px on tablet), and the three stat rows share row heights at tablet width (CSS subgrid), so images line up when labels wrap
+- Case study: the hero stacks below 1024px; it used to overflow sideways at tablet width
+- 404 page rebuilt with V2 buttons and the curve; the old character is removed
+- Checked at 390, 768 and 1440 wide: home, works, tools, a case study, the 404 page and the open mobile menu
+
+### Fixes
+- Nav curve is a constant 2px stroke in the active and hover states (it was being squashed to about 1px by the non-uniform scaling; briefly 3px). Nav links now show the same curve on hover and keyboard focus as in the active state. `Curve` takes an optional `strokeWidth`; section curves keep the exported 1px stroke
+
+### Removed
+- Old home hero (`HeroContent`), the corner mini character and the numbered Works pagination
+- About page (`/about`) and its links; the 404 page and home secondary button now point to Tools
+- Old footer bar (the copyright now lives in the contact panel)
+
+### Notes
+- New shared components: `Curve`, `ui/Button` (primary / secondary / text), `ui/Tag`
+- Old styling archived at `~/Coding Projects/portfolio-V1-archive` and git tag `v1-pre-revamp`
+- Old token names are temporary aliases and will be removed as components move to the new names
+
+---
+
 ## [2026-09-24] — Ginny Mones 2026 Rebrand case study
 
 ### Added

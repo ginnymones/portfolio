@@ -8,15 +8,124 @@
   "gradientTo": "",
   "gradientDirection": "to bottom",
   "overlayOpacity": 50,
-  "overlayColor": "#FFFDF9",
-  "heading": "Hi, I'm",
-  "headingAccent": "Ginny",
-  "subtitle": "I take things to my creative lab, fix them, and turn them into something people can enjoy.",
-  "tagline": "UX/UI Design · Art Direction · Creative Strategy · Team Management",
-  "ctaPrimaryLabel": "View My Creations",
+  "overlayColor": "#FFFCF7",
+  "heading": "Hi, I'm Ginny!",
+  "headingAccent": "",
+  "subtitle": "I'm a creative leader with 16+ years of experience across creative direction, UX/UI design, and team management.",
+  "heroBody": "I have helped brands like Procter & Gamble, Diageo, Jollibee Foods Corporation, The Coffee Bean and Tea Leaf, and Jewelmer establish and grow their brand presence on TV and print, social, and digital media.",
+  "portrait": "/images/hero-portrait.png",
+  "portraitAlt": "Illustration of Ginny: a smiling woman with glasses and shoulder-length hair, in a striped top",
+  "tagline": "",
+  "ctaPrimaryLabel": "View my work",
   "ctaPrimaryLink": "/works",
-  "ctaSecondaryLabel": "About Me",
-  "ctaSecondaryLink": "/about",
+  "ctaSecondaryLabel": "",
+  "ctaSecondaryLink": "",
+  "companyIntro": "Below is a snapshot of my career journey.",
+  "companyProjects": [
+    {
+      "company": "Amazon",
+      "title": "Led a 3D production team & drove 3D art direction",
+      "description": "As Production Manager, I guided a team of as many as 33 artists delivering 3D assets for product listings across amazon.com, then shifted into an art director role for the Design Operations Team where I drove creative direction, crafting concepts for 3D product visualizations that would be used to drive as many as 100 purchases in a single day for Amazon's Echo Dot, Kindle, electronic accessories, and more.",
+      "caseStudy": "",
+      "stats": [
+        {
+          "value": "53%",
+          "label": "Reduction in unaccounted time",
+          "image": "/images/home/amazon/unaccounted-time.jpg",
+          "imageAlt": "A Slack time-request form with fields for the reason, original time and requested adjustment",
+          "caption": "Built a Slack automation to recover 3310.60 unaccounted production minutes, resulting in 10% volume uplift."
+        },
+        {
+          "value": "53%",
+          "label": "Faster than industry standard",
+          "image": "/videos/amz_armani.mp4",
+          "imageAlt": "Looping preview of the 3D product animation",
+          "caption": "Led and art directed an end-to-end 3D animation project completed in 14 days instead of 30+."
+        },
+        {
+          "value": "~20%",
+          "label": "Better approval rate",
+          "image": "/images/home/amazon/workbench.jpg",
+          "imageAlt": "The Approval System UI install page for the Workbench gallery view tool",
+          "caption": "Developed gallery view tool for Workbench, built without touching the main code."
+        }
+      ]
+    },
+    {
+      "company": "Elevation",
+      "title": "Grew an agency's digital business",
+      "description": "As UX/UI Designer and later Digital Account Director, I drove end-to-end digital business management for clients, from ideation to creative execution, development, and reporting. Alongside this, I led a multidisciplinary team of developers, digital artists, and copywriters.",
+      "caseStudy": "",
+      "stats": [
+        {
+          "value": "500%",
+          "label": "More agency revenue",
+          "imageAlt": "Looping preview of client websites from the Elevation portfolio",
+          "caption": "Expanded the agency’s five-website portfolio into 30+ websites in just 12 months.",
+          "image": "/videos/elev_grewportfolio.mp4"
+        },
+        {
+          "value": "+5%",
+          "label": "Cart conversions",
+          "imageAlt": "Looping preview of a luxury brand storefront and its add-to-cart moment marketing",
+          "caption": "Month-on-month for luxury brand clients through moment marketing.",
+          "image": "/videos/elev_addtocart.mp4"
+        }
+      ]
+    },
+    {
+      "company": "TBWA\\SMP",
+      "title": "Building social presence for household brands",
+      "description": "As Art Director for Content, I established the digital branding and presence of Alaska, Nissan, Tokyo Tokyo, Oishi, and Ayala Corporation across social platforms. The success of these digital efforts led a 70% shift in budget allocation from above-the-line platforms to digital.",
+      "caseStudy": "",
+      "stats": [
+        {
+          "value": "2.4K",
+          "label": "Peak livestream watchers",
+          "caption": "Livestream coverage and social visuals for Oishi Snacktacular 2016."
+        },
+        {
+          "value": "50+",
+          "label": "Comments in 24 hours",
+          "caption": "Visuals that got people talking within a day of posting."
+        }
+      ]
+    },
+    {
+      "company": "MediaCom",
+      "title": "Create world-class winning presentations",
+      "description": "As a Multimedia Designer, I collaborated with communications managers and business planning directors across APAC to create winning pitch presentations, establishing MediaCom as the leading media agency in the Philippines. I also created social media visuals and publication ads, and built Facebook applications for partner brands.",
+      "caseStudy": "",
+      "stats": [
+        {
+          "value": "500+",
+          "label": "Contest submissions",
+          "caption": "Livestream coverage and social visuals for Oishi Snacktacular 2016."
+        },
+        {
+          "value": "50+",
+          "label": "Comments in 24 hours",
+          "caption": "Visuals that got people talking within a day of posting."
+        }
+      ]
+    }
+  ],
+  "otherHeading": "I also make other stuff",
+  "otherText": "Illustration, side projects, and small tools I build for myself and for friends.",
+  "otherTiles": [
+    {
+      "label": "Works",
+      "link": "/works",
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "label": "Tools",
+      "link": "/tools",
+      "image": "",
+      "imageAlt": ""
+    }
+  ],
   "body": "",
   "bio": ""
 }
