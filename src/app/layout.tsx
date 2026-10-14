@@ -11,14 +11,14 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ginnymones.com"),
-  title: "Ginny Mones — Creative Problem Solver",
-  description: "Ginny's creative journey and experiments, all in portfolio.",
+  title: "Ginny Mones - Creative Direction, UX/UI Design, Team Management",
+  description: "A creative leader with 16+ years of experience. Explore case studies in UX/UI, branding and product design, plus the tools I've built.",
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "Ginny Mones — Creative Problem Solver",
-    description: "Ginny's creative journey and experiments, all in portfolio.",
+    title: "Ginny Mones - Creative Direction, UX/UI Design, Team Management",
+    description: "A creative leader with 16+ years of experience. Explore case studies in UX/UI, branding and product design, plus the tools I've built.",
     url: "https://ginnymones.com",
     siteName: "Ginny Mones",
     images: [
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ginny Mones — Creative Problem Solver",
-    description: "Ginny's creative journey and experiments, all in portfolio.",
+    title: "Ginny Mones - Creative Direction, UX/UI Design, Team Management",
+    description: "A creative leader with 16+ years of experience. Explore case studies in UX/UI, branding and product design, plus the tools I've built.",
     images: ["/og-image.png"],
   },
 };

@@ -7,6 +7,7 @@ All notable changes to this project are documented here.
 ## [2026-10-15] — Faster Joiiio page and lazy-loaded images
 
 ### Changed
+- Site title and description (browser tab, search results and link previews): the title is now "Ginny Mones - Creative Direction, UX/UI Design, Team Management" and the description "A creative leader with 16+ years of experience. Explore case studies in UX/UI, branding and product design, plus the tools I've built." (`src/app/layout.tsx`). Previously "Creative Problem Solver" and a placeholder description.
 - Homepage videos (Elevation x2, TBWA\SMP) now show a still poster frame until they start playing (`public/videos/*-poster.jpg`, `LoopVideo.tsx`, `ImageSlot.tsx`). Before, a blank khaki box showed whenever autoplay was slow or blocked (for example iPhone Low Power Mode or data saver).
 - Anim (Joiiio): the 36 MB "How can my top be replaced?" GIF in the gallery is replaced by a silent looping WebM (`anim-joiiio-howcanmytop.webm`, 0.8 MB, 1080x1080, 8.7 s). It only downloads when it nears the screen and has the same pause button as the homepage videos. The GIF file is still in the repo.
 - Galleries (`:::bento`) can now hold a `.mp4` or `.webm`, which plays as a lazy silent loop (`BentoGallery.tsx`). Bento blocks are now found before video images are converted, so a video in a gallery is no longer mistaken for a plain video.
