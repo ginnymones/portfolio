@@ -7,12 +7,14 @@ interface LoopVideoProps {
   /** Description for screen readers; empty marks the video as decorative */
   alt?: string;
   className?: string;
+  /** Still frame shown until the video starts (or if autoplay is blocked, e.g. Low Power Mode on iPhones) */
+  poster?: string;
 }
 
 // Silent looping clip that stands in for a stat image (Figma elev_grewportfolio 489:231, elev_addtocart 493:1487).
 // Autoplays and loops (Ginny's call, 2026-10-11, even with reduced motion on). It only downloads and plays while near
 // the viewport, and the button lets anyone pause; a manual pause sticks until they press play again.
-export function LoopVideo({ src, alt = "", className = "" }: LoopVideoProps) {
+export function LoopVideo({ src, alt = "", className = "", poster }: LoopVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
   const [playing, setPlaying] = useState(false);
@@ -47,6 +49,7 @@ export function LoopVideo({ src, alt = "", className = "" }: LoopVideoProps) {
       <video
         ref={ref}
         src={src}
+        poster={poster}
         loop
         muted
         playsInline

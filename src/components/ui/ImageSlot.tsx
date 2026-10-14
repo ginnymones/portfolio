@@ -22,7 +22,7 @@ export function ImageSlot({ src, alt = "", label, className = "", sizes, imageCl
   return (
     <div className={`relative flex items-center justify-center overflow-hidden bg-khaki ${className}`}>
       {src && VIDEO_EXT.test(src) ? (
-        <LoopVideo src={src} alt={alt} />
+        <LoopVideo src={src} alt={alt} poster={src.replace(VIDEO_EXT, "-poster.jpg")} />
       ) : src ? (
         <Image src={src} alt={alt} fill priority={priority} sizes={sizes ?? "(max-width: 768px) 100vw, 400px"} className={`object-cover ${imageClassName}`} />
       ) : (
