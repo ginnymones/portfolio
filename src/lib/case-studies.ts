@@ -127,6 +127,11 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
 
+  // Drafts stay hidden in production, including by direct URL
+  if (process.env.NODE_ENV === "production" && data.status === "draft") {
+    return null;
+  }
+
   return { ...parseMeta(slug, data), content };
 }
 

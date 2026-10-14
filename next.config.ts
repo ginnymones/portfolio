@@ -13,7 +13,16 @@ const nextConfig: NextConfig = {
         source: "/tools/mega-cp-calculator/:path*",
         destination: "https://mega-cp-calculator.vercel.app/:path*",
       },
-      // These two apps are built with a matching basePath, so the prefix is kept
+      // These two apps are built with a matching basePath, so the prefix is kept.
+      // The bare path gets its own rule: a trailing slash makes the app redirect back to this URL in a loop.
+      {
+        source: "/tools/quiz-randomizer",
+        destination: "https://quiz-randomizer-demo.vercel.app/tools/quiz-randomizer",
+      },
+      {
+        source: "/tools/resume-lab",
+        destination: "https://resume-style-tool.vercel.app/tools/resume-lab",
+      },
       {
         source: "/tools/quiz-randomizer/:path*",
         destination: "https://quiz-randomizer-demo.vercel.app/tools/quiz-randomizer/:path*",
