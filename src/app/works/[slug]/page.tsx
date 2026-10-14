@@ -145,6 +145,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             label="Hero image"
             className="aspect-[4/3] w-full rounded-xl lg:aspect-auto lg:h-[440px] lg:w-[600px] lg:shrink-0"
             sizes="(max-width: 1024px) 100vw, 600px"
+            priority
           />
           <div className="flex flex-col items-start gap-5 lg:w-[352px]">
             {study.tags[0] && <Tag>{study.tags[0]}</Tag>}

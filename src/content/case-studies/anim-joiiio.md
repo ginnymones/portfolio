@@ -35,11 +35,11 @@ I then drew this truck with the above in mind, saved the parts separately, then 
 
 ***
 
-![Joiiio's introductory ad](/images/case-studies/anim-joiiio-general.mp4)
+![Joiiio's introductory ad](/images/case-studies/anim-joiiio-general.webm)
 
 The material was met with positive response from the clients, unlocking a year-long contract with JOIIIO.
 
 :::bento
-![Joiiio - How can my top be replaced?](/images/case-studies/anim-joiiio-howcanmytop.gif)
+![Joiiio - How can my top be replaced?](/images/case-studies/anim-joiiio-howcanmytop.webm)
 ![Joiiio - Every Jeep owner's secret, tops off](/images/case-studies/anim-joiiio-services.jpg)
 :::

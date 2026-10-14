@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { LoopVideo } from "@/components/ui/LoopVideo";
+
+const VIDEO_EXT = /\.(mp4|webm)$/i;
 
 interface BentoImage {
   src: string;
@@ -107,18 +110,26 @@ export function BentoGallery({ images }: BentoGalleryProps) {
         className={`grid ${getGridClass()} gap-3 my-8 rounded-xl overflow-hidden`}
       >
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`relative overflow-hidden rounded-xl cursor-zoom-in ${getItemClass(index)}`}
-            onClick={() => setLightbox(image)}
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-              loading="lazy"
-            />
-          </div>
+          VIDEO_EXT.test(image.src) ? (
+            // A video in a gallery plays as a silent loop that only loads near the viewport
+            <div key={index} className={`relative aspect-square overflow-hidden rounded-xl ${getItemClass(index)}`}>
+              <LoopVideo src={image.src} alt={image.alt} />
+            </div>
+          ) : (
+            <div
+              key={index}
+              className={`relative overflow-hidden rounded-xl cursor-zoom-in ${getItemClass(index)}`}
+              onClick={() => setLightbox(image)}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          )
         ))}
       </div>
       {lightbox && (

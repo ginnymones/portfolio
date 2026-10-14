@@ -78,17 +78,29 @@ function convertVideoImgs(html: string): string {
       const posterJpg = `${basePath}-thumb.jpg`;
       // We'll try png first (can't do fs check client-side, so include poster attr and let browser handle 404 gracefully)
       const poster = `poster="${posterPng}"`;
-      return `<video src="${src}" ${poster} controls preload="metadata" class="rounded-xl my-8 w-full"><p>${alt}</p></video>`;
+      // A .webm is much smaller than an .mp4. The same name with .mp4 is the fallback for browsers that can't play WebM
+      // (it is only requested when the first source fails).
+      const sources = /\.webm$/.test(src)
+        ? `<source src="${src}" type="video/webm"><source src="${basePath}.mp4" type="video/mp4">`
+        : `<source src="${src}" type="video/mp4">`;
+      return `<video ${poster} controls preload="metadata" class="rounded-xl my-8 w-full">${sources}<p>${alt}</p></video>`;
     }
   );
+}
+
+/** Images in rendered markdown load as they near the screen instead of all at once. */
+function lazyImages(html: string): string {
+  return html.replace(/<img\s+(?![^>]*\bloading=)/g, '<img loading="lazy" decoding="async" ');
 }
 
 /**
  * Parse content HTML and split into segments: regular HTML and bento galleries.
  */
 function parseContentSegments(html: string) {
-  // First, convert video img tags to proper video elements
-  const processedHtml = convertVideoImgs(html);
+  // Bento blocks are found first, on the raw HTML, so a video inside a gallery stays an <img> tag for the gallery to read.
+  // Plain HTML segments get their video <img> tags converted to <video> and their images lazy-loaded.
+  const processedHtml = html;
+  const prepare = (segment: string) => lazyImages(convertVideoImgs(segment));
 
   // Remark wraps :::bento, images, and ::: in a single <p> tag:
   const bentoRegex =
@@ -104,7 +116,7 @@ function parseContentSegments(html: string) {
   while ((match = bentoRegex.exec(processedHtml)) !== null) {
     // Add HTML before this bento block
     if (match.index > lastIndex) {
-      segments.push({ type: "html", content: processedHtml.slice(lastIndex, match.index) });
+      segments.push({ type: "html", content: prepare(processedHtml.slice(lastIndex, match.index)) });
     }
 
     // Parse images from the bento block
@@ -125,12 +137,12 @@ function parseContentSegments(html: string) {
 
   // Add remaining HTML
   if (lastIndex < processedHtml.length) {
-    segments.push({ type: "html", content: processedHtml.slice(lastIndex) });
+    segments.push({ type: "html", content: prepare(processedHtml.slice(lastIndex)) });
   }
 
   // If no bento blocks found, return the whole thing as HTML
   if (segments.length === 0) {
-    segments.push({ type: "html", content: processedHtml });
+    segments.push({ type: "html", content: prepare(processedHtml) });
   }
 
   return segments;
