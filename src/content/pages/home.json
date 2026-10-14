@@ -25,7 +25,7 @@
     {
       "company": "Amazon",
       "title": "Led a 3D production team & drove 3D art direction",
-      "description": "As Production Manager, I guided a team of as many as 33 artists delivering 3D assets for product listings across amazon.com, then shifted into an art director role for the Design Operations Team where I drove creative direction, crafting concepts for 3D product visualizations that would be used to drive as many as 100 purchases in a single day for Amazon's Echo Dot, Kindle, electronic accessories, and more.",
+      "description": "As Production Manager, I guided a team of as many as 33 artists delivering 3D assets for product listings across amazon.com. I then shifted to an art director role for the Design Operations Team in Q1 2026 where I drove creative direction, crafting concepts for 3D product visualizations that would be used to drive as many as 100 purchases in a single day for Amazon's Echo Dot, Kindle, electronic accessories, and more.\n\nI was also part of the interview loop for MNL’s 2D Audits team, screening and assessing 30+ candidates.",
       "caseStudy": "",
       "stats": [
         {
@@ -33,21 +33,26 @@
           "label": "Reduction in unaccounted time",
           "image": "/images/home/amazon/unaccounted-time.jpg",
           "imageAlt": "A Slack time-request form with fields for the reason, original time and requested adjustment",
-          "caption": "Built a Slack automation to recover 3310.60 unaccounted production minutes, resulting in 10% volume uplift."
+          "caption": "Built a Slack automation to recover 3310.60 unaccounted production minutes, resulting in 10% volume uplift.",
+          "buttonLabel": "Read Case Study",
+          "buttonLink": "/works/amazon-slack-automation"
         },
         {
-          "value": "53%",
-          "label": "Faster than industry standard",
-          "image": "/videos/amz_armani.mp4",
-          "imageAlt": "Looping preview of the 3D product animation",
-          "caption": "Led and art directed an end-to-end 3D animation project completed in 14 days instead of 30+."
+          "value": "100+",
+          "label": "Orders within 3 hours of launch",
+          "image": "/images/home/amazon/tablet-case.jpg",
+          "imageAlt": "A pink patterned tablet carrying case hanging from a wall peg above a pencil cup and colorful toy blocks",
+          "caption": "Art directed 3D product visualization for the Amazon Kids Tablets carrying cases",
+          "buttonLabel": "View product page",
+          "buttonLink": "https://www.amazon.com/Patrol-Carrying-stickers-Amazon-Tablets/dp/B0GYBBGMGN?th=1"
         },
         {
           "value": "~20%",
-          "label": "Better approval rate",
+          "label": "Higher approval rate",
           "image": "/images/home/amazon/workbench.jpg",
           "imageAlt": "The Approval System UI install page for the Workbench gallery view tool",
-          "caption": "Developed gallery view tool for Workbench, built without touching the main code."
+          "caption": "Developed gallery view tool for Workbench through agentic coding, contributing to ~20% more volumes approved within one week.",
+          "buttonLabel": "Details Confidential"
         }
       ]
     },
@@ -62,14 +67,18 @@
           "label": "More agency revenue",
           "imageAlt": "Looping preview of client websites from the Elevation portfolio",
           "caption": "Expanded the agency’s five-website portfolio into 30+ websites in just 12 months.",
-          "image": "/videos/elev_grewportfolio.mp4"
+          "image": "/videos/elev_grewportfolio.mp4",
+          "buttonLabel": "View Live site",
+          "buttonLink": "https://www.coffeebean.com.ph/"
         },
         {
           "value": "+5%",
-          "label": "Cart conversions",
+          "label": "Cart conversions month-on-month",
           "imageAlt": "Looping preview of a luxury brand storefront and its add-to-cart moment marketing",
-          "caption": "Month-on-month for luxury brand clients through moment marketing.",
-          "image": "/videos/elev_addtocart.mp4"
+          "caption": "Drove month-on-month increase in luxury brand sales through moment marketing.",
+          "image": "/videos/elev_addtocart.mp4",
+          "buttonLabel": "View Live site",
+          "buttonLink": "https://jewelmer.com/"
         }
       ]
     },
@@ -82,48 +91,38 @@
         {
           "value": "2.4K",
           "label": "Peak livestream watchers",
-          "caption": "Livestream coverage and social visuals for Oishi Snacktacular 2016."
+          "caption": "Handled camerawork for the livestream coverage and 360-degree view of the event for Oishi Snacktacular 2016.",
+          "image": "/videos/tbwa_snacktacular.mp4",
+          "imageAlt": "Livestream of the Oishi Snacktacular 2016 event with a 360-degree view of the crowd",
+          "buttonLabel": "View Live work",
+          "buttonLink": "https://www.facebook.com/oishi.ph/videos/10153773375758379/"
         },
         {
-          "value": "50+",
-          "label": "Comments in 24 hours",
-          "caption": "Visuals that got people talking within a day of posting."
-        }
-      ]
-    },
-    {
-      "company": "MediaCom",
-      "title": "Create world-class winning presentations",
-      "description": "As a Multimedia Designer, I collaborated with communications managers and business planning directors across APAC to create winning pitch presentations, establishing MediaCom as the leading media agency in the Philippines. I also created social media visuals and publication ads, and built Facebook applications for partner brands.",
-      "caseStudy": "",
-      "stats": [
-        {
-          "value": "500+",
-          "label": "Contest submissions",
-          "caption": "Livestream coverage and social visuals for Oishi Snacktacular 2016."
-        },
-        {
-          "value": "50+",
-          "label": "Comments in 24 hours",
-          "caption": "Visuals that got people talking within a day of posting."
+          "value": "100+",
+          "label": "Comments and shares in 24 hours",
+          "caption": "Visuals that got people talking within a day of posting.",
+          "image": "/images/home/tbwa/engagement.jpg",
+          "imageAlt": "Social posts for Oishi Snacktacular 2016 with comments and shares from followers",
+          "buttonLabel": "View Live work",
+          "buttonLink": "https://www.facebook.com/photo/?fbid=1842214432716832&set=a.645230407637940"
         }
       ]
     }
   ],
   "otherHeading": "I also make other stuff",
-  "otherText": "Illustration, side projects, and small tools I build for myself and for friends.",
+  "otherText": "Illustration, side projects, and tools that I’ve built for myself and for friends.",
   "otherTiles": [
     {
       "label": "Works",
       "link": "/works",
-      "image": "",
-      "imageAlt": ""
+      "image": "/images/case-studies/100-days-of-ui-checkout-header.jpg",
+      "imageAlt": "A checkout page design from the 100 Days of UI challenge"
     },
     {
       "label": "Tools",
       "link": "/tools",
-      "image": "",
-      "imageAlt": ""
+      "image": "/images/tools/mega-cp-calculator.png",
+      "imageAlt": "Mega CP Calculator showing a Staraptor's CP at level 20"
     }
   ],
   "body": "",

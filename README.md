@@ -33,8 +33,8 @@ Visit `http://localhost:3000`
 | `date` | Yes | Publication date (YYYY-MM-DD), used for sorting |
 | `liveUrl` | No | Link to live project |
 | `role`, `years` | No | Hero meta (V2) |
-| `situation`, `task` | No | STAR Situation and Task text (V2) |
-| `resultsStats`, `resultsCopy` | No | STAR Results stats and closing paragraphs (V2) |
+| `challenge` | No | Challenge text: context plus what you set out to do (V2) |
+| `resultsStats`, `resultsCopy` | No | Results stats and closing paragraphs (V2) |
 | `homepageOnly` | No | `true` hides the case study from Works, related and prev/next (V2; company highlights no longer use case studies) |
 
 ### Image Guidelines
@@ -46,7 +46,7 @@ Visit `http://localhost:3000`
 
 ### Content Structure
 
-Case studies follow STAR (V2): **Situation**, **Task**, **Action** and **Results**. Situation, Task and Results are frontmatter fields; the markdown body is Action, where `###` headings start blocks with an image beside the text. Older write-ups still work and show entirely under Action. See [docs/CASE-STUDY-STRUCTURE.md](docs/CASE-STUDY-STRUCTURE.md).
+Case studies have three sections (V2): **Challenge**, **Action** and **Results**. Challenge and Results are frontmatter fields (each is hidden when empty); the markdown body is Action, where `###` headings start blocks with an image beside the text. Older write-ups still work and show entirely under Action. See [docs/CASE-STUDY-STRUCTURE.md](docs/CASE-STUDY-STRUCTURE.md).
 
 You can add any markdown content to Action: images, videos (via embed), links, lists, etc.
 

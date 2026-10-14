@@ -94,12 +94,11 @@ role: "Your role"                 # Optional (V2), hero meta
 years: "2018 – 2022"              # Optional (V2), hero meta; falls back to the year of date
 date: "YYYY-MM-DD"                # Required, used for sort order
 homepageOnly: false               # V2: true hides it from Works/related/prev-next (optional; company highlights no longer have case studies)
-situation: ""                     # V2 STAR, optional
-task: ""                          # V2 STAR, optional
-resultsStats:                     # V2 STAR, optional list of {value, label, icon}
+challenge: ""                     # V2, optional: context plus what you set out to do
+resultsStats:                     # V2, optional list of {value, label, icon}
   - value: "500%"
     label: "More agency revenue"
-resultsCopy: ""                   # V2 STAR, optional
+resultsCopy: ""                   # V2, optional
 liveUrl: "https://..."            # Optional, shown as link
 backgroundType: "none"            # none | image | video | color | gradient
 backgroundImage: ""               # For image backgrounds
@@ -112,7 +111,7 @@ overlayOpacity: 50                # 0-100
 overlayColor: "#FFFDF9"           # Overlay tint color
 ```
 
-Body content structure (V2, STAR): the markdown body is the **Action** section; Situation, Task and Results come from the frontmatter fields above. Older write-ups (Problem Statement / Solution / Results & Impact) still render, entirely inside Action. Full details: [CASE-STUDY-STRUCTURE.md](CASE-STUDY-STRUCTURE.md).
+Body content structure (V2): the markdown body is the **Action** section; Challenge and Results come from the frontmatter fields above. Older write-ups (Problem Statement / Solution / Results & Impact) still render, entirely inside Action. Full details: [CASE-STUDY-STRUCTURE.md](CASE-STUDY-STRUCTURE.md).
 
 ### Pages (JSON)
 

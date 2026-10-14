@@ -37,6 +37,9 @@ export interface CompanyStat {
   /** Key in STAT_MOTIONS (src/lib/stat-motion.ts); replaces the image with an animated stack */
   motion?: string;
   caption?: string;
+  /** Button under the caption: a link when buttonLink is set, otherwise a static outlined tag (e.g. "Confidential") */
+  buttonLabel?: string;
+  buttonLink?: string;
 }
 
 export interface CompanyProject {

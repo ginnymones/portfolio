@@ -4,6 +4,107 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-14] — Homepage Amazon stats and case studies re-synced from Figma
+
+### Added
+- Amazon section, new stat "100+ orders within 3 hours of launch" with the Amazon Kids Tablets carrying case image (`public/images/home/amazon/tablet-case.jpg`) and a "View product page" button linking to the Amazon listing. It replaces the "53% faster than industry standard" stat, which is gone from the Figma frame.
+- Case study `amazon-slack-automation` now has its real content from Figma: Challenge (numbered list and bullets), Action (full-width form image with caption, beside-text Slack message image), the three Results stats and Results bullets. Still a draft: the header and thumbnail are template placeholders in Figma too.
+
+### Changed
+- Homepage Amazon: description is now two paragraphs (the interview-loop line sits in its own paragraph, as in Figma) and mentions Q1 2026; the Workbench stat caption reads "...through agentic coding, contributing to ~20% more volumes approved within one week."; its tag reads "Details Confidential". `CompanyHighlight.tsx` renders a blank line in a description as a new paragraph.
+- Case study titles now follow the Figma hero headings (this also changes the breadcrumb, Works card, tab title and related links): Rebrand "The Ginny Mones 2026 Rebrand, Part 1", MHW:PH, Collection Tracker "Pokémon Card Collection Tracker", Starter Pack, Mega CP "Mega Evolution Combat Power (CP) Calculator", Quiz Randomizer, Resume Lab, Workload Tracker, Chansey "Pokemon Sketches", Email Design System. The `[DEV]`, `[BRAND]` and `[ILLUS]` prefixes are gone from these.
+- Quiz Randomizer and Resume Lab bullets are regular weight (no bold lead-ins), as in Figma.
+- Anim case study rewritten from the Figma frame: new title "JOIIIO parts replacement video demonstration", client Joiiio, a Challenge and Action write-up, a new still of the vector jeep (`anim-joiiio-howcanmytop-still.png`), the intro-ad video and a two-image gallery. The Tender Bites GIFs were removed from the page (files kept). Header and thumbnail now point at the existing `.png`; the old `.jpg` path was broken.
+- Chansey Sketches shows "2025" as in Figma, and the intro line "Some Chansey sketches that I've done over the years." was removed because the Figma frame no longer has it. An Action made only of images and galleries now shows no "Action" heading (`works/[slug]/page.tsx`), as in the Figma frame.
+- Anim case study renamed from `anim-motion-graphics` to `anim-joiiio` (URL `/works/anim-joiiio`; the Figma frame is renamed too). Image file names keep the old prefix.
+- Homepage company descriptions now run the full column width (1000px) as in Figma; they were capped at 720px (`CompanyHighlight.tsx`).
+- Homepage: TBWA\SMP livestream caption now reads "Handled camerawork for the livestream coverage and ..." (Figma edit). The "I also make other stuff" tiles now have images: Works uses the 100 Days of UI Checkout header (added in Figma), Tools uses the Mega CP Calculator screenshot (`home.json` `otherTiles`).
+- Amazon Slack case study: the header and card image are now the Slack time-request form (the image set in Figma, `amz_meter01.jpg`); before, both pointed at a missing placeholder file, so no header showed on desktop or mobile.
+- Anim: the "Given this, I knew what I had to work on first" image is now the cropped jeep as in the Figma frame (`anim-joiiio-howcanmytop-still.png`, exported from the frame at 2x). The video uses its `anim-joiiio-general-thumb.png` poster, which was replaced with the new thumbnail.
+- Figma (homepage desktop and mobile): typos fixed ("Procter & Gamble", "journey."), Tools preview now shows the Mega CP Calculator image, and the mobile Works and Tools tiles show their images too.
+- Tool cards and case study "Live App" links for Mega CP Calculator, Quiz Randomizer and Resume Lab point at `ginnymones.com/tools/<tool>` (proxied in `next.config.ts`); Workload Tracker points at the demo workspace `/w/demo`.
+
+### Notes
+- Social Nissan is set to `status: "draft"` (hidden in production) while Ginny finishes it; its Figma Challenge is an unfinished sentence ("While Nissan began their") and was not applied. The `social-alaska` frame has no content file, and neither frame was touched.
+- Figma: the Email Design System card in the Tools frames (desktop 359:152, mobile 411:145) now matches the site (new title and summary, Beta status, Launch button), the Works card title reads "Email Design System — Figma Plugin", and the breadcrumb in 17 case study frames now reads the hero heading (Nissan and Alaska left alone).
+
+---
+
+## [2026-10-13] — Email Design System: guide, demo zip and case study update
+
+### Added
+- How-to guide for the rebuilt plugin, a standalone page at `/guides/email-design-system.html` (`public/guides/`). Portfolio cream and orange, Forum and Google Sans Flex, light by default with a Dark mode toggle, install steps for the zip demo, troubleshooting.
+- Demo download `public/downloads/Email-Design-System-demo.zip` (manifest, built plugin, read-me), linked from install step one of the guide.
+- Case study `dev-figma-to-email-builder`: addendum at the bottom, "Update: Rebuilt as the Email Design System (October 2026)", with what changed, module thumbnails, restyle and a link to the guide and zip. Three new images `public/images/case-studies/figma-to-email-builder-v2-*.png`. Original STAR text and results untouched.
+
+### Changed
+- Content synced from the Figma case study frames (Figma is the source of truth), 2026-10-14: Amazon Slack (title, summary, client, Action text), Anim (title), Social Nissan (title), Rebrand (tech stack as five paragraphs), MHW:PH (new Action paragraphs, new Results with three stats), Collection Tracker (task paragraph moved from Challenge to the start of Action, Results wording, new block order), Starter Pack (Challenge wording, "Key considerations" line, closing paragraph, four Results lines), Mega CP Calculator (task paragraphs moved from Challenge to the start of Action, third stat 148 and a fifth Results line), Quiz Randomizer, Resume Style Tool and Workload Tracker (the "Key Design Decisions" heading is gone, as in Figma).
+- Email Design System case study now uses the images from its Figma frame: `figma-to-email-builder-hero.jpg` (header and Works card thumbnail), `-a1.jpg`, `-a2.jpg`, `-a3.jpg` (checked byte-for-byte against the Figma fills). It was still pointing at the old plugin screenshots.
+- Results on Quiz Randomizer, Resume Style Tool and Workload Tracker are now bullet lists, as in Figma.
+- Lists in case study Action text (bullets and numbered lists) now show their markers on desktop and mobile; Tailwind's reset had removed them (`globals.css`). Challenge and Results lists already did. Leftover icon circles deleted from the MHW:PH, Email Design System and Starter Pack frames in Figma.
+- Case study Results stats no longer show the khaki placeholder circle when a stat has no icon (the Figma frames have no icon circles any more). A stat with an icon image still shows it (`works/[slug]/page.tsx`). Icon circles also removed from the desktop and mobile case study templates in Figma.
+- Font weight and text re-synced from Figma (2026-10-14): SemiBold lead-ins mirrored as bold on Collection Tracker; em dashes in the Collection Tracker and Starter Pack bullets; Results lines on Quiz Randomizer, Resume Style Tool and Workload Tracker lose their trailing periods; hidden Figma layers (MHW:PH third stat, Collection Tracker Results, Starter Pack stat) removed from the content.
+- Rebrand images updated from the Figma frame: `branding-ginny-group.png`, `branding-ginny-tinacms.png`, `branding-ginny-details.png` and the header `branding-ginny-header.jpg` (card thumbnail too) were replaced with exports of the Figma images (2x). All other case study images were checked byte-for-byte against the Figma fills and already match.
+- Challenge and Results text now support lists: a block whose lines all start with `- ` renders as a bullet list, and one that starts with `1. `, `2. ` as a numbered list (`works/[slug]/page.tsx`). Applied where Figma uses list formatting: Mega CP Challenge bullets, Amazon Slack numbered items, Results lists on Rebrand, MHW:PH, Collection Tracker, Starter Pack, Mega CP and Email Design System, and the Rebrand tech stack bullets.
+- Action text: consecutive image lines (no blank line between) form an image stack, one column of images beside the text, each caption from its alt text. Used on Mega CP Calculator to match Figma (`action-blocks.ts`, `ActionSection.tsx`).
+- Case study `dev-figma-to-email-builder` is replaced by `dev-email-design-system` (file renamed, content rewritten from the new Figma frame: new Challenge, Action, Results and stats 13 / 7 / 8). The tool card is now titled "Email Design System" (summary trimmed) and links to `dev-email-design-system` and the guide. The old case study (original write-up) is parked in `_to_delete/dev-figma-to-email-builder.md`. The how-to guide and demo zip links moved to Relevant links. The old "Update" sections and their v2 images are no longer used by the page (image files still in `public/images/case-studies/`).
+- Action text: a `+++` line after a full-width image keeps the text that follows in the same block, under the caption (`action-blocks.ts`, `ActionSection.tsx`). Used for the closing line on 100 Days Sign Up, matching Figma.
+- Case study layout aligned with the Figma frames: heading-to-text gap in Action blocks is now 20px (was 12), Challenge paragraph gap 20px (was 16). Block order fixed on 100 Days Checkout, Sign Up and User Profile, and on Workload Tracker (two images shared one paragraph, so its Key Design Decisions row and the recurring-templates image did not render as in Figma).
+- Case study structure is now **Challenge, Action, Results** (was STAR). "Situation" is renamed Challenge and any Task text is folded into the end of the Challenge, in the Figma frames (all 20 desktop frames, the `case study / hi-fi` template and the mobile case study frame) and in the content: `situation` and `task` frontmatter fields are gone, replaced by `challenge` in 11 case studies plus `_template.md`. Page code (`works/[slug]/page.tsx`), loader (`case-studies.ts`), Tina schema (`tina/config.ts`) and docs updated. Challenge and Results still hide when empty.
+- Case study Action text: a `***` line now ends an image + text row so the following paragraphs run full width (`src/lib/action-blocks.ts`). Used on 100 Days of UI Landing Page to match Figma: header image beside the first three paragraphs, the next two full width, then the mobile and full desktop images.
+- 100 Days of UI case studies (all six): passive and third-person phrasing rewritten to first person, active voice. Wording only, no change to the message. Mirrored in the Figma desktop frames (section 526:2). The six `.md` files were then re-synced from the Figma frames: each now has `challenge` and `task` as separate sections, Action text and image captions match Figma, and typos were fixed.
+- Email Design System guide footer: "Created by Ginny Mones" now links to https://ginnymones.com.
+- Tool card "Figma to HTML Email Builder" (`src/content/tools/figma-to-email-builder.md`): status Beta, new thumbnail `public/images/tools/email-design-system.png`, summary updated, "Launch" now opens the guide. Title, case study link and date unchanged.
+
+### Notes
+- A draft of a separate "Email Design System" tool card is parked in `_to_delete/` (not part of the site).
+- The guide is a static file with its images embedded. To update it, replace the file and the zip together.
+
+---
+
+## [2026-10-12] — Case studies moved into STAR
+
+### Changed
+- 100 Days of UI studies (all six) now use a single **Challenge** section instead of Situation + Task, following Ginny's rework of the app-icon frame in Figma. New `challenge` field (`case-studies.ts`, `works/[slug]/page.tsx`, `tina/config.ts`); the old Task text is merged into Challenge in the five studies that had one, wording unchanged. App Icon Challenge and Action text now match her Figma wording. The Figma frames for the other five were updated the same way (Task frame hidden, as on app-icon). Action is unchanged.
+- `role` (and `years` where it is a range) added to every case study from the Figma hero meta: 100 Days of UI = UX/UI Designer, Amazon Slack = Production Manager, Project Owner, Joiiio animations = Art Director, Rebrand = Art Director, Copywriter, Developer, MHW:PH = Art Director, Copywriter, the dev tools = Product Designer, Developer, Chansey = Illustrator, Nissan = Art Director.
+
+### Added
+- Amazon "53% Reduction in unaccounted time" stat: "Read Case Study" button linking to `/works/amazon-slack-automation` (`home.json`). The study is still `status: draft`, so the link only works locally until it is published.
+
+### Added
+- Figma only: all 19 case studies recreated at desktop width (section `case studies / desktop (all, from site content)`, node 526:2 in the 2026 Resume file). No code change.
+
+### Changed
+- Case study Action images now always sit on the LEFT with the text on the right (was alternating, then briefly right). Every stand-alone image in a block pairs with its neighbouring text, so write-ups with several images and no `###` headings (Rebrand, 100 Days of UI) get the same layout instead of inline images. On phones the image comes first. `ActionSection.tsx`, `docs/CASE-STUDY-STRUCTURE.md` and `_template.md` updated. The Figma case study frame (357:171) may still show the alternating layout.
+- 15 case studies (100 Days of UI x six, Pokémon Collection Tracker, Vibe Coding Starter Pack, Figma to Email Builder, Mega CP Calculator, Quiz Randomizer, Resume Lab, Workload Tracker, Ginny Mones 2026 Rebrand, MHW:PH) re-sorted from Problem / Solution / Results into `situation`, `task`, Action (body) and `resultsStats` / `resultsCopy`. Wording is Ginny's own, only moved. Tasks are only filled where the write-up already had a goal or brief sentence; Results tiles only use numbers already in the write-up.
+- Landing Page study: RingConn link moved to a "Original RingConn Gen 2 page" link button, since Situation/Task text is plain.
+- Calculator study: removed a stray pasted fragment ("lutions are often the most simple ones...") from the end of the Solution.
+- `_template.md` and `amazon-slack-automation.md`: multi-paragraph STAR fields now use `|-` blocks. A blank line inside a quoted YAML string does not start a new paragraph.
+- Originals backed up in `V2 Assets/backups/case-studies-2026-10-12/` (local only).
+
+---
+
+## [2026-10-11] — Homepage buttons, links and Figma edits
+
+### Added
+- Optional button under each company stat (`buttonLabel`, `buttonLink`; TinaCMS: Pages > Home > Company Highlights > Stats). With a link it is the primary button and opens in a new tab; without a link it is a static outlined tag (used for "Confidential").
+- Links: Elevation "View Live site" (coffeebean.com.ph, jewelmer.com); TBWA\SMP "View Live work" (Oishi livestream video, engagement post). Amazon "Confidential" tags on the 53% faster and ~20% stats.
+- TBWA\SMP engagement image `public/images/home/tbwa/engagement.jpg` (from the Figma frame).
+
+### Changed
+- Copy synced from Figma 357:13: Amazon "Higher approval rate" and Workbench caption, Elevation "Cart conversions month-on-month" and caption, TBWA\SMP livestream caption, "100+ Comments and shares in 24 hours", "I also make other stuff" text.
+- Stat grid reserves a fifth row so buttons line up across columns.
+- Phones: buttons stack under the caption in the single-column layout (same content as desktop).
+
+### Removed
+- MediaCom section (removed from the Figma homepage). Still in the `staging` commit if it comes back.
+
+### Notes
+- Amazon "Read Case Study" button (53% reduction in unaccounted time) is in Figma but its link is still to follow, so it is not shown yet. Add `Read case study` + link to that stat in the CMS or `home.json` when ready.
+- Figma mobile frame 364:96 is out of date (old copy, Amazon only, no buttons); the site itself is one responsive layout.
+
+---
+
 ## [2026-10-11] — Homepage synced from Figma, real videos in stat slots
 
 ### Added

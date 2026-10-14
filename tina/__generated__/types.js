@@ -45,6 +45,8 @@ export const PagePartsFragmentDoc = gql`
       imageAlt
       motion
       caption
+      buttonLabel
+      buttonLink
     }
   }
   otherHeading
@@ -126,8 +128,7 @@ export const CaseStudyPartsFragmentDoc = gql`
   years
   date
   homepageOnly
-  situation
-  task
+  challenge
   liveUrl
   links {
     __typename

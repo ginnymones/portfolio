@@ -22,7 +22,13 @@ export function CompanyHighlight({ id, project }: { id: string; project: Company
         </h2>
       </div>
 
-      {project.description && <p className="max-w-[720px] text-warm-gray">{project.description}</p>}
+      {project.description && (
+        <div className="flex w-full flex-col gap-5 text-warm-gray">
+          {project.description.split(/\n{2,}/).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+      )}
 
       {project.stats && project.stats.length > 0 && (
         <div
@@ -33,7 +39,7 @@ export function CompanyHighlight({ id, project }: { id: string; project: Company
           {project.stats.map((stat) => (
             <div
               key={`${stat.value}-${stat.label}`}
-              className="flex flex-col gap-[10px] pt-3 md:row-span-4 md:grid md:grid-rows-subgrid md:gap-y-3 md:pt-0"
+              className="flex flex-col gap-[10px] pt-3 md:row-span-5 md:grid md:grid-rows-subgrid md:gap-y-3 md:pt-0"
             >
               <p className="font-serif text-[44px] leading-none text-sunset md:text-5xl">{stat.value}</p>
               <p className="label text-dark-gray">{stat.label}</p>
@@ -54,6 +60,22 @@ export function CompanyHighlight({ id, project }: { id: string; project: Company
                 />
               )}
               {stat.caption && <p className="text-warm-gray">{stat.caption}</p>}
+              {stat.buttonLabel && (
+                <div className="pt-2 md:pt-0">
+                  {stat.buttonLink ? (
+                    <Button
+                      href={stat.buttonLink}
+                      {...(/^https?:/.test(stat.buttonLink) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      {stat.buttonLabel}
+                    </Button>
+                  ) : (
+                    <span className="inline-flex items-center justify-center rounded-full border border-ochre px-10 py-[14px] text-[18px] font-semibold uppercase leading-normal tracking-[0.05em] text-ochre">
+                      {stat.buttonLabel}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>

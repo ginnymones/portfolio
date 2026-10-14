@@ -37,6 +37,8 @@ fragment PageParts on Page {
       imageAlt
       motion
       caption
+      buttonLabel
+      buttonLink
     }
   }
   otherHeading
@@ -115,8 +117,7 @@ fragment CaseStudyParts on CaseStudy {
   years
   date
   homepageOnly
-  situation
-  task
+  challenge
   liveUrl
   links {
     __typename

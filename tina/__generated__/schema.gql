@@ -103,6 +103,8 @@ type PageCompanyProjectsStats {
   imageAlt: String
   motion: String
   caption: String
+  buttonLabel: String
+  buttonLink: String
 }
 
 type PageCompanyProjects {
@@ -212,6 +214,8 @@ input PageCompanyProjectsStatsFilter {
   imageAlt: StringFilter
   motion: StringFilter
   caption: StringFilter
+  buttonLabel: StringFilter
+  buttonLink: StringFilter
 }
 
 input PageCompanyProjectsFilter {
@@ -419,8 +423,7 @@ type CaseStudy implements Node & Document {
   years: String
   date: String!
   homepageOnly: Boolean
-  situation: String
-  task: String
+  challenge: String
   liveUrl: String
   links: [CaseStudyLinks]
   backgroundType: String
@@ -466,8 +469,7 @@ input CaseStudyFilter {
   years: StringFilter
   date: DatetimeFilter
   homepageOnly: BooleanFilter
-  situation: StringFilter
-  task: StringFilter
+  challenge: StringFilter
   liveUrl: StringFilter
   links: CaseStudyLinksFilter
   backgroundType: StringFilter
@@ -533,6 +535,8 @@ input PageCompanyProjectsStatsMutation {
   imageAlt: String
   motion: String
   caption: String
+  buttonLabel: String
+  buttonLink: String
 }
 
 input PageCompanyProjectsMutation {
@@ -658,8 +662,7 @@ input CaseStudyMutation {
   years: String
   date: String
   homepageOnly: Boolean
-  situation: String
-  task: String
+  challenge: String
   liveUrl: String
   links: [CaseStudyLinksMutation]
   backgroundType: String

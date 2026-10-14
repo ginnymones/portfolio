@@ -43,17 +43,50 @@ export async function generateMetadata({
   };
 }
 
-const paragraphs = (text?: string) =>
+// Text fields (challenge, results copy): a blank line starts a new block. A block whose lines all start with "- " is a
+// bullet list, and one whose lines all start with "1. ", "2. " … is a numbered list (as in the Figma text lists).
+type TextBlock = { kind: "p"; text: string } | { kind: "ul" | "ol"; items: string[] };
+
+const textBlocks = (text?: string): TextBlock[] =>
   (text ?? "")
     .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter(Boolean);
+    .map((chunk) => chunk.trim())
+    .filter(Boolean)
+    .map((chunk): TextBlock => {
+      const lines = chunk.split("\n").map((l) => l.trim()).filter(Boolean);
+      if (lines.every((l) => /^[-•]\s+/.test(l))) return { kind: "ul", items: lines.map((l) => l.replace(/^[-•]\s+/, "")) };
+      if (lines.every((l) => /^\d+\.\s+/.test(l))) return { kind: "ol", items: lines.map((l) => l.replace(/^\d+\.\s+/, "")) };
+      return { kind: "p", text: chunk };
+    });
 
-function StarHeading({ children }: { children: React.ReactNode }) {
+function TextBlocks({ blocks }: { blocks: TextBlock[] }) {
+  return (
+    <>
+      {blocks.map((b, i) =>
+        b.kind === "p" ? (
+          <p key={i} className="text-dark-gray">{b.text}</p>
+        ) : (
+          (() => {
+            const List = b.kind === "ul" ? "ul" : "ol";
+            return (
+              <List key={i} className={`pl-6 text-dark-gray ${b.kind === "ul" ? "list-disc" : "list-decimal"}`}>
+                {b.items.map((item, j) => (
+                  <li key={j}>{item}</li>
+                ))}
+              </List>
+            );
+          })()
+        ),
+      )}
+    </>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
   return <h2 className="heading-4 text-xl text-sunset md:text-2xl">{children}</h2>;
 }
 
-// Figma: case study / hi-fi (357:171). STAR: Situation, Task, Action, Results.
+// Figma: case study / hi-fi (357:171). Sections: Challenge, Action, Results. Challenge and Results are hidden when empty.
 // No mobile frame exists yet: the stacked layout below is a proposal.
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
@@ -64,9 +97,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   const actionBlocks = await parseActionBlocks(study.content);
-  const situation = paragraphs(study.situation);
-  const task = paragraphs(study.task);
-  const resultsCopy = paragraphs(study.resultsCopy);
+  // An Action made only of images and galleries has nothing to label (Figma: Chansey sketches has no Action heading)
+  const actionHasText = /\S/.test(study.content.replace(/!\[[^\]]*\]\([^)]*\)|:::\w*|\*\*\*|\+\+\+/g, ""));
+  const challenge = textBlocks(study.challenge);
+  const resultsCopy = textBlocks(study.resultsCopy);
   const stats = study.resultsStats ?? [];
   // Homepage-only company case studies are left out of related and prev/next
   const related = study.homepageOnly ? [] : getRelatedCaseStudies(slug, study.tags, 3);
@@ -137,30 +171,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </header>
 
-        {/* Situation */}
-        {situation.length > 0 && (
-          <section className="flex flex-col gap-4 pb-12 md:pb-[72px]">
-            <StarHeading>Situation</StarHeading>
-            {situation.map((p, i) => (
-              <p key={i} className="text-dark-gray">{p}</p>
-            ))}
-          </section>
-        )}
-
-        {/* Task */}
-        {task.length > 0 && (
-          <section className="flex flex-col gap-4 pb-12 md:pb-[72px]">
-            <StarHeading>Task</StarHeading>
-            {task.map((p, i) => (
-              <p key={i} className="text-dark-gray">{p}</p>
-            ))}
+        {/* Challenge */}
+        {challenge.length > 0 && (
+          <section className="flex flex-col gap-5 pb-12 md:pb-[72px]">
+            <SectionHeading>Challenge</SectionHeading>
+            <TextBlocks blocks={challenge} />
           </section>
         )}
 
         {/* Action */}
         {actionBlocks.length > 0 && (
           <section className="flex flex-col gap-8 pb-12 md:gap-12 md:pb-[72px]">
-            <StarHeading>Action</StarHeading>
+            {actionHasText && <SectionHeading>Action</SectionHeading>}
             <ActionSection blocks={actionBlocks} />
           </section>
         )}
@@ -168,21 +190,19 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         {/* Results */}
         {(stats.length > 0 || resultsCopy.length > 0) && (
           <section className="flex flex-col gap-10 pb-16 md:pb-28">
-            <StarHeading>Results</StarHeading>
+            <SectionHeading>Results</SectionHeading>
             {stats.length > 0 && (
               <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
                 {stats.map((stat) => (
                   <div key={`${stat.value}-${stat.label}`} className="flex flex-col items-center gap-3 text-center">
                     <p className="font-serif text-5xl leading-none text-sunset">{stat.value}</p>
-                    <ImageSlot src={stat.icon} alt="" label="" className="size-16 rounded-full" sizes="64px" />
+                    {stat.icon && <ImageSlot src={stat.icon} alt="" label="" className="size-16 rounded-full" sizes="64px" />}
                     <p className="label text-dark-gray">{stat.label}</p>
                   </div>
                 ))}
               </div>
             )}
-            {resultsCopy.map((p, i) => (
-              <p key={i} className="text-dark-gray">{p}</p>
-            ))}
+            <TextBlocks blocks={resultsCopy} />
           </section>
         )}
 

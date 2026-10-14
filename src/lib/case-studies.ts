@@ -31,8 +31,7 @@ export interface CaseStudyMeta extends BackgroundConfig {
   years?: string;
   date: string;
   homepageOnly?: boolean;
-  situation?: string;
-  task?: string;
+  challenge?: string;
   resultsStats?: ResultStat[];
   resultsCopy?: string;
   liveUrl?: string;
@@ -74,8 +73,7 @@ function parseMeta(slug: string, data: Record<string, unknown>): CaseStudyMeta {
     years: (data.years as string) || undefined,
     date: (data.date as string) || "",
     homepageOnly: data.homepageOnly === true,
-    situation: (data.situation as string) || undefined,
-    task: (data.task as string) || undefined,
+    challenge: (data.challenge as string) || undefined,
     resultsStats: (data.resultsStats as ResultStat[]) || [],
     resultsCopy: (data.resultsCopy as string) || undefined,
     liveUrl: data.liveUrl as string | undefined,

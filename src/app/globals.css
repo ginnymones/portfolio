@@ -156,6 +156,15 @@ body {
     padding-left: 1.5rem;
   }
 
+  /* Tailwind's reset removes list markers; bring them back for write-ups */
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
   .prose li {
     margin-bottom: 0.5rem;
     line-height: 1.5;

@@ -1,11 +1,13 @@
 ---
-status: "published"
-title: "[SOCIAL] Assets for Nissan's social media accounts"
+status: "draft"
+title: "Social Media Assets for Nissan"
 thumbnail: "/images/case-studies/social-nissan-header.png"
 headerImage: "/images/case-studies/social-nissan-header.png"
 summary: "Social assets that I worked on for Nissan during my time in TBWA\\SMP"
 tags: ["Graphic Design",  "Branding"]
 client: "Nissan"
+role: "Art Director"
+years: "2016 - 2017"
 date: "2016-03-20"
 links:
   - label: "View on Behance"
