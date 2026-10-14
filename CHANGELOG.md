@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 - Anim (Joiiio): the 36 MB "How can my top be replaced?" GIF in the gallery is replaced by a silent looping WebM (`anim-joiiio-howcanmytop.webm`, 0.8 MB, 1080x1080, 8.7 s). It only downloads when it nears the screen and has the same pause button as the homepage videos. The GIF file is still in the repo.
 - Galleries (`:::bento`) can now hold a `.mp4` or `.webm`, which plays as a lazy silent loop (`BentoGallery.tsx`). Bento blocks are now found before video images are converted, so a video in a gallery is no longer mistaken for a plain video.
 - Anim (Joiiio): the main video is now `anim-joiiio-general.webm` (2.7 MB, 1200x628, 27 s, with sound) instead of the 22 MB MP4. The page lists the MP4 as a fallback source for browsers that can't play WebM; it is only downloaded if the WebM fails. The existing `-thumb.png` poster is still used.
+- Image weight: ten large JPEGs were re-exported as progressive JPEGs at the same dimensions, about 18 MB down to 3 MB with no visible change (100 Days of UI headers and mobile shots, the Landing Page full-page capture, and the Chansey header). File names are unchanged. `amz-mandogrogu.jpg` (139 KB) was added next to the original 2.6 MB PNG, which is kept; nothing uses either yet.
 - Every image in rendered case study text now loads lazily (`loading="lazy"`, `decoding="async"`). The case study header image loads right away (`priority`), as do the logo and homepage portrait; all other images load as they near the screen.
 
 ---
