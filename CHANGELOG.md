@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-15] — New Get in touch copy
+
+### Changed
+- The Get in touch panel copy now reads "Have an idea you can't put into visuals or writing, or a brand problem that requires a creative solution? Say hola." (`src/content/pages/contact.json`, and the fallback text in `ContactSection.tsx`). It was "Have a brand, a product, or a team that needs a creative lead? Say hola."
+
+### Notes
+Figma updated to match: all 12 copies of the line (`get in touch - samp` 392:277, `get in touch / mobile` 416:197 and their copies on the page frames) now use the new text; it wraps to two lines on desktop and three on mobile.
+
+---
+
 ## [2026-10-15] — Legacy color aliases removed
 
 ### Changed

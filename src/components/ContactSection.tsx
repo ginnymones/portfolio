@@ -16,7 +16,7 @@ export function ContactSection() {
         <div className="flex flex-col items-center gap-[18px] rounded-[20px] bg-sunset px-4 py-12 text-center text-warm-white md:gap-7 md:rounded-[24px] md:px-6 md:py-20 lg:pl-[calc(var(--art-left)+517px)] lg:pr-[max(24px,calc(100%-(var(--art-left)+517px)-496px))]">
           <h2 className="heading-1 text-4xl md:text-5xl">{page.heading || "Get in touch"}</h2>
           <p className="max-w-[460px] text-[15px] md:text-base">
-            {page.subtitle || "Have a brand, a product, or a team that needs a creative lead? Say hola."}
+            {page.subtitle || "Have an idea you can't put into visuals or writing, or a brand problem that requires a creative solution? Say hola."}
           </p>
           <SocialLinks links={settings.socialLinks.filter((link) => !/substack/i.test(link.label))} email={settings.email} variant="panel" />
           <p className="text-sm md:text-base">&copy; {new Date().getFullYear()} Ginny Mones</p>
