@@ -82,8 +82,8 @@ export function SocialLinks({
 
   const baseClasses =
     variant === "light"
-      ? "text-neutral-warm hover:text-background"
-      : "text-neutral-dark hover:text-accent-orange";
+      ? "text-light-gray hover:text-cream"
+      : "text-warm-gray hover:text-sunset";
 
   return (
     <div className={`flex flex-wrap gap-5 justify-center ${className}`}>

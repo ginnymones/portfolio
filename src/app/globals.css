@@ -19,15 +19,6 @@
   --color-forest: #47D856;
   --color-crimson: #DA3131;
 
-  /* Transitional aliases: V1 token names now point at V2 colors.
-     Remove as components migrate to the names above. */
-  --color-background: var(--color-cream);
-  --color-foreground: var(--color-dark-gray);
-  --color-accent-orange: var(--color-sunset);
-  --color-accent-yellow: var(--color-sunshine);
-  --color-neutral-warm: var(--color-light-gray);
-  --color-neutral-dark: var(--color-warm-gray);
-
   --font-sans: "Google Sans Flex", system-ui, sans-serif;
   --font-serif: "Forum", Georgia, serif;
 }
@@ -114,8 +105,8 @@ html {
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-cream);
+  color: var(--color-dark-gray);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.5;

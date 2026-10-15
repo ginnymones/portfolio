@@ -63,7 +63,7 @@ export function Navigation() {
         the animation stays smooth. A soft drop shadow replaces the old line once the bar is compact.
       */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 bg-background transition-shadow duration-300 ease-out motion-reduce:transition-none ${
+        className={`fixed inset-x-0 top-0 z-50 bg-cream transition-shadow duration-300 ease-out motion-reduce:transition-none ${
           scrolled ? "shadow-[0_4px_16px_rgba(0,0,0,0.08)]" : "shadow-[0_4px_16px_rgba(0,0,0,0)]"
         }`}
       >
@@ -139,7 +139,7 @@ export function Navigation() {
           />
           <aside
             aria-label="Menu"
-            className={`fixed right-0 top-0 z-40 flex h-dvh w-[280px] flex-col overscroll-contain bg-background px-6 pb-8 shadow-[-8px_0_24px_rgba(0,0,0,0.15)] transition-[transform,visibility] duration-300 ease-out motion-reduce:transition-none ${
+            className={`fixed right-0 top-0 z-40 flex h-dvh w-[280px] flex-col overscroll-contain bg-cream px-6 pb-8 shadow-[-8px_0_24px_rgba(0,0,0,0.15)] transition-[transform,visibility] duration-300 ease-out motion-reduce:transition-none ${
               isOpen ? "visible translate-x-0" : "invisible translate-x-full"
             }`}
           >

@@ -36,7 +36,7 @@ function LightboxModal({ src, alt, onClose }: LightboxProps) {
     >
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 text-white hover:text-accent-yellow transition-colors"
+        className="absolute top-6 right-6 text-white hover:text-sunshine transition-colors"
         aria-label="Close lightbox"
       >
         <svg

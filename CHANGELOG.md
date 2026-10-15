@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-15] — Legacy color aliases removed
+
+### Changed
+- `Navigation` (`bg-cream`), `SocialLinks` (old `light` and default variants: `light-gray`, `cream`, `warm-gray`, `sunset`), `Lightbox` and `BentoGallery` (close-button hover `sunshine`) now use the V2 color names. The `body` background and text use `cream` and `dark-gray` directly.
+
+### Removed
+- The transitional V1 aliases in `globals.css` (`background`, `foreground`, `accent-orange`, `accent-yellow`, `neutral-warm`, `neutral-dark`). Every alias resolved to the same V2 color, so nothing looks different (page, header and body colors checked in the browser).
+
+### Notes
+The unused `Footer.tsx` still names the old classes; it is queued for deletion.
+
+---
+
 ## [2026-10-15] — Docs updated for V2
 
 ### Changed
