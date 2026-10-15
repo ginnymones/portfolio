@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-15] — Docs updated for V2
+
+### Changed
+- `docs/DESIGN-SYSTEM.md` rewritten for V2: brand and neutral palette, status colors, Forum and Google Sans Flex type styles (`heading-1` to `heading-5`, `label`), 1200px and 1000px containers, breakpoints, buttons, tag, curve, nav and drawer, cards, Get in touch panel, and the Figma frame map. The V1 colors, type scale and radii are gone; the temporary V1 aliases are listed with the components that still use them.
+- `docs/PROJECT-SPEC.md` rewritten: site structure (no About page, `/tools`, proxied tools, redirects), tools content model, Challenge, Action, Results case study fields, homepage content, current file structure, Vercel Hobby image limits and lessons learned.
+- `docs/REPLICATION-GUIDE.md` and `docs/AGENT-SKILLS.md` rewritten for the V2 workflows (Figma sync, case studies, tools and proxies, media, Tina schema sync, deploy checks, pending list). The missing `PENDING-TASKS.md` reference was removed.
+- `README.md` now covers `/tools`, the new case study fields and sections, image guidelines, V2 tokens and the docs index.
+- `docs/CASE-STUDY-STRUCTURE.md`: documented image stacks and the `***` and `+++` block markers, and refreshed the intro (the mobile frame exists now).
+
+### Notes
+Documentation only; no site code changed.
+
+---
+
 ## [2026-10-15] — Faster Joiiio page and lazy-loaded images
 
 ### Changed

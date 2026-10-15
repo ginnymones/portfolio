@@ -1,6 +1,6 @@
 # Case Study Structure (V2: Challenge, Action, Results)
 
-Applies to the V2 revamp (branch `v2-revamp`). Figma: file `TvM2qUTpe3HvmMmc7IyJlx`, frame `case study / hi-fi` (node `357:171`). There is no Figma mobile frame for case studies yet; the stacked mobile layout is a proposal.
+Live since the V2 launch (2026-10-15). Figma: file `TvM2qUTpe3HvmMmc7IyJlx`, frames `case study / hi-fi` (node `357:171`) and `case study / mobile` (409:135), plus one desktop frame per case study in `case studies / desktop (all, from site content)` (526:2).
 
 V1 case studies were one free-form markdown body (Problem Statement, Solution, Results & Impact). V2 uses three sections: **Challenge, Action, Results**. Challenge is the context plus what I set out to do (it replaced the earlier Situation and Task; any Task text now sits at the end of the Challenge). Challenge and Results are hidden when empty. A V1 write-up needs no edits to keep working.
 
@@ -39,6 +39,9 @@ Action is the markdown body. `src/lib/action-blocks.ts` splits it into blocks:
 - A `###` heading starts a block.
 - Every stand-alone image is paired with the text next to it (the text after it, or, if none follows before the next image, the text before it). A pair sits side by side with the image on the left and the text on the right (on phones the image comes first, then the text). They never alternate. So a block can hold several rows.
 - A block with an image but no text runs full width. The image's alt text (or the heading, if there is no alt text) is the caption.
+- Images on consecutive lines (one per line, no blank line between) form a **stack**: one image column holding all of them, each with its alt text as a caption, beside the text.
+- A line with just `***` starts a new block without a heading. Use it to end one image + text row and begin another.
+- A line with just `+++` right after a stand-alone image keeps the text that follows in the same block, under the image and its caption (instead of pairing the text beside it).
 - Anything before the first `###` is an intro block with no heading.
 - A block with no image is full-width prose.
 - `:::bento` galleries, inline videos (`.mp4` / `.webm`) and the image lightbox still work.

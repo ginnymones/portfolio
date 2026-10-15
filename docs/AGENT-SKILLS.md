@@ -1,304 +1,222 @@
-# Agent Skills — Portfolio Site Builder
+# Agent Skills: Portfolio Site Workflows (V2)
 
-## Skill: Scaffold Portfolio Site
+Step-by-step recipes for an AI agent (or a person) working on this repo. Read [PROJECT-SPEC.md](./PROJECT-SPEC.md) first for the architecture and [DESIGN-SYSTEM.md](./DESIGN-SYSTEM.md) for tokens.
 
-**Trigger**: User wants a new portfolio/case-study site
+## Ground rules (apply to every skill)
 
-**Steps**:
-1. Confirm design preferences: colors, font, layout style
-2. Create Next.js project with App Router + Tailwind CSS v4
-3. Set up page structure: Home, About, Works (grid + detail), Contact
-4. Create `site-settings.json` for shared data (name, email, socials, footer text)
-5. Create content system: Markdown for case studies, JSON for pages — all CMS-editable from the start
-6. Implement PageBackground component (image/video/color/gradient + overlay)
-7. Implement mobile hamburger nav (14px text, solid bg, drop shadow)
-8. Add BackToTop button (up arrow + text, 10px+ padding, rounded corners)
-9. Add image lightbox for case study content images
-10. Set up TinaCMS with schema for pages, case studies, and site settings
-11. Add editorial workflow (draft/published status on case studies)
-12. Create sample case studies with template
-13. Add favicon (128x128 PNG in `src/app/` + `public/`, declared in metadata)
-14. Verify build passes
-15. Guide deployment (GitHub → Tina Cloud → Vercel)
-
-**Key decisions to confirm with user**:
-- Number of nav items / pages
-- Case study structure (what sections)
-- Grid layout (items per row, per page)
-- CMS preference (Tina vs alternatives)
-- Hosting preference
-- Social links and contact details
-
-**Critical rules**:
-- NEVER hardcode page text in JSX — wire all content to JSON/markdown from the start
-- Use `site-settings.json` for any data appearing in 2+ places
-- Always include mobile nav in initial scaffold
-- Always add `status` field to case studies for editorial workflow
-- Upgrade `next-mdx-remote` to v6+ before first deploy to Vercel
+- **Figma is the source of truth** (file `TvM2qUTpe3HvmMmc7IyJlx`). Ginny edits it between sessions, so re-read the frame before changing code; do not guess spacing or copy.
+- **Never hardcode page text in JSX.** Wire it to JSON or markdown so Tina can edit it.
+- **Text used in two or more places lives in `site-settings.json`.**
+- **Ask before** changing the content schema, adding a dependency, removing a page, touching the favicon, or pushing. A push to `main` is a production deploy.
+- **Do not invent numbers.** Every stat must come from Ginny's resume or her CMS content.
+- Write numbers zero to nine as words and 10 and above as numerals in copy you draft.
+- Use token classes (`bg-sunset`, `text-warm-gray`), never raw hex. Do not use the legacy aliases (`accent-orange`, `neutral-dark`, ...).
+- Headings are Forum with one weight: never fake a bold. No orphans (a single word alone on the last line).
+- Log every visible change in `CHANGELOG.md` (newest first, `## [YYYY-MM-DD] — Title`, then Added / Changed / Removed / Notes).
+- Keep `V2 Assets/PENDING.md` and the Notion page "ginnymones.com V2 revamp: pending items" in sync: update both whenever an item is added, checked off, decided or reworded.
+- Never commit `CLAUDE.md`, `V2 Assets/`, `_to_delete/` or `tsconfig.tsbuildinfo`.
+- Verify UI changes in a browser at about 1440px and at phone width (390px), not only with `tsc`.
 
 ---
 
-## Skill: Add New Page to Portfolio
+## Skill: Sync a page or case study from Figma
 
-**Trigger**: User wants to add a page (e.g., Services, Testimonials)
+**Trigger**: Ginny edited a Figma frame and wants the site to match.
 
 **Steps**:
-1. Create page component in `src/app/[page]/page.tsx`
-2. Add JSON content file in `src/content/pages/[page].json` with ALL text content (never hardcode)
-3. Add fields to Tina schema in `tina/config.ts`
-4. Add nav link in `Navigation.tsx` (both desktop and mobile menu)
-5. Wire up PageBackground support
-6. Verify build
+1. Read the frame with the Figma tools (`get_metadata`, then `get_design_context` for the node). Node ids are in the Figma table in `V2 Assets/CLAUDE.md`.
+2. Compare text, lists, bold, layout, images, and desktop against mobile. Skip hidden layers.
+3. Compare images byte for byte (export from Figma, compare with the file in `public/`) before replacing any.
+4. Update the content file (`home.json` or the case study markdown), not the JSX.
+5. Case studies: put context in `challenge`, outcomes in `resultsStats` / `resultsCopy`, the rest in the body (Action). See [CASE-STUDY-STRUCTURE.md](./CASE-STUDY-STRUCTURE.md).
+6. Update the CHANGELOG and the pending list (both places).
+
+Read before any bulk write to Figma: confirm the target node and index first; tool returns are limited to about 20 KB.
 
 ---
 
-## Skill: Add CMS Fields
+## Skill: Add a case study
 
-**Trigger**: User wants to make more content editable via Tina
+**Trigger**: Ginny has a new write-up.
 
 **Steps**:
-1. Identify what's currently hardcoded vs CMS-managed
-2. Decide: does this data belong in a page JSON, or in site-settings.json (if shared)?
-3. Add fields to the appropriate collection in `tina/config.ts`
-4. Add corresponding data to the JSON/markdown content file
-5. Update the page component to read from content instead of hardcoded values
-6. Verify the field appears in Tina admin panel
-
-**Field types available**:
-- `string` — single line text
-- `string` with `component: "textarea"` — multi-line
-- `rich-text` — WYSIWYG editor
-- `image` — file upload with drag-and-drop
-- `number` — numeric input
-- `datetime` — date picker
-- `boolean` — toggle
-- `object` (list: true) — repeatable groups (e.g., experience items, skills)
-- `string` with `options` — dropdown select
-
-**When to use site-settings.json vs page JSON**:
-- Site settings: data used by 2+ components/pages (email, socials, name, footer text)
-- Page JSON: data specific to a single page (heading, bio, CTA text)
+1. Copy `src/content/case-studies/_template.md` to `<slug>.md` (lowercase, hyphens).
+2. Fill in the frontmatter: `title`, `thumbnail`, `headerImage` (with alt text), `summary`, `tags` (first tag shows in the hero), `role`, `years`, `date`.
+3. Write `challenge`, `resultsStats` (up to three) and `resultsCopy`; empty sections are hidden.
+4. Write Action in the body with `###` blocks and images (image left, text right).
+5. Set `status: "draft"` while writing; publish by setting it to `"published"`.
+6. Compress images first (see "Add media"). Check the card, hero and Related work at 1440 and 390px.
+7. If a tool should link to it, set `caseStudy` in `src/content/tools/<tool>.md` to the slug.
+8. If the study replaces or renames an old one, add a permanent redirect in `next.config.ts`.
 
 ---
 
-## Skill: Configure Flexible Backgrounds
+## Skill: Add or edit a tool
 
-**Trigger**: User wants to change page backgrounds
+**Trigger**: A new tool for `/tools`, or a change to an existing card.
 
 **Steps**:
-1. Ensure PageBackground component is wrapping the page
-2. Ensure background fields exist in the content file
-3. Guide user through Tina admin:
-   - Select background type from dropdown
-   - Upload image or provide video path
-   - Set overlay opacity for readability (recommend 40-60)
-4. For videos: file goes in `public/videos/`, reference as `/videos/filename.mp4`
-5. For images: upload via Tina media manager or place in `public/images/`
+1. Create or edit `src/content/tools/<slug>.md`: `title`, `status`, `projectStatus`, `thumbnail` (4:3 screenshot in `public/images/tools/`), `summary`, `tags`, `liveUrl`, `repoUrl`, `caseStudy`, `date`.
+2. Status dot: live = forest, beta = sunshine, in progress = sunset.
+3. Order is strictly newest-first by `date`. Do not add a featured or pinned override.
+4. To serve a tool under ginnymones.com, add rewrites in `next.config.ts` (see PROJECT-SPEC "Tools and proxies"). For apps with a matching `basePath`, add a separate bare-path rule so the trailing-slash redirect cannot loop.
+5. Test any rewrite or redirect change on a Vercel preview before production.
+6. The Quiz Randomizer card points at the demo deployment, never the private family app.
 
 ---
 
-## Skill: Deploy Portfolio Site
+## Skill: Edit homepage company highlights
 
-**Trigger**: User is ready to go live
-
-**Pre-requisites**:
-- GitHub repo created and code pushed
-- Tina Cloud account with project connected to repo
+**Trigger**: Update a stat, caption, image or button on the homepage.
 
 **Steps**:
-1. Verify `next-mdx-remote` is v6+ (Vercel blocks vulnerable versions)
-2. Get Client ID and Token from Tina Cloud dashboard
-3. Add to `.env` locally and as Vercel env vars
-4. Ensure `package.json` build script is: `"build": "tinacms build && next build"`
-5. Push to GitHub
-6. Connect repo in Vercel (or run `npx vercel`)
-7. Verify deployment succeeds
-8. Test `/admin` panel login on live site
-9. Confirm edit → commit → redeploy flow works
+1. Edit `companyProjects` in `src/content/pages/home.json` (or Tina > Pages > Home).
+2. A blank line inside `description` starts a new paragraph. A company with two stats uses a two-column grid.
+3. A stat image field accepts `.mp4` / `.webm`: it plays as a silent loop. Add `<name>-poster.jpg` next to the video.
+4. A stat with `buttonLabel` and `buttonLink` shows a button; a label alone shows an outlined tag.
+5. Highlights are standalone: leave `caseStudy` empty unless a case study should be linked.
+6. Check every number against Ginny's resume.
+
+---
+
+## Skill: Add a page
+
+**Trigger**: A new route.
+
+**Steps**:
+1. Create `src/app/<page>/page.tsx` using the 1000px reading container or the 1200px wide container with `px-6 xl:px-0`.
+2. Create `src/content/pages/<page>.json` with all visible text; read it with `getPageContent`.
+3. Add new fields to `tina/config.ts` if needed, then regenerate and commit the Tina files (see "Sync Tina schema").
+4. Add the link to `navLinks` in `Navigation.tsx` (one array feeds the desktop bar and the drawer).
+5. Draw it in Figma first if it is a new design, get Ginny's OK, then build.
+6. Check the page at 1440, 1024, 768 and 390px; confirm no sideways scroll.
+
+---
+
+## Skill: Add CMS fields
+
+**Trigger**: Something hardcoded should become editable.
+
+**Steps**:
+1. Decide where it lives: a page JSON for one page, `site-settings.json` for shared data.
+2. Ask Ginny first (schema change).
+3. Add the field to the right collection in `tina/config.ts`, add the data to the content file, and read it in the component.
+4. Regenerate and commit the Tina files with the config change.
+
+**Field types**: `string`, `string` with `ui: { component: "textarea" }`, `rich-text`, `image`, `number`, `datetime`, `boolean`, `string` with `options` (dropdown), and `object` with `list: true` (repeatable group).
+
+---
+
+## Skill: Sync Tina schema
+
+**Trigger**: `tina/config.ts` changed, or a deploy fails with a schema mismatch.
+
+**Steps**:
+1. Run `npm run dev` (or `npm run build`) once. It regenerates `tina/tina-lock.json` and `tina/__generated__/*`.
+2. `git status tina/` should show the changes.
+3. Commit them together with `tina/config.ts`.
+4. After the push, wait for Tina Cloud to reindex; use Reindex in the branch menu if needed. "Refresh Branches" does not reindex.
+
+A single missing quote in frontmatter breaks indexing for the whole branch; check quotes before pushing.
+
+---
+
+## Skill: Add media (images and video)
+
+**Trigger**: New images or clips for case studies or the homepage.
+
+Vercel image optimization is off (Hobby plan limits), so the committed file is the downloaded file.
+
+**Steps**:
+1. JPEG: export progressive, at display size (2x for retina). PNG only when you need transparency.
+2. Video: use WebM (or a short MP4). No big GIFs.
+3. Give homepage loops a `<name>-poster.jpg` in the same folder.
+4. Put case study files in `public/images/case-studies/`, tool screenshots in `public/images/tools/`, homepage files in `public/images/home/<company>/`, videos in `public/videos/`.
+5. Always write alt text (empty alt only for decoration).
+6. Do not delete unused media (Nissan, Alaska, `amz-mandogrogu`, old GIFs) without Ginny's OK; offer, don't act.
+
+---
+
+## Skill: Change design tokens
+
+**Trigger**: New colors, fonts or type styles.
+
+**Steps**:
+1. Colors: edit `@theme` in `src/app/globals.css`. Keep the Figma names (`color/brand/sunset` is `--color-sunset`).
+2. Fonts: edit the Google Fonts `<link>` in `layout.tsx` and `--font-sans` / `--font-serif`.
+3. Type styles: `.heading-1` to `.heading-5` and `.label` in `globals.css`.
+4. Update [DESIGN-SYSTEM.md](./DESIGN-SYSTEM.md) and the Figma `design-system` frame (321:3).
+5. To retire a legacy alias, migrate its users first (listed in DESIGN-SYSTEM.md), then delete it.
+
+---
+
+## Skill: Edit the navigation or the mobile drawer
+
+**Trigger**: New link, spacing or behavior change.
+
+**Notes**:
+- Desktop bar: 170px with a 70px logo at the top, 70px after about 60px of scroll (back to full below 10px). Phone: 88px then 64px. The spacer under it never changes.
+- Animate with transform and opacity only; honor `prefers-reduced-motion`.
+- Drawer: 280px, slides in from the right, always mounted, `inert` when closed, Escape closes it, focus moves in and back out, no body scroll lock.
+- Active link and hover use the 2px `simple` curve.
+- Draw new nav or menu designs in Figma first, then build.
+
+---
+
+## Skill: Deploy
+
+**Trigger**: Ginny says go.
+
+**Steps**:
+1. `npx tsc --noEmit` and `npm run build` pass (not while `npm run dev` is running).
+2. Check `git status`: no `CLAUDE.md`, `V2 Assets/`, `_to_delete/`, `tsconfig.tsbuildinfo`, secrets or large unoptimized media.
+3. For rewrite, redirect or proxy changes: push a branch and test the Vercel preview first.
+4. Commit with the attribution trailer the session requires; push only after Ginny confirms.
+5. After the deploy, spot-check live pages, redirects, proxied tools (`/tools/mega-cp-calculator`, `/tools/quiz-randomizer`, `/tools/resume-lab`) and that drafts return 404.
+6. Update the CHANGELOG and both pending lists.
 
 **Common issues**:
-- `next-mdx-remote` vulnerability blocks deploy → upgrade to v6+
-- Tina build fails without credentials → ensure env vars are set in hosting platform
-- Peer dependency warnings (React 19 vs Tina's React 18 deps) → safe to ignore, they're warnings not errors
-- Push rejected after Tina admin edit → use `git pull --rebase` to resolve
-- Favicon not showing → hard refresh (Cmd+Shift+R), ensure 128x128+ size, declared in layout metadata
+- Tina build fails without credentials: set `NEXT_PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN` in Vercel (the build script skips indexing, but the live CMS needs them).
+- Push rejected after a Tina edit: `git pull --rebase origin main`, then push.
+- Favicon not showing: hard refresh; 128px or larger.
+- Proxy loop on a tool path: bare-path rewrite missing (see "Add or edit a tool").
+- Draft reachable in production: it should 404; check `status` handling in `case-studies.ts`.
 
 ---
 
-## Skill: Customize Design Tokens
+## Skill: Manage site settings and work tags
 
-**Trigger**: User wants different colors/fonts for a new site
+**Where**: Tina > Site Settings (`src/content/site-settings.json`).
 
-**Steps**:
-1. Edit `src/app/globals.css` → `@theme` section for colors
-2. Edit `src/app/layout.tsx` → Google Fonts link
-3. Update `globals.css` → `--font-sans` variable
-4. Update component classes if using specific color names
-5. Update `site-settings.json` (name, footer text)
-6. Rebuild and verify
+- `name`, `email` (hola@ginnymones.com for anything public; inginnyusdev@gmail.com is only for the tools), `socialLinks` (feeds the Get in touch panel; Substack stays here but is hidden in the panel).
+- `workTags`: the Works filter chips. A tag appears only when at least one case study uses it; matching is exact and case-sensitive.
+- Adding a new global field: add it to the JSON, to the `SiteSettings` interface in `src/lib/site-settings.ts`, and to the `siteSettings` collection in `tina/config.ts`, then sync the Tina schema.
 
 ---
 
-## Skill: Set Up Editorial Workflow
+## Skill: Relevant links on a case study
 
-**Trigger**: User wants draft/publish control over case studies
+**Trigger**: Add GitHub, Figma, demo or other buttons to a study.
 
-**How it works**:
-- Each case study has a `status` field: `"draft"` or `"published"`
-- In development (`NODE_ENV !== production`): all studies visible (for preview)
-- In production: only `"published"` studies appear on the site
-- User sets status in Tina admin via a dropdown field
+Add a `links` array to the frontmatter (or Tina > Case Studies > Relevant Links):
 
-**Implementation**:
-- Frontmatter: `status: "published"` or `status: "draft"`
-- `getAllCaseStudies()` filters out drafts when `process.env.NODE_ENV === "production"`
-- Tina schema includes `status` as a required field with options
-
----
-
-## Skill: Manage Shared Site Settings
-
-**Trigger**: User wants to update social links, email, footer text, or site name
-
-**Where to edit**: Tina admin → Site Settings collection → site-settings.json
-
-**Fields available**:
-- Site Name
-- Contact Email
-- Copyright Text
-- Footer Heading
-- Footer Description
-- Social Links (repeatable: label + URL)
-
-**What reads from site settings**:
-- Footer component (heading, description, email, socials, copyright)
-- Contact page (social links)
-- Any future component that needs global data
-
-**Adding a new global field**:
-1. Add field to `src/content/site-settings.json`
-2. Add to `SiteSettings` interface in `src/lib/site-settings.ts`
-3. Add field to `siteSettings` collection in `tina/config.ts`
-4. Use `getSiteSettings()` in the consuming component
-
----
-
-## Skill: Handle Git Conflicts from Tina Cloud
-
-**Trigger**: Push rejected because Tina committed changes from the admin panel
-
-**Steps**:
-1. Run `git pull --rebase origin main`
-2. If conflicts: resolve, then `git rebase --continue`
-3. Push again: `git push origin main`
-
-**Prevention**: Pull before starting local work if you've recently edited in the admin panel.
-
----
-
-## Skill: Add Favicon
-
-**Trigger**: User provides a favicon file
-
-**Requirements**:
-- PNG format, 128x128 pixels minimum (16x16 is too small for modern browsers)
-- Place in both `src/app/favicon.png` (Next.js auto-detection) and `public/favicon.png`
-- Declare explicitly in layout metadata: `icons: { icon: "/favicon.png" }`
-
-**If favicon doesn't show after deploy**:
-- Hard refresh (Cmd+Shift+R) — browsers cache favicons aggressively
-- Verify file is at least 128x128
-- Check that metadata declaration is present in layout.tsx
-
----
-
-## Skill: Mobile Navigation
-
-**Trigger**: Always included in initial scaffold
-
-**Implementation details**:
-- Hamburger icon: 3 animated lines → X on open (CSS transitions)
-- Menu panel: drops down from nav bar (not full-screen overlay)
-- Text size: 14px (`text-[14px]`)
-- Background: solid base color (`bg-background`), not translucent
-- Drop shadow: `shadow-lg` on the panel
-- Auto-close on route change
-- Body scroll locked when open
-- Accessible: `aria-label`, `aria-expanded` on toggle button
-
-
----
-
-## Skill: Manage Work Tags (Filtering)
-
-**Trigger**: User wants to add, remove, or reorder tags for the Works filter bar
-
-**Where to edit**: Tina admin → Site Settings → Work Tags
-
-**How it works**:
-- `workTags` in `site-settings.json` defines the list of tags that appear in the filter bar
-- Only tags that have at least one case study assigned will actually show in the UI
-- Tags are matched exactly (case-sensitive) — "UX/UI Design" ≠ "ux/ui design"
-- A case study can have multiple tags and will appear under each matching filter
-
-**Adding a new tag**:
-1. Add the tag string to `workTags` in site settings (via Tina admin or JSON file)
-2. Assign the tag to one or more case studies (in their `tags` frontmatter array)
-3. It appears in the filter bar automatically on next build
-
-**Current defined tags**:
-- Illustration
-- Graphic Design
-- UX/UI Design
-- Product Design
-- Animation
-- Development
-
-**Architecture**:
-- Tags stored in: `src/content/site-settings.json` → `workTags[]`
-- Filter component: `src/components/WorksGrid.tsx` (client-side, receives tags as props)
-- Tags passed from server: `src/app/works/page.tsx` reads settings and passes to WorksGrid
-
-
----
-
-## Skill: Sync Tina Schema After Config Changes
-
-**Trigger**: Deploy fails with "local GraphQL schema doesn't match remote" error
-
-**Root cause**: You changed `tina/config.ts` (added/removed fields) but didn't regenerate and commit the `tina/__generated__/` files. Tina Cloud compares against these committed files.
-
-**Steps**:
-1. Run locally: `npx tinacms dev --command "echo done"` (starts and stops, regenerating files)
-2. Check: `git status tina/` — you should see changes in `tina/__generated__/`
-3. Commit: `git add tina/ && git commit -m "Regenerate Tina schema files"`
-4. Push: `git push origin main`
-5. Wait ~30s for Tina Cloud to re-index, then redeploy
-
-**Critical rule**: Every time you modify `tina/config.ts` (add fields, change collections, rename types), you MUST regenerate and commit the generated files before deploying.
-
----
-
-## Skill: Add Relevant Links to Case Studies
-
-**Trigger**: User wants to add external links (GitHub, Figma, demo, etc.) to a case study
-
-**How it works**:
-- Each case study has a `links` array in frontmatter
-- Links appear below the content as styled buttons with icons
-- Editable via Tina admin (Case Studies → select study → Relevant Links)
-
-**Frontmatter format**:
 ```yaml
 links:
   - label: "View on GitHub"
     url: "https://github.com/..."
     icon: "github"
-  - label: "Live Demo"
-    url: "https://..."
-    icon: "globe"
 ```
 
-**Available icons**: `github`, `figma`, `dribbble`, `behance`, `npm`, `globe` (website), `play` (demo/video), `link` (generic)
+Icons: `github`, `figma`, `dribbble`, `behance`, `npm`, `globe`, `play`, `link`. Component: `src/components/CaseStudyLinks.tsx`.
 
-**Component**: `src/components/CaseStudyLinks.tsx`
+---
+
+## Skill: Update the pending list
+
+**Trigger**: Any item on the V2 pending list changes.
+
+**Steps**:
+1. Edit the Notion page (https://app.notion.com/p/3f305d704c66819cb839d6bc438ab277, under Daily To-Dos) with `notion-update-page`.
+2. Edit `V2 Assets/PENDING.md` the same way. If Notion is unreachable, say so and update the local file.
+3. Log visible changes in `CHANGELOG.md`.
+4. Keep each line in the form `- [ ] Task` with the **owner** (Ginny, Claude or Both) and **effort** (XS under 5 min, S 5 to 15, M 15 to 60, L 1 to 3 hours, XL half a day or more).

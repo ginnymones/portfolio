@@ -1,255 +1,271 @@
-# Portfolio Site — Project Spec
+# ginnymones.com: Project Spec (V2)
 
 ## Purpose
 
-A reusable, minimalist portfolio site template for showcasing design work as case studies. Built for speed of deployment and ease of content management — non-technical users should be able to add/edit case studies and page content through a visual CMS without touching code.
+Ginny Mones' portfolio: case studies, a tools page, and a short career snapshot on the homepage. Content is editable through a visual CMS (TinaCMS) without touching code. The site is live at https://ginnymones.com (V2 launched 2026-10-15). V1 is kept as git tags `v1-pre-revamp` and `v1-live-before-v2`.
+
+The visual source of truth is Figma (file `TvM2qUTpe3HvmMmc7IyJlx`). See [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) for tokens and components.
 
 ---
 
-## Tech Stack
+## Tech stack
 
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| Framework | Next.js (App Router) | Static generation, fast builds, Vercel-native |
-| Styling | Tailwind CSS v4 | Utility-first, rapid customization |
-| CMS | TinaCMS (Cloud) | Visual editor, Git-backed, no database |
-| Content format | Markdown (case studies) + JSON (pages + site settings) | Easy to template, version-controlled |
-| Hosting | Vercel | Zero-config deploys, auto-rebuild on Git push |
-| Font | Google Sans Flex (variable) | Clean geometric sans, variable weight support |
+| Layer | Technology | Notes |
+|---|---|---|
+| Framework | Next.js 15 (App Router), React 19 | Static generation |
+| Styling | Tailwind CSS v4 | Tokens in `src/app/globals.css` (`@theme`) |
+| CMS | TinaCMS (Cloud) | Git-backed; edits commit to GitHub |
+| Content | Markdown (case studies, tools) and JSON (pages, site settings) | `src/content/` |
+| Hosting | Vercel (Hobby plan) | Deploys from `main`; a push to `main` is a production deploy |
+| Fonts | Forum (headings), Google Sans Flex (everything else) | Google Fonts `<link>` in `layout.tsx` |
+| Icons | Font Awesome (brand and solid, SVG) | Social links, case study link buttons |
+| Analytics | Vercel Analytics | `<Analytics />` in `layout.tsx` |
+| Sitemap | `next-sitemap` | Runs after `next build`; also writes `robots.txt` |
+
+Vercel image optimization is off (`images.unoptimized` in `next.config.ts`) because of the Hobby plan's transformation limits. Compress images before adding them (see Gotchas).
 
 ---
 
-## Site Structure
+## Site structure
 
 ```
-HOME (/)           → Splash/hero page with CTA
-ABOUT (/about)     → Bio, work experience, tools & skills, social links
-WORKS (/works)     → Case study gallery (3 staggered columns, 6 at a time, "Load more")
-  └─ CASE STUDY (/works/[slug]) → Individual case study with breadcrumbs + lightbox
-#CONTACT           → Persistent section on every page (not a separate route), anchored via id
+HOME (/)                    Hero, company highlights, "I also make other stuff" tiles
+WORKS (/works)              Case study gallery: 3 staggered columns, tag filter, Load more
+  └─ CASE STUDY (/works/[slug])   Challenge, Action, Results
+TOOLS (/tools)              Hero and a two-column grid of tool cards
+  └─ /tools/<name>          Proxied tool apps (see "Tools and proxies")
+#contact                    Get in touch panel, at the bottom of every page (not a route)
+404                         not-found page
 ```
+
+`/about` no longer exists: it redirects permanently to `/#intro`. Old case study URLs `/works/anim-motion-graphics` and `/works/dev-figma-to-email-builder` redirect to `/works/anim-joiiio` and `/works/dev-email-design-system`. The old Vercel address `inginnyus.vercel.app` redirects to ginnymones.com with the path kept. All redirects are in `next.config.ts`.
+
+Navigation links (Works, Tools, Contact) are the `navLinks` array in `src/components/Navigation.tsx`.
+
+### Homepage
+
+Sections, top to bottom (Figma `homepage / hi-fi` 357:13, mobile 364:96):
+
+1. **Hero** (`#intro`): portrait illustration in a circle, heading, subtitle, intro paragraph, primary button.
+2. **Company highlights**: an intro line, then one section per company (Amazon, Elevation, TBWA\SMP). Each has a tag, headline, description, and one to three stat tiles (number, label, image or looping video, caption, optional button). Highlights are standalone: there are no company case studies behind them (decided 2026-10-09). The `caseStudy` field is optional and normally empty.
+3. **"I also make other stuff"**: a heading, curve, short text and linked preview tiles (Works, Tools).
+
+All of it comes from `src/content/pages/home.json`.
+
+### Works
+
+`/works` lists published case studies newest first, six at a time, with **Load more** (adds six per click, resets when the filter changes). Filters are single-select chips built from `workTags` in site settings (only tags with at least one study show). `?tag=` deep-links a filter. Studies marked `homepageOnly` are left out.
+
+### Tools
+
+`/tools` lists the files in `src/content/tools/`, newest first by `date` (standing rule: both `/works` and `/tools` sort strictly newest-first; no featured or pinned override). Each card shows a status dot, tags, summary and the buttons that apply: Launch, Case study, Code.
+
+### Get in touch
+
+The `ContactSection` panel is in the root layout, so it appears on every page. Heading and copy: Pages > Contact. Email and social links: Site Settings. Substack stays in Site Settings but is hidden in the panel.
 
 ---
 
-## Design System
+## Content architecture
 
-### Colors
+### Site settings (JSON)
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| Background | `#FFFDF9` | Page background |
-| Foreground | `#333333` | Primary text |
-| Accent Orange | `#D26D1F` | Primary accent, links, CTAs |
-| Accent Yellow | `#F3C041` | Secondary accent (rare) |
-| Neutral Warm | `#AFA29B` | Muted text, borders |
-| Neutral Dark | `#5A5756` | Body text, footer background |
+`src/content/site-settings.json`, editable in Tina under Site Settings:
 
-### Typography
-
-- Font: Google Sans Flex (400, 500, 600, 700)
-- Headings: 600-700 weight
-- Body: 400 weight
-- Scale: Tailwind defaults (text-sm through text-7xl)
-
-### Design Principles
-
-- Minimalist — content-first, no visual clutter
-- Warm — soft background, warm neutrals
-- Accessible — proper contrast ratios, semantic HTML, ARIA labels
-- Responsive — mobile-first, 3-col grid collapses gracefully
-
----
-
-## Content Architecture
-
-### Site Settings (JSON — Global)
-
-Location: `src/content/site-settings.json`
-
-Single source of truth for data shared across multiple components (Footer, Contact, Works):
-- `name` — site/brand name
-- `email` — contact email
-- `copyright` — footer copyright text
-- `footerHeading` — heading text in contact section
-- `footerDescription` — paragraph text in contact section
-- `workTags[]` — array of tag strings used for Works page filtering
-- `socialLinks[]` — array of {label, url} pairs
-
-Editable in Tina admin under "Site Settings" collection.
-
-### Case Studies (Markdown)
-
-Location: `src/content/case-studies/[slug].md`
-
-Frontmatter schema:
-```yaml
-status: "published"               # "draft" | "published" — drafts hidden in production
-title: "Project Title"            # Required
-thumbnail: "/images/..."          # 4:3 ratio, for grid card
-headerImage: "/images/..."        # 16:9 ratio, for detail page
-summary: "Short description"      # 1-2 sentences for card
-tags: ["Tag 1", "Tag 2"]          # Shown on cards + detail
-client: "Client Name"             # Optional
-role: "Your role"                 # Optional (V2), hero meta
-years: "2018 – 2022"              # Optional (V2), hero meta; falls back to the year of date
-date: "YYYY-MM-DD"                # Required, used for sort order
-homepageOnly: false               # V2: true hides it from Works/related/prev-next (optional; company highlights no longer have case studies)
-challenge: ""                     # V2, optional: context plus what you set out to do
-resultsStats:                     # V2, optional list of {value, label, icon}
-  - value: "500%"
-    label: "More agency revenue"
-resultsCopy: ""                   # V2, optional
-liveUrl: "https://..."            # Optional, shown as link
-backgroundType: "none"            # none | image | video | color | gradient
-backgroundImage: ""               # For image backgrounds
-backgroundVideo: ""               # For video backgrounds
-backgroundColor: ""               # For solid color
-gradientFrom: ""                  # Gradient start
-gradientTo: ""                    # Gradient end
-gradientDirection: "to bottom"    # Gradient direction
-overlayOpacity: 50                # 0-100
-overlayColor: "#FFFDF9"           # Overlay tint color
-```
-
-Body content structure (V2): the markdown body is the **Action** section; Challenge and Results come from the frontmatter fields above. Older write-ups (Problem Statement / Solution / Results & Impact) still render, entirely inside Action. Full details: [CASE-STUDY-STRUCTURE.md](CASE-STUDY-STRUCTURE.md).
+- `name`, `email` (contact email is **hola@ginnymones.com**), `copyright` (only the unused `Footer` reads it)
+- `workTags[]`: the Works filter list
+- `socialLinks[]`: `{label, url}` pairs, shown as icon over label (Email first)
+- `footerHeading`, `footerDescription`: legacy fields from V1, no longer read by the panel (it uses Pages > Contact)
 
 ### Pages (JSON)
 
-Location: `src/content/pages/[page].json`
+`src/content/pages/<page>.json` for `home`, `works`, `tools`, `contact` (and a leftover `about`). Common fields: `title`, `heading`, `headingAccent`, `subtitle`, `tagline`, CTA labels and links, and the background fields (type, image, video, color, gradient, overlay).
 
-Fields managed via Tina CMS:
-- Title, heading, subtitle, tagline
-- CTA labels and links
-- Background configuration (image/video/color/gradient + overlay)
-- Bio (rich text) — About page
-- Work Experience (repeatable list) — About page
-- Tools & Skills (repeatable list, grouped by category) — About page
-- Social Links (repeatable list) — About page
+Home also holds `portrait`, `portraitAlt`, `heroBody`, `companyIntro`, `companyProjects[]` (company, title, description, optional `caseStudy`, `stats[]` with value, label, image, imageAlt, motion, caption, buttonLabel, buttonLink), `otherHeading`, `otherText`, `otherTiles[]`.
+
+`about.json` and the About-only Tina fields (`experience`, `toolsAndSkills`, `bio`) are unused now and are waiting for a decision to remove them (see `V2 Assets/PENDING.md`). The `motion` stat field and `MotionImageSlot` are also unused since the real videos replaced the CSS stand-in.
+
+### Case studies (Markdown)
+
+`src/content/case-studies/<slug>.md`. `_template.md` is the starter. There are 19 published-or-draft files; `status: "draft"` hides a study in production, including by direct URL.
+
+```yaml
+status: "published"        # "draft" hides it in production
+title: "Project title"
+thumbnail: "/images/..."   # Works card (4:3 on phones, staggered ratios on desktop)
+thumbnailAlt: ""
+headerImage: "/images/..." # Hero image beside the title block (600x440 on the page)
+headerImageAlt: ""
+summary: "One or two sentences"
+tags: ["UX/UI Design"]     # first tag shows in the hero
+client: "Client"           # optional
+role: "UX/UI Designer"     # hero meta
+years: "2018 – 2022"       # hero meta; falls back to the year of `date`
+date: "YYYY-MM-DD"         # sort order
+homepageOnly: false        # true hides it from Works, Related work and Previous / Next
+liveUrl: "https://..."     # "View live" text button in the hero
+challenge: ""              # context plus what you set out to do
+resultsStats:              # up to three: {value, label, icon?}
+  - value: "500%"
+    label: "More agency revenue"
+resultsCopy: ""            # closing paragraphs under the stats
+links:                     # Relevant links buttons: {label, url, icon}
+  - label: "Live App"
+    url: "https://..."
+    icon: "globe"
+# plus the background fields shared with pages
+```
+
+The markdown body is the **Action** section. Layout rules, list syntax and the code map are in [CASE-STUDY-STRUCTURE.md](CASE-STUDY-STRUCTURE.md).
+
+### Tools (Markdown)
+
+`src/content/tools/<slug>.md`, loaded by `src/lib/tools.ts`:
+
+```yaml
+status: "published"        # or "draft" (hidden in production)
+title: "Mega CP Calculator"
+thumbnail: "/images/tools/mega-cp-calculator.png"   # 4:3 screenshot
+thumbnailAlt: ""
+summary: "One sentence"
+tags: ["Web App"]
+projectStatus: "live"      # live | beta | in-progress
+liveUrl: "/tools/mega-cp-calculator"
+repoUrl: ""
+caseStudy: "dev-mega-cp-calculator"   # only linked if that case study file exists
+date: "2026-09-01"
+featured: false            # stored but no longer affects sort order
+```
+
+Current tools: Pokémon Collection Tracker, Quiz Randomizer, Resume Lab, Mega CP Calculator, Figma to HTML Email Builder, Workload Tracker.
+
+### Flexible backgrounds
+
+Pages and case studies share a background config rendered by `PageBackground.tsx`: none, still image, looping video, solid color or gradient, plus an overlay (opacity 0 to 100 and a color) for readability. The V2 pages mostly use `none`.
 
 ---
 
-## Flexible Background System
+## Tools and proxies
 
-Applicable to all pages and individual case studies.
+Each tool stays its own Vercel project; `next.config.ts` rewrites make them appear under ginnymones.com:
 
-| Type | Input | Rendering |
-|------|-------|-----------|
-| None | — | Default page background color |
-| Image | Upload via Tina media manager | Full-bleed `background-image`, cover |
-| Video | MP4 path in `/public/videos/` | Muted, looping `<video>`, object-fit cover |
-| Solid Color | Hex value | CSS `background-color` |
-| Gradient | From/To hex + direction | CSS `linear-gradient` |
+| Path | Destination | Notes |
+|---|---|---|
+| `/tools/mega-cp-calculator/*` | `mega-cp-calculator.vercel.app` | Path prefix stripped |
+| `/tools/quiz-randomizer` and `/*` | `quiz-randomizer-demo.vercel.app/tools/quiz-randomizer` | The demo deployment, not the private family app. Built with a matching `basePath` |
+| `/tools/resume-lab` and `/*` | `resume-style-tool.vercel.app/tools/resume-lab` | Built with a matching `basePath` |
 
-**Overlay**: Semi-transparent layer between background and content. Adjustable opacity (0-100) and color. Ensures text readability regardless of background choice.
+The bare paths for the two `basePath` apps have their own rules because a trailing slash makes those apps redirect back in a loop. The Workload Tracker card links to the demo workspace at `/w/demo`. The Pokémon Collection Tracker is not under `/tools` yet.
 
 ---
 
-## Key Features
+## Key features
 
-- **Previous / Next navigation**: Navigate between case studies at the bottom of each detail page
-- **Related case studies**: 3 related works shown below content, ranked by shared tags + recency
-- **Relevant links**: Per-study link buttons with icons (GitHub, Figma, Dribbble, etc.) — managed via Tina
-- **Social links with icons**: Font Awesome brand icons (Dribbble, LinkedIn, Behance) in contact section
-- **Tag-based filtering**: Works page has a filter bar (All + defined tags). Tags managed from Tina admin. Client-side, instant.
-- **Load more** (V2, replaces numbered pagination): Client-side, shows 6 items and adds 6 per click, works alongside tag filtering. Resets to 6 on filter change.
-- **Mobile navigation**: Hamburger menu with compact dropdown (14px text, solid bg, drop shadow)
-- **Back to top button**: Appears after 400px scroll, up arrow + text, rounded corners, fixed bottom-right
-- **Inline video support**: `.mp4`/`.webm` files in markdown render as `<video>` with controls + auto poster thumbnail
-- **Image lightbox**: Click any case study image to view full-screen with Escape/click-outside to dismiss
-- **Lazy loading**: Case study cards use IntersectionObserver, render skeleton until visible
-- **Breadcrumbs**: Case study pages show Home > Works > Title
-- **Editorial workflow**: Draft/Published status per case study — drafts hidden from production
-- **Shared site settings**: Single JSON for name, email, socials, footer text — used by Footer + Contact + anywhere needed
-- **Tools & Skills**: Repeatable, categorized list on About page (with proficiency levels)
-- **Static generation**: All pages pre-rendered at build time
-- **Git-backed CMS**: All edits create commits, full version history
-- **Image optimization**: Next.js Image component with AVIF/WebP support
-- **Favicon**: Place `favicon.png` (128x128 recommended) in `src/app/` and `public/`, declared in layout metadata
+- **Case study sections**: Challenge, Action, Results; empty sections are hidden; Action images sit left with text on the right, with `###` blocks, `:::bento` galleries and inline video.
+- **Previous / Next and Related work**: newest-first order; up to three related studies ranked by shared tags, then recency. Both skip `homepageOnly` studies.
+- **Relevant links**: per-study buttons with icons (`github`, `figma`, `dribbble`, `behance`, `npm`, `globe`, `play`, `link`).
+- **Image lightbox**: click a case study image to see it full screen; Escape or a click outside closes it.
+- **Looping video**: `.mp4` or `.webm` in an image field plays as a silent loop with a poster and pause button. Videos load only near the screen.
+- **Lazy images**: every image in case study text loads lazily; the header, logo and homepage portrait load first.
+- **Navigation**: fixed bar that shrinks on scroll; slide-out drawer on phones.
+- **Section dots** on the homepage (from 1280px) mark the company in view.
+- **Back to top** after 400px of scroll.
+- **Drafts**: hidden in production (`NODE_ENV === "production"`), visible in local dev.
+- **Social preview**: `public/og-image.png` (Figma `social-preview` 375:108), declared in `layout.tsx` metadata with Open Graph and Twitter tags.
+- **Git-backed CMS**: every Tina edit is a commit.
 
 ---
 
-## Deployment Flow
+## Deployment flow
 
-1. Edit content in Tina CMS admin (`/admin`)
-2. Tina commits changes to GitHub repo
-3. Vercel detects push, rebuilds site (~1-2 min)
-4. Site is live with new content
+1. Edit content in Tina (`/admin/index.html`) or in the files.
+2. Tina commits to GitHub; a local push goes to `main`.
+3. Vercel rebuilds (`tinacms build --skip-indexing && next build && next-sitemap`) in about one to two minutes.
+4. The site is live.
+
+Pushing to `main` is a production deploy; check with Ginny first. Use a Vercel preview (push a branch) for anything that changes rewrites or redirects: two bugs in the launch only showed on Vercel (a proxy loop on bare tool paths, and drafts reachable by URL) and are fixed in commit `62737d1`.
 
 ---
 
-## File Structure
+## File structure
 
 ```
 portfolio/
+├── docs/                    # These docs + CASE-STUDY-STRUCTURE.md
 ├── public/
-│   ├── admin/              # Tina CMS admin panel (auto-generated)
-│   ├── favicon.png         # Site favicon (128x128)
-│   ├── images/case-studies/ # Case study images
-│   ├── uploads/            # Tina media uploads
-│   └── videos/             # Background videos
+│   ├── admin/               # Tina admin (generated)
+│   ├── branding/            # Logos (sunset variant is the one in the UI)
+│   ├── downloads/           # Email Design System demo zip
+│   ├── guides/              # Email Design System guide (static HTML)
+│   ├── images/              # case-studies/, home/, tools/, get-in-touch-art.png, hero-portrait.png
+│   ├── videos/              # Homepage loops and posters
+│   ├── favicon.png, og-image.png
+│   └── ginny-404@2x.png, ginny.svg   # unused, queued for deletion
 ├── src/
 │   ├── app/
-│   │   ├── favicon.png     # Next.js auto-detected favicon
-│   │   ├── layout.tsx      # Root layout with nav, contact section, footer, back-to-top
-│   │   ├── page.tsx        # Home
-│   │   ├── about/page.tsx  # About
-│   │   ├── works/page.tsx  # Works grid
-│   │   └── works/[slug]/   # Case study detail
+│   │   ├── layout.tsx       # Fonts, metadata, Navigation, ContactSection, BackToTop, Analytics
+│   │   ├── globals.css      # @theme tokens, type styles, prose, stat-motion keyframes
+│   │   ├── page.tsx         # Home
+│   │   ├── not-found.tsx    # 404
+│   │   ├── works/page.tsx, works/[slug]/page.tsx
+│   │   └── tools/page.tsx
 │   ├── components/
-│   │   ├── BackToTop.tsx   # Scroll-to-top button
-│   │   ├── Breadcrumbs.tsx
-│   │   ├── CaseStudyCard.tsx
-│   │   ├── ContactSection.tsx # #contact CTA section (80vw desktop, full mobile)
-│   │   ├── Footer.tsx      # Minimal footer (copyright only)
-│   │   ├── Lightbox.tsx    # Image lightbox for case studies
-│   │   ├── Navigation.tsx  # Desktop + mobile hamburger nav
-│   │   └── PageBackground.tsx
+│   │   ├── ui/              # Button, Tag, ImageSlot, LoopVideo, MotionImageSlot (unused)
+│   │   ├── ActionSection, BentoGallery, Breadcrumbs, CaseStudyCard, CaseStudyLinks,
+│   │   │   CaseStudyNav, CompanyHighlight, ContactSection, Curve, Lightbox,
+│   │   │   Navigation, PageBackground, RelatedCaseStudies, SectionDots,
+│   │   │   SocialLinks, ToolCard, ToolsGrid, WorksGrid, BackToTop
+│   │   └── Footer.tsx, Character.tsx   # unused, queued for deletion
 │   ├── content/
-│   │   ├── case-studies/   # Markdown case study files
-│   │   ├── pages/          # JSON page content (includes contact.json for the section)
-│   │   └── site-settings.json # Global settings (name, email, socials)
+│   │   ├── case-studies/    # 19 markdown files + _template.md
+│   │   ├── tools/           # 6 markdown files
+│   │   ├── pages/           # home, works, tools, contact (about unused)
+│   │   └── site-settings.json
 │   └── lib/
-│       ├── case-studies.ts # Case study reader + pagination + draft filtering
-│       ├── pages.ts        # Page content reader + rich text parser
-│       └── site-settings.ts # Site settings reader
+│       ├── case-studies.ts  # Loader, drafts, related and adjacent helpers
+│       ├── action-blocks.ts # Action markdown to blocks
+│       ├── tools.ts         # Tools loader
+│       ├── pages.ts         # Page JSON reader
+│       ├── site-settings.ts
+│       └── stat-motion.ts   # Unused CSS stat animation data
 ├── tina/
-│   └── config.ts           # TinaCMS schema definition
-├── .env                    # Tina Cloud credentials
-├── next.config.ts
-├── tailwind config (via CSS)
-└── package.json
+│   ├── config.ts            # Schema: pages, siteSettings, tools, caseStudies
+│   ├── tina-lock.json, __generated__/   # Commit with any config change
+├── V2 Assets/               # Local only: PENDING.md, source media, backups (not committed)
+├── CHANGELOG.md             # Dated entry for every visible change
+├── next.config.ts           # Rewrites (tool proxies), redirects, image settings
+└── next-sitemap.config.js
 ```
 
----
-
-## Reuse Checklist (for future portfolio sites)
-
-1. Clone the repo
-2. Update colors in `src/app/globals.css` (@theme section)
-3. Update font in layout.tsx and globals.css
-4. Update `src/content/site-settings.json` (name, email, socials, footer copy)
-5. Replace placeholder content in `src/content/pages/*.json`
-6. Replace case study markdown files
-7. Update favicon (128x128 PNG in `src/app/` and `public/`)
-8. Update metadata in `layout.tsx` (title, description, icons)
-9. Create new Tina Cloud project, get Client ID + Token
-10. Set env vars locally (`.env`) and on Vercel
-11. Deploy to Vercel
-12. Test `/admin` panel, make an edit, confirm redeploy works
-13. Done — client can self-manage from `/admin`
+`CLAUDE.md`, `V2 Assets/` and `_to_delete/` are local only and are never committed.
 
 ---
 
-## Gotchas & Lessons Learned
+## Reuse checklist (for another portfolio)
 
-- **Favicon**: Must be 128x128+ PNG. Place in both `src/app/favicon.png` (Next.js auto-detect) and declare in metadata `icons: { icon: "/favicon.png" }`. Hard-refresh needed to clear browser cache.
-- **Vercel security**: Blocks deploys for vulnerable dependencies. Always use `next-mdx-remote@6+`.
-- **TinaCMS + React 19**: Peer dependency warnings are harmless — Tina works fine with React 19.
-- **Git conflicts from Tina**: When Tina commits from the admin panel while you're also pushing locally, use `git pull --rebase` to resolve.
-- **Mobile nav**: Keep text at 14px, use solid background (not translucent), add drop shadow. Full-screen overlays feel oversized on mobile.
-- **Shared data**: Any text that appears in 2+ places (social links, email, name) must live in `site-settings.json` — never duplicate across components.
-- **Editorial workflow**: Use `status: "draft"` / `"published"` in frontmatter. Filter drafts in production via `process.env.NODE_ENV === "production"`.
-- **Tina schema sync**: After modifying `tina/config.ts`, you MUST run `npx tinacms dev --command "echo done"` locally, then commit the updated `tina/__generated__/` files. Deploy will fail with "schema mismatch" otherwise.
-- **YAML frontmatter validation**: A single missing quote in frontmatter (e.g., `icon: "globe` instead of `icon: "globe"`) will break Tina Cloud indexing for the entire branch. Always double-check quotes before pushing.
-- **Tina Cloud reindex**: When indexing fails, click the ⋮ menu next to the branch in Tina Cloud dashboard → "Reindex". The "Refresh Branches" button does NOT re-index content.
-- **All content must be CMS-editable from day one**: Never hardcode page text in JSX. Wire everything to JSON/markdown content files during initial scaffold.
+1. Clone the repo and run `npm install`.
+2. Replace the colors in `src/app/globals.css` (`@theme`) and the fonts in `layout.tsx`.
+3. Update `src/content/site-settings.json`, `src/content/pages/*.json` and the metadata in `layout.tsx`.
+4. Replace the case study and tool markdown files and the images under `public/`.
+5. Replace the favicon and `og-image.png`, and the domain strings (`metadataBase`, `next-sitemap.config.js`, redirects).
+6. Remove or edit the tool rewrites and redirects in `next.config.ts`.
+7. Create a Tina Cloud project; set `NEXT_PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN` locally and on Vercel.
+8. Deploy to Vercel; open `/admin`, make an edit and confirm it redeploys.
+
+---
+
+## Gotchas and lessons learned
+
+- **Tina schema sync**: after changing `tina/config.ts`, run `npm run dev` or `npm run build` once and commit `tina/tina-lock.json` and `tina/__generated__/*` with the config change. Otherwise Tina Cloud reports a schema mismatch and the live CMS won't see the new fields. `npm run build` skips Tina indexing (`--skip-indexing`) so it can run without credentials.
+- **YAML frontmatter**: one missing quote breaks Tina Cloud indexing for the whole branch. Re-check quotes before pushing.
+- **Tina Cloud reindex**: use the branch menu in the Tina dashboard, then Reindex. "Refresh Branches" does not reindex.
+- **Git conflicts from Tina**: use `git pull --rebase origin main` before pushing.
+- **Vercel Hobby limits**: image transformations are capped (about 5,000; overflow returns 402), so optimization is off. Compress offline: progressive JPEGs, WebM for video, no big GIFs. A progressive re-export took ten JPEGs from about 18 MB to 3 MB.
+- **Vercel security**: deploys are blocked for vulnerable dependencies; keep `next-mdx-remote` at 6 or later if it is ever added.
+- **Proxied tools**: a trailing slash on a `basePath` app redirects back and loops. Keep the bare-path rules in `next.config.ts`.
+- **Production-only bugs**: `npm run build` and `npm run dev` share `.next` and can clash; run one at a time. Test rewrites and redirects on a Vercel preview.
+- **Shared data**: text used in two or more places lives in `site-settings.json`.
+- **All visible text is CMS-editable**: never hardcode page text in JSX.
+- **Forum has one weight**: never fake a bold.
+- **Write numbers** zero to nine as words and 10 and above as numerals in copy.
+- **Favicon**: do not change it without asking (decided 2026-10-08).
