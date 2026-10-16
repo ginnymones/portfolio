@@ -30,7 +30,7 @@ export default function WorksPage() {
       overlayColor={page.overlayColor}
       className="min-h-screen"
     >
-      <section className="mx-auto max-w-[1200px] px-6 pb-16 pt-6 xl:px-0">
+      <section className="mx-auto max-w-[1000px] px-6 pb-16 pt-6 xl:px-0">
         <div className="flex flex-col items-start gap-4 pb-12">
           <h1 className="heading-1 text-burnt-sienna">{page.heading || "Works"}</h1>
           <Curve variant="fancy" className="h-[10.65px] w-[216px] text-neutral-black" />

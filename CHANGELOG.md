@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-16] — Works gallery width matches home
+
+### Changed
+- The `/works` content container (heading, filter chips, card gallery) is now `max-w-[1000px]`, the same as the home page content, instead of 1200px (`src/app/works/page.tsx`). Cards are about 313px wide on desktop (was 381px); cover aspect ratios are unchanged, so the staggered heights scale proportionally. The card image `sizes` hint was updated to match (`CaseStudyCard.tsx`).
+
+---
+
 ## [2026-10-15] — New Get in touch copy
 
 ### Changed

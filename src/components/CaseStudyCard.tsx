@@ -34,7 +34,7 @@ export function CaseStudyCard({
           alt={thumbnailAlt || `${title} thumbnail`}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 382px"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 314px"
         />
         <div className="absolute inset-0 flex flex-col justify-end gap-4 bg-sunset p-7 text-warm-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
           {summary && <p className="line-clamp-6">{summary}</p>}
