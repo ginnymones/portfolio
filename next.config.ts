@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Next 16 otherwise writes an AGENTS.md into the project on first run
+  agentRules: false,
   images: {
     formats: ["image/avif", "image/webp"],
     unoptimized: true, // Remove this once you have real images
