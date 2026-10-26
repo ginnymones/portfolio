@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-10-26] — Resume Lab thumbnail
+
+### Changed
+- The Resume Lab card on `/tools` now shows the reworked start screen (portrait on the burnt-sienna circle, "Find your resume style", Start the quiz) instead of the old result screen. Updated `public/images/tools/resume-style-tool.png` and its alt text in `src/content/tools/resume-style-tool.md`
+
+---
+
 ## [2026-10-16] — Works gallery width matches home
 
 ### Changed
