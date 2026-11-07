@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-11-07] — Favicon on the guide pages
+
+### Fixed
+- `public/guides/job-search-automation.html` and `public/guides/email-design-system.html` now link `/favicon.png`, so they show the same tab icon as the rest of the site.
+
+---
+
 ## [2026-11-07] — Job Search Automations guide on /tools
 
 ### Added
