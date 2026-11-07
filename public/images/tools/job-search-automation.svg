@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="968" height="500" viewBox="0 0 968 500" role="img" aria-label="Two job search automation guides: Job board and Upwork digest">
+  <rect width="968" height="500" fill="#FFFCF7"/>
+  <rect x="64" y="72" width="388" height="356" rx="24" fill="#FEFBEF" stroke="#DAC6A3" stroke-width="2"/>
+  <rect x="516" y="72" width="388" height="356" rx="24" fill="#FEFBEF" stroke="#DAC6A3" stroke-width="2"/>
+  <text x="96" y="148" font-family="Georgia, serif" font-size="40" fill="#B75220">Job board</text>
+  <text x="548" y="148" font-family="Georgia, serif" font-size="40" fill="#B75220">Upwork digest</text>
+  <g fill="#DAC6A3"><rect x="96" y="188" width="300" height="14" rx="7"/><rect x="96" y="222" width="240" height="14" rx="7"/><rect x="548" y="188" width="300" height="14" rx="7"/><rect x="548" y="222" width="240" height="14" rx="7"/></g>
+  <g fill="#CF5925"><rect x="96" y="272" width="120" height="36" rx="18"/><rect x="548" y="272" width="120" height="36" rx="18"/></g>
+  <g fill="#F3E9D6"><rect x="96" y="340" width="300" height="52" rx="12"/><rect x="548" y="340" width="300" height="52" rx="12"/></g>
+  <rect x="352" y="440" width="264" height="44" rx="22" fill="#F3E9D6"/>
+  <rect x="356" y="444" width="128" height="36" rx="18" fill="#B75220"/>
+</svg>

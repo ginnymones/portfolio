@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-11-07] — Job Search Automations guide on /tools
+
+### Added
+- New card on `/tools` (`src/content/tools/job-search-automation.md`, thumbnail `public/images/tools/job-search-automation.svg`) linking to a combined guide page, `public/guides/job-search-automation.html`.
+- The guide page opens with a short intro to the two automations (daily job board update, weekday Upwork job digest), then a two-position switch ("Job board setup" / "Upwork job digest setup") that shows one guide at a time. Keyboard arrows work, and `#upwork` in the URL opens the Upwork guide directly.
+
+### Notes
+- Built from the two source guides in `job-search-automation/`. Body text is 16px, the theme switch and copy buttons are kept, the two "Shared by" footers are merged into one, and the second guide's template element ids were renamed (`u-tpl`, `u-tpl2`) to avoid clashing with the first.
+- No case study yet, so the card has Launch only.
+
+---
+
 ## [2026-10-26] — Resume Lab thumbnail
 
 ### Changed
