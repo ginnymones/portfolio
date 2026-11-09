@@ -4,6 +4,17 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-11-09] — Home page copy updates
+
+### Changed
+- Home hero (`heroBody` in `src/content/pages/home.json`): the brand list now also names Revlon, PHINMA, and Ayala Corporation.
+- Home Amazon highlight: added "Day to day, I also reviewed AI-generated visuals at scale." to the end of the first paragraph.
+
+### Notes
+- The same text was mirrored on the Figma homepage frames (desktop `homepage / hi-fi` and `homepage / mobile`), so Figma and the site match.
+
+---
+
 ## [2026-11-07] — Favicon on the guide pages
 
 ### Fixed
